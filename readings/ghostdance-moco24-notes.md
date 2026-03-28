@@ -1,7 +1,7 @@
 # Paper Notes: *LMA driven Dynamic Audiovisuals in a Virtual Reality Live Dance Performance: Ghostdance*
 
 **Authors:** José Siopa, Rui F. Antunes, Cecília de Lima, João Carrilho, Ana Paula B. Cláudio, Maria Beatriz Carmo  
-**Venue:** MOCO '24 — 9th International Conference on Movement and Computing, Utrecht, Netherlands  
+**Venue:** MOCO '24 - 9th International Conference on Movement and Computing, Utrecht, Netherlands  
 **DOI:** [10.1145/3658852.3659081](https://doi.org/10.1145/3658852.3659081)
 
 ---
