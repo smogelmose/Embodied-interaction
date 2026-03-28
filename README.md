@@ -23,7 +23,7 @@ The project extracts Laban Effort Action Drives from Kafka's The Metamorphosis b
 
 In Siopa et al.'s Ghostdance (MOCO '24), a live VR dance performance, an LSTM classifier picks out the same eight LMA Action Drives from a dancer's live IMU data and controls a Unity particle swarm and spatial audio system in real time. Ghostdance goes live body → classification → audiovisuals, this project flips the sensing stage so that literary prose is the sensor and close reading is the classifier.
 
-**Website:** https://mogelmose.org
+**Website:** https://mogelmose.org  
 **GitHub:** https://github.com/smogelmose/Embodied-interaction
 
 ## Course
