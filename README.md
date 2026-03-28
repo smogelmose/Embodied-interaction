@@ -1,27 +1,31 @@
 # Embodied Interaction
 
-Repository for the Embodied Interaction course at AAU Copenhagen - 
-exploring bodily presence, movement quality, and designing and 
+Repository for the Embodied Interaction course at AAU Copenhagen —
+exploring bodily presence, movement quality, and designing and
 evaluating embodied systems.
 
 ## About
-This repository documents my work for the **Embodied Interaction** 
-course at Aalborg University Copenhagen (MED8, Spring 2026). The 
-course explores the emerging theory of embodied interaction - where 
-the bodily presence of both user and system, alongside socially 
-embedded interaction practices, forms the basis for designing and 
+
+This repository documents my work for the **Embodied Interaction**
+course at Aalborg University Copenhagen (MED8, Spring 2026). The
+course explores the emerging theory of embodied interaction — where
+the bodily presence of both user and system, alongside socially
+embedded interaction practices, forms the basis for designing and
 evaluating embodied systems.
 
 ## Contents
 
 ### Mini-Project
-Individual implementation of an embodied interaction concept, 
-grounded in an academic reference and demonstrated through a 
+
+Individual implementation of an embodied interaction concept,
+grounded in an academic reference and demonstrated through a
 working prototype.
 
 *Metamorphic Efforts: Visualizing Laban Movement Qualities from Kafka's The Metamorphosis*
 
-This project extracts Laban Effort Action Drives from Kafka's *The Metamorphosis* through close reading and full BESS (Body, Effort, Shape, Space) annotation from a passage, then renders those qualities as generative audiovisuals in TouchDesigner and ComfyUI. The pipeline inverts Fdili Alaoui et al. (2017): rather than body → sensors → Effort classification, the flow is text → close reading → BESS annotation → generative audiovisual output. A short number of passages are selected for a 5-minute prototype, covering four Action Drives (Press, Wring, Punch, Slash) and grounded in de Meijer's (1989) empirical Effort-to-emotion mapping. The TouchDesigner implementation uses multi-layer visual architecture together with multi-layer ElevenLabs audio.
+This project extracts Laban Effort Action Drives from Kafka's *The Metamorphosis* through close reading and full BESS (Body, Effort, Shape, Space) annotation of key passages, then renders those qualities as generative audiovisuals in TouchDesigner and ComfyUI. The pipeline inverts Fdili Alaoui et al. (2017): rather than body → sensors → Effort classification, the flow is text → close reading → BESS annotation → generative audiovisual output. Four passages are selected for a 5-minute prototype, covering four Action Drives (Press, Wring, Punch, Slash) and grounded in de Meijer's (1989) empirical Effort-to-emotion mapping. The TouchDesigner implementation uses a multi-layer visual architecture together with multi-layer ElevenLabs audio.
+
+A key precedent is Siopa et al.'s *Ghostdance* (MOCO '24), a live VR dance performance in which an LSTM classifier identifies the same eight LMA Action Drives from a dancer's live IMU data and drives a Unity particle swarm and spatial audio system in real time. Where Ghostdance goes live body → classification → audiovisuals, this project inverts the sensing stage: literary prose replaces the sensor, and close reading replaces the classifier.
 
 **GitHub:** https://github.com/smogelmose/Embodied-interaction
 
@@ -32,3 +36,6 @@ Spring 2026
 
 ## License
 MIT License – see [LICENSE](LICENSE) for details.
+
+- [Fdili Alaoui et al. (2017) — Seeing, Sensing and Recognizing Laban Movement Qualities](readings\ghostdance-moco24-notes.md)
+- [Siopa et al. (2024) — LMA driven Dynamic Audiovisuals in a VR Live Dance Performance: Ghostdance](readings\ghostdance-moco24-notes.md)
