@@ -37,5 +37,5 @@ Spring 2026
 ## License
 MIT License – see [LICENSE](LICENSE) for details.
 
-- [Fdili Alaoui et al. (2017) — Seeing, Sensing and Recognizing Laban Movement Qualities](readings\ghostdance-moco24-notes.md)
+- [Fdili Alaoui et al. (2017) — Seeing, Sensing and Recognizing Laban Movement Qualities](readings\fdili-alaoui-2017-seeing-sensing-recognizing-laban.md)
 - [Siopa et al. (2024) — LMA driven Dynamic Audiovisuals in a VR Live Dance Performance: Ghostdance](readings\ghostdance-moco24-notes.md)
