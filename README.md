@@ -1,7 +1,6 @@
 # Embodied Interaction
 
-Repository for the Embodied Interaction course at AAU Copenhagen - exploring bodily presence, movement quality, and designing and
-evaluating embodied systems.
+Repository for the Embodied Interaction course at AAU Copenhagen - exploring bodily presence, movement quality, and designing and evaluating embodied systems.
 
 ## About
 
