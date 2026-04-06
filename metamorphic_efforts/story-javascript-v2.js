@@ -1,7 +1,7 @@
 // ============================================================
 // METAMORPHIC EFFORTS - Story JavaScript
 // Hybrid architecture. Twine = interface. TouchDesigner = headless visuals.
-// Bidirectional WebSocket. 
+// Bidirectional WebSocket.
 // Five polyphonic audio layers.
 // LMA annotation with progressive reveal and toggle.
 // ============================================================
@@ -9,11 +9,9 @@
 window.ME = window.ME || {};
 ME.wsUrl = 'ws://localhost:9980';
 ME.ws = null;
-ME.useFallback = true;
 ME.totalPassages = 10;
 ME.currentBess = null;
 ME.targetBess = null;
-ME.noiseTime = 0;
 ME.lmaVisible = true;
 ME.revealDelay = 8000;
 ME.autoTimer = null;
@@ -86,31 +84,57 @@ ME.connectWS = function() {
     ME.ws.binaryType = 'arraybuffer';
 
     ME.ws.onopen = function() {
-      ME.useFallback = false;
       var d = document.getElementById('me-dot');
       var l = document.getElementById('me-label');
       if (d) d.className = 'connected';
       if (l) l.textContent = 'td connected';
+      console.info('ME: WebSocket connected to', ME.wsUrl);
     };
 
     ME.ws.onmessage = function(e) {
-      if (e.data instanceof ArrayBuffer) ME.drawTDFrame(e.data);
+      var label = document.getElementById('me-label');
+      if (e.data instanceof ArrayBuffer || e.data instanceof Blob) {
+        if (label) label.textContent = 'td frame';
+        ME.drawTDFrame(e.data);
+      } else if (typeof e.data === 'string') {
+        var src = null;
+        if (e.data.indexOf('data:image/') === 0) {
+          src = e.data;
+        } else if (/^[A-Za-z0-9+/=\s]+$/.test(e.data) && e.data.length > 100) {
+          src = 'data:image/jpeg;base64,' + e.data.replace(/\s+/g, '');
+        } else {
+          try {
+            var json = JSON.parse(e.data);
+            if (json && typeof json.data === 'string') {
+              if (json.data.indexOf('data:image/') === 0) {
+                src = json.data;
+              } else {
+                var mime = json.type || 'image/jpeg';
+                src = 'data:' + mime + ';base64,' + json.data.replace(/\s+/g, '');
+              }
+            }
+          } catch (err) {}
+        }
+        if (src) {
+          if (label) label.textContent = 'td frame';
+          ME.drawTDFrameDataURL(src);
+        }
+      }
     };
 
     ME.ws.onclose = function() {
-      ME.useFallback = true;
       var d = document.getElementById('me-dot');
       var l = document.getElementById('me-label');
       if (d) d.className = 'fallback';
-      if (l) l.textContent = 'fallback visuals';
+      if (l) l.textContent = 'disconnected';
       setTimeout(ME.connectWS, 4000);
     };
 
-    ME.ws.onerror = function() {
-      ME.useFallback = true;
+    ME.ws.onerror = function(err) {
+      console.warn('ME: WS error', err);
     };
   } catch (e) {
-    ME.useFallback = true;
+    console.warn('ME: WS connection failed', e);
   }
 };
 
@@ -129,57 +153,35 @@ ME.initCanvas = function() {
   ME.canvas.width = 854;
   ME.canvas.height = 480;
   ME.ctx = ME.canvas.getContext('2d');
-  ME.noiseData = ME.ctx.createImageData(854, 480);
   ME.frameImg = new Image();
 };
 
 ME.drawTDFrame = function(buf) {
-  var blob = new Blob([buf], { type: 'image/jpeg' });
+  if (!buf) return;
+  var blob = buf instanceof Blob ? buf : new Blob([buf], { type: 'image/jpeg' });
   var url = URL.createObjectURL(blob);
   ME.frameImg.onload = function() {
+    if (!ME.ctx) return;
     ME.ctx.drawImage(ME.frameImg, 0, 0, 854, 480);
+    URL.revokeObjectURL(url);
+  };
+  ME.frameImg.onerror = function(err) {
+    console.warn('ME: TD frame failed to load', err);
     URL.revokeObjectURL(url);
   };
   ME.frameImg.src = url;
 };
 
-// ============================================================
-// FALLBACK VISUALS
-// ============================================================
-
-ME.drawFallback = function() {
-  if (!ME.useFallback || !ME.noiseData) return;
-  var b = ME.currentBess || { intensity: 0.2, flow: 0.15 };
-  var w = 854, h = 480, data = ME.noiseData.data, t = ME.noiseTime;
-  var intensity = b.intensity || 0.2;
-  var bR = 25 + intensity * 60;
-  var bG = 12 + intensity * 30;
-  var bB = 5 + intensity * 10;
-
-  for (var y = 0; y < h; y += 2) {
-    for (var x = 0; x < w; x += 2) {
-      var nx = x / w * 4 + t * 0.003;
-      var ny = y / h * 4 + t * 0.002;
-      var n = Math.sin(nx * 3.7 + ny * 2.3 + t * 0.01) *
-              Math.cos(ny * 4.1 - nx * 1.9 + t * 0.008) *
-              Math.sin((nx + ny) * 2 + t * 0.005);
-      n = (n * 0.5 + 0.5) * intensity;
-      var vx = (x / w - 0.5) * 2;
-      var vy = (y / h - 0.5) * 2;
-      n *= Math.max(0, 1 - (vx * vx + vy * vy) * 0.4);
-      var r = Math.min(255, bR * n * 2);
-      var g = Math.min(255, bG * n * 2);
-      var bb = Math.min(255, bB * n * 1.5);
-      var i = (y * w + x) * 4;
-      data[i] = r; data[i + 1] = g; data[i + 2] = bb; data[i + 3] = 255;
-      if (x + 1 < w) { data[i + 4] = r; data[i + 5] = g; data[i + 6] = bb; data[i + 7] = 255; }
-      var i2 = ((y + 1) * w + x) * 4;
-      if (y + 1 < h) { data[i2] = r; data[i2 + 1] = g; data[i2 + 2] = bb; data[i2 + 3] = 255; }
-      if (x + 1 < w && y + 1 < h) { data[i2 + 4] = r; data[i2 + 5] = g; data[i2 + 6] = bb; data[i2 + 7] = 255; }
-    }
-  }
-  ME.ctx.putImageData(ME.noiseData, 0, 0);
-  ME.noiseTime += 1 + (b.flow || 0.15) * 3;
+ME.drawTDFrameDataURL = function(dataURL) {
+  if (!dataURL) return;
+  ME.frameImg.onload = function() {
+    if (!ME.ctx) return;
+    ME.ctx.drawImage(ME.frameImg, 0, 0, 854, 480);
+  };
+  ME.frameImg.onerror = function(err) {
+    console.warn('ME: TD frame data URL failed', err);
+  };
+  ME.frameImg.src = dataURL;
 };
 
 // ============================================================
@@ -268,9 +270,8 @@ ME.setLayerGain = function(id, v) {
   if (layer) layer.gain.gain.value = v;
 };
 
-// Preload an audio file, read its duration, then schedule it
-// so it ends at targetEndSec (with optional offset before end)
-ME.scheduleLayerToEnd = function(layerId, path, targetEndSec, offsetBefore) {
+// Preload audio, read duration, schedule to end with narration
+ME.scheduleLayerToEnd = function(layerId, path, narrDurSec, offsetBefore) {
   offsetBefore = offsetBefore || 0;
   var probe = new Audio(path);
 
@@ -278,7 +279,7 @@ ME.scheduleLayerToEnd = function(layerId, path, targetEndSec, offsetBefore) {
     var fileDur = probe.duration;
     if (!fileDur || fileDur <= 0) return;
 
-    var startSec = Math.max(2, targetEndSec - fileDur - offsetBefore);
+    var startSec = Math.max(2, narrDurSec - fileDur - offsetBefore);
     var startMs = startSec * 1000;
 
     console.log('ME: ' + layerId + ' (' + path.split('/').pop() + ') dur ' +
@@ -291,10 +292,7 @@ ME.scheduleLayerToEnd = function(layerId, path, targetEndSec, offsetBefore) {
     ME.layerTimers.push(timer);
   });
 
-  probe.addEventListener('error', function() {
-    // File missing, skip silently
-  });
-
+  probe.addEventListener('error', function() {});
   probe.load();
 };
 
@@ -408,7 +406,7 @@ ME.triggerPassage = function(pid, bessData) {
     });
   }
 
-  // --- NARRATION ---
+  // Stop everything from previous passage
   ME.stopLayer('narration');
   ME.stopLayer('body_vox');
   ME.stopLayer('sfx');
@@ -427,60 +425,61 @@ ME.triggerPassage = function(pid, bessData) {
     return;
   }
 
+  // Narration starts immediately
   var narrAudio = ME.playLayer('narration',
     'audio/narration/narr_p' + String(pid).padStart(2, '0') + '.mp3'
   );
 
-    if (narrAudio) {
-      narrAudio.addEventListener('loadedmetadata', function() {
-        var narrDur = narrAudio.duration;
-        if (!narrDur || narrDur <= 0) return;
+  // Once narration duration is known, schedule everything else
+  if (narrAudio) {
+    narrAudio.addEventListener('loadedmetadata', function() {
+      var narrDur = narrAudio.duration;
+      if (!narrDur || narrDur <= 0) return;
 
-        console.log('ME: p' + pid + ' narration duration ' + narrDur.toFixed(1) + 's');
+      console.log('ME: p' + pid + ' narration duration ' + narrDur.toFixed(1) + 's');
 
-        if (ME.nextPassageTarget) {
-          var advanceMs = (narrDur * 1000) + 3000;
-          if (ME.autoTimer) clearTimeout(ME.autoTimer);
+      // Auto-advance: narration duration + 3s buffer
+      if (ME.nextPassageTarget) {
+        var advanceMs = (narrDur * 1000) + 3000;
+        if (ME.autoTimer) clearTimeout(ME.autoTimer);
 
-          ME.layerTimers.push(setTimeout(function() {
-            ME.fadeDrone(2000);
-          }, advanceMs - 2000));
+        // Fade drone 2s before advance
+        ME.layerTimers.push(setTimeout(function() {
+          ME.fadeDrone(2000);
+        }, advanceMs - 2000));
 
-          ME.autoTimer = setTimeout(function() {
-            Engine.play(ME.nextPassageTarget);
-          }, advanceMs);
-        }
+        ME.autoTimer = setTimeout(function() {
+          Engine.play(ME.nextPassageTarget);
+        }, advanceMs);
+      }
 
-        if (pid <= 9) {
-          var bvPath = 'audio/body_vox/body_vox_p' + String(pid).padStart(2, '0') + '.mp3';
-          ME.scheduleLayerToEnd('body_vox', bvPath, narrDur);
-        }
+      // Body vox: schedule to end with narration
+      if (pid <= 9) {
+        var bvPath = 'audio/body_vox/body_vox_p' + String(pid).padStart(2, '0') + '.mp3';
+        ME.scheduleLayerToEnd('body_vox', bvPath, narrDur);
+      }
 
-        var sfxFiles = ME.SFX_MAP[pid] || [];
-        sfxFiles.forEach(function(f, idx) {
-          ME.scheduleLayerToEnd('sfx', f, narrDur, idx * 0.5);
-        });
-
-        var charFiles = ME.CHAR_MAP[pid] || [];
-        charFiles.forEach(function(f, idx) {
-          ME.scheduleLayerToEnd('characters', f, narrDur, idx * 0.3);
-        });
+      // SFX: schedule to end with narration
+      var sfxFiles = ME.SFX_MAP[pid] || [];
+      sfxFiles.forEach(function(f, idx) {
+        ME.scheduleLayerToEnd('sfx', f, narrDur, idx * 0.5);
       });
-    }
 
-  // --- DRONE ---
+      // Characters: schedule to end with narration
+      var charFiles = ME.CHAR_MAP[pid] || [];
+      charFiles.forEach(function(f, idx) {
+        ME.scheduleLayerToEnd('characters', f, narrDur, idx * 0.3);
+      });
+    });
+  }
+
+  // Drone starts immediately (loops, fades at end)
   var dk = ME.DRONE_PASSAGE[pid];
   if (dk) {
     ME.playLayer('drone', ME.DRONE_MAP[dk], { loop: true });
   }
 
-  // --- SFX ---
-  // These are scheduled once narration metadata is available.
-
-  // --- CHARACTERS ---
-  // These are scheduled once narration metadata is available.
-
-  // --- LMA reveal ---
+  // LMA reveal
   ME.revealLMA();
 };
 
@@ -509,7 +508,6 @@ ME.lerpBess = function() {
 
 ME.animate = function() {
   ME.lerpBess();
-  if (ME.useFallback) ME.drawFallback();
   requestAnimationFrame(ME.animate);
 };
 
