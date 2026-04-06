@@ -165,110 +165,748 @@ html, body { background: #0a0806; margin: 0; padding: 0; height: 100%; overflow:
 .me-legend-dot.effort { background: rgba(192,57,43,0.7); }
 .me-legend-dot.shape { background: rgba(39,174,96,0.7); }
 .me-legend-dot.body { background: rgba(41,128,185,0.7); }
-.me-legend-dot.space { background: rgba(243,156,18,0.7); }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.ME = window.ME || {};
-ME.wsUrl = 'ws://localhost:9980'; ME.ws = null; ME.useFallback = true;
-ME.totalPassages = 10; ME.currentBess = null; ME.targetBess = null; ME.noiseTime = 0;
-ME.lmaVisible = true; ME.revealDelay = 8000;
-ME.DRONE_MAP = {'press_low':'audio/drones/drone_press_low.mp3','press_high':'audio/drones/drone_press_high.mp3','wring':'audio/drones/drone_wring.mp3','glide':'audio/drones/drone_glide.mp3','slash':'audio/drones/drone_slash.mp3'};
-ME.DRONE_PASSAGE = {1:'press_low',2:'press_low',3:'press_low',4:'press_high',5:'wring',6:'press_high',7:'wring',8:'glide',9:'slash',10:'slash'};
-ME.SFX_MAP = {1:['audio/sfx/sfx_room_ambience.mp3','audio/sfx/sfx_body_rustle.mp3'],2:['audio/sfx/sfx_rain_window.mp3','audio/sfx/sfx_clock_ticking.mp3'],3:['audio/sfx/sfx_body_thrashing.mp3','audio/sfx/sfx_insect_legs.mp3'],4:['audio/sfx/sfx_clock_ticking.mp3'],5:[],6:['audio/sfx/sfx_body_thrashing.mp3','audio/sfx/sfx_insect_legs.mp3'],7:[],8:['audio/sfx/sfx_key_turning.mp3','audio/sfx/sfx_fluid_drip.mp3'],9:['audio/sfx/sfx_door_open.mp3','audio/sfx/sfx_gasp.mp3','audio/sfx/sfx_body_thud.mp3'],10:['audio/sfx/sfx_newspaper_swat.mp3','audio/sfx/sfx_body_scrape.mp3','audio/sfx/sfx_door_slam.mp3']};
-ME.CHAR_MAP = {1:[],2:[],3:[],4:['audio/characters/char_knock_door.mp3','audio/characters/char_mother_call.mp3'],5:[],6:[],7:['audio/characters/char_knock_loud.mp3','audio/characters/char_manager_footsteps.mp3','audio/characters/char_grete_cry.mp3'],8:[],9:['audio/characters/char_grete_cry.mp3'],10:['audio/characters/char_father_hissing.mp3','audio/characters/char_father_pacing.mp3','audio/characters/char_door_slam.mp3']};
-ME.PASSAGE_MIX = {1:{narration:0.9,body_vox:0.3,drone:0.4,sfx:0.3,characters:0.0},2:{narration:0.9,body_vox:0.25,drone:0.45,sfx:0.35,characters:0.0},3:{narration:0.85,body_vox:0.35,drone:0.5,sfx:0.35,characters:0.0},4:{narration:0.85,body_vox:0.35,drone:0.55,sfx:0.4,characters:0.4},5:{narration:0.8,body_vox:0.4,drone:0.6,sfx:0.3,characters:0.0},6:{narration:0.8,body_vox:0.45,drone:0.55,sfx:0.45,characters:0.0},7:{narration:0.75,body_vox:0.4,drone:0.6,sfx:0.35,characters:0.6},8:{narration:0.9,body_vox:0.3,drone:0.5,sfx:0.4,characters:0.0},9:{narration:0.7,body_vox:0.45,drone:0.65,sfx:0.5,characters:0.5},10:{narration:0.8,body_vox:0.0,drone:0.7,sfx:0.6,characters:0.7}};
-ME.connectWS = function(){try{ME.ws=new WebSocket(ME.wsUrl);ME.ws.binaryType='arraybuffer';ME.ws.onopen=function(){ME.useFallback=false;var d=document.getElementById('me-dot'),l=document.getElementById('me-label');if(d)d.className='connected';if(l)l.textContent='td connected';};ME.ws.onmessage=function(e){if(e.data instanceof ArrayBuffer)ME.drawTDFrame(e.data);};ME.ws.onclose=function(){ME.useFallback=true;var d=document.getElementById('me-dot'),l=document.getElementById('me-label');if(d)d.className='fallback';if(l)l.textContent='fallback visuals';setTimeout(ME.connectWS,4000);};ME.ws.onerror=function(){ME.useFallback=true;};}catch(e){ME.useFallback=true;}};
-ME.sendBESS = function(data){if(ME.ws&&ME.ws.readyState===WebSocket.OPEN)ME.ws.send(JSON.stringify(data));};
-ME.initCanvas = function(){ME.canvas=document.getElementById('me-canvas');ME.canvas.width=854;ME.canvas.height=480;ME.ctx=ME.canvas.getContext('2d');ME.noiseData=ME.ctx.createImageData(854,480);ME.frameImg=new Image();};
-ME.drawTDFrame = function(buf){var blob=new Blob([buf],{type:'image/jpeg'});var url=URL.createObjectURL(blob);ME.frameImg.onload=function(){ME.ctx.drawImage(ME.frameImg,0,0,854,480);URL.revokeObjectURL(url);};ME.frameImg.src=url;};
-ME.drawFallback = function(){if(!ME.useFallback||!ME.noiseData)return;var b=ME.currentBess||{intensity:0.2,flow:0.15};var w=854,h=480,data=ME.noiseData.data,t=ME.noiseTime,int=b.intensity||0.2,bR=25+int*60,bG=12+int*30,bB=5+int*10;for(var y=0;y<h;y+=2){for(var x=0;x<w;x+=2){var nx=x/w*4+t*0.003,ny=y/h*4+t*0.002;var n=Math.sin(nx*3.7+ny*2.3+t*0.01)*Math.cos(ny*4.1-nx*1.9+t*0.008)*Math.sin((nx+ny)*2+t*0.005);n=(n*0.5+0.5)*int;var vx=(x/w-0.5)*2,vy=(y/h-0.5)*2;n*=Math.max(0,1-(vx*vx+vy*vy)*0.4);var r=Math.min(255,bR*n*2),g=Math.min(255,bG*n*2),bb=Math.min(255,bB*n*1.5);var i=(y*w+x)*4;data[i]=r;data[i+1]=g;data[i+2]=bb;data[i+3]=255;if(x+1<w){data[i+4]=r;data[i+5]=g;data[i+6]=bb;data[i+7]=255;}var i2=((y+1)*w+x)*4;if(y+1<h){data[i2]=r;data[i2+1]=g;data[i2+2]=bb;data[i2+3]=255;}if(x+1<w&&y+1<h){data[i2+4]=r;data[i2+5]=g;data[i2+6]=bb;data[i2+7]=255;}}}ME.ctx.putImageData(ME.noiseData,0,0);ME.noiseTime+=1+(b.flow||0.15)*3;};
-ME.audioCtx=null;ME.layers={};
-ME.initAudio = function(){ME.audioCtx=new(window.AudioContext||window.webkitAudioContext)();ME.masterGain=ME.audioCtx.createGain();ME.masterGain.gain.value=1.0;ME.masterGain.connect(ME.audioCtx.destination);[{id:'narration',g:0.9,l:'Narration'},{id:'body_vox',g:0.35,l:'Body'},{id:'drone',g:0.7,l:'Drone'},{id:'sfx',g:0.4,l:'SFX'},{id:'characters',g:0.5,l:'Characters'}].forEach(function(d){var gain=ME.audioCtx.createGain();gain.gain.value=d.g;gain.connect(ME.masterGain);ME.layers[d.id]={gain:gain,defaultGain:d.g,label:d.l,sources:[]};});};
-ME.playLayer=function(id,path,opts){opts=opts||{};var layer=ME.layers[id];if(!layer)return;var a=new Audio(path);a.loop=opts.loop||false;try{var s=ME.audioCtx.createMediaElementSource(a);s.connect(layer.gain);}catch(e){}if(opts.delay){setTimeout(function(){a.play().catch(function(){});},opts.delay);}else{a.play().catch(function(){});}layer.sources.push(a);return a;};
-ME.fireSound=function(id,path){var layer=ME.layers[id];if(!layer)return;var a=new Audio(path);try{var s=ME.audioCtx.createMediaElementSource(a);s.connect(layer.gain);}catch(e){}a.play().catch(function(){});};
-ME.stopLayer=function(id){var layer=ME.layers[id];if(!layer)return;layer.sources.forEach(function(a){try{a.pause();a.currentTime=0;}catch(e){}});layer.sources=[];};
-ME.setLayerGain=function(id,v){var l=ME.layers[id];if(l)l.gain.gain.value=v;};
-ME.revealTimer=null;
-ME.revealLMA=function(){if(ME.revealTimer)clearTimeout(ME.revealTimer);ME.revealTimer=setTimeout(function(){if(!ME.lmaVisible)return;var spans=document.querySelectorAll('.lma');spans.forEach(function(span,i){setTimeout(function(){span.classList.add('revealed');},i*120);});},ME.revealDelay);};
-ME.hideLMA=function(){document.querySelectorAll('.lma').forEach(function(s){s.classList.remove('revealed');s.classList.add('lma-hidden');});};
-ME.showLMA=function(){document.querySelectorAll('.lma').forEach(function(s){s.classList.remove('lma-hidden');});ME.revealLMA();};
-ME.toggleLMA=function(){ME.lmaVisible=!ME.lmaVisible;var dot=document.getElementById('me-lma-toggle-dot');var legend=document.getElementById('me-lma-legend');if(ME.lmaVisible){if(dot)dot.classList.add('active');if(legend)legend.classList.add('visible');ME.showLMA();}else{if(dot)dot.classList.remove('active');if(legend)legend.classList.remove('visible');ME.hideLMA();}};
-ME.triggerPassage=function(pid,bessData){ME.targetBess=bessData;if(!ME.currentBess)ME.currentBess=Object.assign({},bessData);ME.sendBESS(bessData);if(ME.audioCtx&&ME.audioCtx.state==='suspended')ME.audioCtx.resume();var dn=document.getElementById('me-drive-name');if(dn)dn.textContent=bessData.action_drive||'';var ctr=document.getElementById('me-counter');if(ctr)ctr.textContent=pid>0?pid+' / 10':'';var prog=document.getElementById('me-progress');if(prog)prog.style.width=(pid/10*100)+'%';var mix=ME.PASSAGE_MIX[pid];if(mix){Object.keys(mix).forEach(function(id){ME.setLayerGain(id,mix[id]);var sl=document.getElementById('me-slider-'+id);if(sl)sl.value=mix[id]*100;});}ME.stopLayer('narration');if(pid>=1&&pid<=10)ME.playLayer('narration','audio/narration/narr_p'+String(pid).padStart(2,'0')+'.mp3');ME.stopLayer('body_vox');if(pid>=1&&pid<=9)ME.playLayer('body_vox','audio/body_vox/body_vox_p'+String(pid).padStart(2,'0')+'.mp3',{delay:10000});ME.stopLayer('drone');var dk=ME.DRONE_PASSAGE[pid];if(dk)ME.playLayer('drone',ME.DRONE_MAP[dk],{loop:true});(ME.SFX_MAP[pid]||[]).forEach(function(f){ME.fireSound('sfx',f);});(ME.CHAR_MAP[pid]||[]).forEach(function(f){ME.fireSound('characters',f);});ME.revealLMA();};
-ME.autoTimer=null;ME.setAutoAdvance=function(target,ms){if(ME.autoTimer)clearTimeout(ME.autoTimer);ME.autoTimer=setTimeout(function(){Engine.play(target);},ms);};
-ME.lerpBess=function(){if(!ME.currentBess||!ME.targetBess)return;['flow','intensity','weight_passive','shape_grow','shape_rise','shape_advance','body_connectivity','body_sequencing','kinesphere','space_approach','space_plane'].forEach(function(k){if(ME.targetBess[k]!==undefined&&ME.currentBess[k]!==undefined)ME.currentBess[k]+=(ME.targetBess[k]-ME.currentBess[k])*0.02;});};
-ME.animate=function(){ME.lerpBess();if(ME.useFallback)ME.drawFallback();requestAnimationFrame(ME.animate);};
-ME.buildControls=function(){var ctr=document.getElementById('me-controls');if(!ctr)return;Object.keys(ME.layers).forEach(function(id){var layer=ME.layers[id];var row=document.createElement('div');row.className='me-slider-row';var lbl=document.createElement('label');lbl.textContent=layer.label;lbl.setAttribute('for','me-slider-'+id);var sl=document.createElement('input');sl.type='range';sl.id='me-slider-'+id;sl.min='0';sl.max='100';sl.value=String(layer.defaultGain*100);sl.addEventListener('input',function(){ME.setLayerGain(id,this.value/100);});row.appendChild(lbl);row.appendChild(sl);ctr.appendChild(row);});var div=document.createElement('div');div.className='me-controls-divider';ctr.appendChild(div);var toggle=document.createElement('div');toggle.id='me-lma-toggle';toggle.innerHTML='<label>LMA Annotation</label><div id="me-lma-toggle-dot" class="active"></div>';toggle.addEventListener('click',ME.toggleLMA);ctr.appendChild(toggle);var legend=document.createElement('div');legend.id='me-lma-legend';legend.className='visible';legend.innerHTML='<span class="me-legend-item"><span class="me-legend-dot effort"></span>Effort</span><span class="me-legend-item"><span class="me-legend-dot shape"></span>Shape</span><span class="me-legend-item"><span class="me-legend-dot body"></span>Body</span><span class="me-legend-item"><span class="me-legend-dot space"></span>Space</span>';ctr.appendChild(legend);};
-$(document).on(':passageinit',function(){if(ME.autoTimer)clearTimeout(ME.autoTimer);if(ME.revealTimer)clearTimeout(ME.revealTimer);});
-$(document).one(':storyready',function(){var body=document.body;var canvas=document.createElement('canvas');canvas.id='me-canvas';body.insertBefore(canvas,body.firstChild);var vig=document.createElement('div');vig.id='me-vignette';body.insertBefore(vig,body.children[1]);var drv=document.createElement('div');drv.id='me-drive';drv.innerHTML='<span id="me-drive-name">--</span><span id="me-drive-emotion"></span>';body.appendChild(drv);var st=document.createElement('div');st.id='me-status';st.innerHTML='<span id="me-dot"></span><span id="me-label">connecting</span>';body.appendChild(st);var ct=document.createElement('div');ct.id='me-counter';body.appendChild(ct);var pb=document.createElement('div');pb.id='me-progress';pb.style.width='0%';body.appendChild(pb);var cp=document.createElement('div');cp.id='me-controls';cp.innerHTML='<div id="me-controls-label">Voices</div>';body.appendChild(cp);ME.initCanvas();ME.initAudio();ME.buildControls();ME.connectWS();ME.animate();});</script><tw-passagedata pid="1" name="StoryInit" tags="" position="0,0" size="100,100">&lt;&lt;set $passageNum to 0&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Title" tags="" position="300,50" size="100,100">&lt;div class=&quot;title-screen&quot;&gt;\
+.me-legend-dot.space { background: rgba(243,156,18,0.7); }</style><script role="script" id="twine-user-script" type="text/twine-javascript">// ============================================================
+// METAMORPHIC EFFORTS v2 -- Story JavaScript
+// Hybrid architecture. Twine = interface. TD = headless visuals.
+// Bidirectional WebSocket. Five polyphonic audio layers.
+// LMA annotation with progressive reveal and toggle.
+// Auto-advance: reads narration duration, waits for it + 3s buffer.
+// ============================================================
+
+window.ME = window.ME || {};
+ME.wsUrl = 'ws://localhost:9980';
+ME.ws = null;
+ME.useFallback = true;
+ME.totalPassages = 10;
+ME.currentBess = null;
+ME.targetBess = null;
+ME.noiseTime = 0;
+ME.lmaVisible = true;
+ME.revealDelay = 8000;
+ME.autoTimer = null;
+ME.revealTimer = null;
+ME.nextPassageTarget = null;
+
+// ============================================================
+// AUDIO MAPS
+// ============================================================
+
+ME.DRONE_MAP = {
+  'press_low':  'audio/drones/drone_press_low.mp3',
+  'press_high': 'audio/drones/drone_press_high.mp3',
+  'wring':      'audio/drones/drone_wring.mp3',
+  'glide':      'audio/drones/drone_glide.mp3',
+  'slash':      'audio/drones/drone_slash.mp3'
+};
+
+ME.DRONE_PASSAGE = {
+  1: 'press_low',  2: 'press_low',  3: 'press_low',
+  4: 'press_high', 5: 'wring',      6: 'press_high',
+  7: 'wring',      8: 'glide',      9: 'slash',
+  10: 'slash'
+};
+
+ME.SFX_MAP = {
+  1:  ['audio/sfx/sfx_room_ambience.mp3', 'audio/sfx/sfx_body_rustle.mp3'],
+  2:  ['audio/sfx/sfx_rain_window.mp3', 'audio/sfx/sfx_clock_ticking.mp3'],
+  3:  ['audio/sfx/sfx_body_thrashing.mp3', 'audio/sfx/sfx_insect_legs.mp3'],
+  4:  ['audio/sfx/sfx_clock_ticking.mp3'],
+  5:  [],
+  6:  ['audio/sfx/sfx_body_thrashing.mp3', 'audio/sfx/sfx_insect_legs.mp3'],
+  7:  [],
+  8:  ['audio/sfx/sfx_key_turning.mp3', 'audio/sfx/sfx_fluid_drip.mp3'],
+  9:  ['audio/sfx/sfx_door_open.mp3', 'audio/sfx/sfx_gasp.mp3', 'audio/sfx/sfx_body_thud.mp3'],
+  10: ['audio/sfx/sfx_newspaper_swat.mp3', 'audio/sfx/sfx_body_scrape.mp3', 'audio/sfx/sfx_door_slam.mp3']
+};
+
+ME.CHAR_MAP = {
+  1: [], 2: [], 3: [],
+  4:  ['audio/characters/char_knock_door.mp3', 'audio/characters/char_mother_call.mp3'],
+  5:  [], 6: [],
+  7:  ['audio/characters/char_knock_loud.mp3', 'audio/characters/char_manager_footsteps.mp3', 'audio/characters/char_grete_cry.mp3'],
+  8:  [],
+  9:  ['audio/characters/char_grete_cry.mp3'],
+  10: ['audio/characters/char_father_hissing.mp3', 'audio/characters/char_father_pacing.mp3', 'audio/characters/char_door_slam.mp3']
+};
+
+ME.PASSAGE_MIX = {
+  1:  { narration: 0.9,  body_vox: 0.3,  drone: 0.4,  sfx: 0.3,  characters: 0.0 },
+  2:  { narration: 0.9,  body_vox: 0.25, drone: 0.45, sfx: 0.35, characters: 0.0 },
+  3:  { narration: 0.85, body_vox: 0.35, drone: 0.5,  sfx: 0.35, characters: 0.0 },
+  4:  { narration: 0.85, body_vox: 0.35, drone: 0.55, sfx: 0.4,  characters: 0.4 },
+  5:  { narration: 0.8,  body_vox: 0.4,  drone: 0.6,  sfx: 0.3,  characters: 0.0 },
+  6:  { narration: 0.8,  body_vox: 0.45, drone: 0.55, sfx: 0.45, characters: 0.0 },
+  7:  { narration: 0.75, body_vox: 0.4,  drone: 0.6,  sfx: 0.35, characters: 0.6 },
+  8:  { narration: 0.9,  body_vox: 0.3,  drone: 0.5,  sfx: 0.4,  characters: 0.0 },
+  9:  { narration: 0.7,  body_vox: 0.45, drone: 0.65, sfx: 0.5,  characters: 0.5 },
+  10: { narration: 0.8,  body_vox: 0.0,  drone: 0.7,  sfx: 0.6,  characters: 0.7 }
+};
+
+// ============================================================
+// WEBSOCKET (bidirectional)
+// ============================================================
+
+ME.connectWS = function() {
+  try {
+    ME.ws = new WebSocket(ME.wsUrl);
+    ME.ws.binaryType = 'arraybuffer';
+
+    ME.ws.onopen = function() {
+      ME.useFallback = false;
+      var d = document.getElementById('me-dot');
+      var l = document.getElementById('me-label');
+      if (d) d.className = 'connected';
+      if (l) l.textContent = 'td connected';
+    };
+
+    ME.ws.onmessage = function(e) {
+      if (e.data instanceof ArrayBuffer) ME.drawTDFrame(e.data);
+    };
+
+    ME.ws.onclose = function() {
+      ME.useFallback = true;
+      var d = document.getElementById('me-dot');
+      var l = document.getElementById('me-label');
+      if (d) d.className = 'fallback';
+      if (l) l.textContent = 'fallback visuals';
+      setTimeout(ME.connectWS, 4000);
+    };
+
+    ME.ws.onerror = function() {
+      ME.useFallback = true;
+    };
+  } catch (e) {
+    ME.useFallback = true;
+  }
+};
+
+ME.sendBESS = function(data) {
+  if (ME.ws && ME.ws.readyState === WebSocket.OPEN) {
+    ME.ws.send(JSON.stringify(data));
+  }
+};
+
+// ============================================================
+// CANVAS
+// ============================================================
+
+ME.initCanvas = function() {
+  ME.canvas = document.getElementById('me-canvas');
+  ME.canvas.width = 854;
+  ME.canvas.height = 480;
+  ME.ctx = ME.canvas.getContext('2d');
+  ME.noiseData = ME.ctx.createImageData(854, 480);
+  ME.frameImg = new Image();
+};
+
+ME.drawTDFrame = function(buf) {
+  var blob = new Blob([buf], { type: 'image/jpeg' });
+  var url = URL.createObjectURL(blob);
+  ME.frameImg.onload = function() {
+    ME.ctx.drawImage(ME.frameImg, 0, 0, 854, 480);
+    URL.revokeObjectURL(url);
+  };
+  ME.frameImg.src = url;
+};
+
+// ============================================================
+// FALLBACK VISUALS (when TD not connected)
+// ============================================================
+
+ME.drawFallback = function() {
+  if (!ME.useFallback || !ME.noiseData) return;
+  var b = ME.currentBess || { intensity: 0.2, flow: 0.15 };
+  var w = 854, h = 480, data = ME.noiseData.data, t = ME.noiseTime;
+  var intensity = b.intensity || 0.2;
+  var bR = 25 + intensity * 60;
+  var bG = 12 + intensity * 30;
+  var bB = 5 + intensity * 10;
+
+  for (var y = 0; y < h; y += 2) {
+    for (var x = 0; x < w; x += 2) {
+      var nx = x / w * 4 + t * 0.003;
+      var ny = y / h * 4 + t * 0.002;
+      var n = Math.sin(nx * 3.7 + ny * 2.3 + t * 0.01) *
+              Math.cos(ny * 4.1 - nx * 1.9 + t * 0.008) *
+              Math.sin((nx + ny) * 2 + t * 0.005);
+      n = (n * 0.5 + 0.5) * intensity;
+      var vx = (x / w - 0.5) * 2;
+      var vy = (y / h - 0.5) * 2;
+      n *= Math.max(0, 1 - (vx * vx + vy * vy) * 0.4);
+      var r = Math.min(255, bR * n * 2);
+      var g = Math.min(255, bG * n * 2);
+      var bb = Math.min(255, bB * n * 1.5);
+      var i = (y * w + x) * 4;
+      data[i] = r; data[i + 1] = g; data[i + 2] = bb; data[i + 3] = 255;
+      if (x + 1 < w) { data[i + 4] = r; data[i + 5] = g; data[i + 6] = bb; data[i + 7] = 255; }
+      var i2 = ((y + 1) * w + x) * 4;
+      if (y + 1 < h) { data[i2] = r; data[i2 + 1] = g; data[i2 + 2] = bb; data[i2 + 3] = 255; }
+      if (x + 1 < w && y + 1 < h) { data[i2 + 4] = r; data[i2 + 5] = g; data[i2 + 6] = bb; data[i2 + 7] = 255; }
+    }
+  }
+  ME.ctx.putImageData(ME.noiseData, 0, 0);
+  ME.noiseTime += 1 + (b.flow || 0.15) * 3;
+};
+
+// ============================================================
+// WEB AUDIO API
+// ============================================================
+
+ME.audioCtx = null;
+ME.layers = {};
+
+ME.initAudio = function() {
+  ME.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  ME.masterGain = ME.audioCtx.createGain();
+  ME.masterGain.gain.value = 1.0;
+  ME.masterGain.connect(ME.audioCtx.destination);
+
+  var defs = [
+    { id: 'narration',  g: 0.9,  l: 'Narration' },
+    { id: 'body_vox',   g: 0.35, l: 'Body' },
+    { id: 'drone',      g: 0.7,  l: 'Drone' },
+    { id: 'sfx',        g: 0.4,  l: 'SFX' },
+    { id: 'characters', g: 0.5,  l: 'Characters' }
+  ];
+
+  defs.forEach(function(d) {
+    var gain = ME.audioCtx.createGain();
+    gain.gain.value = d.g;
+    gain.connect(ME.masterGain);
+    ME.layers[d.id] = {
+      gain: gain,
+      defaultGain: d.g,
+      label: d.l,
+      sources: []
+    };
+  });
+};
+
+ME.playLayer = function(id, path, opts) {
+  opts = opts || {};
+  var layer = ME.layers[id];
+  if (!layer) return null;
+
+  var audio = new Audio(path);
+  audio.loop = opts.loop || false;
+
+  try {
+    var source = ME.audioCtx.createMediaElementSource(audio);
+    source.connect(layer.gain);
+  } catch (e) {
+    console.warn('ME: could not connect audio', path);
+  }
+
+  if (opts.delay) {
+    setTimeout(function() {
+      audio.play().catch(function() {});
+    }, opts.delay);
+  } else {
+    audio.play().catch(function() {});
+  }
+
+  layer.sources.push(audio);
+  return audio;
+};
+
+ME.fireSound = function(id, path) {
+  var layer = ME.layers[id];
+  if (!layer) return;
+  var audio = new Audio(path);
+  try {
+    var source = ME.audioCtx.createMediaElementSource(audio);
+    source.connect(layer.gain);
+  } catch (e) {}
+  audio.play().catch(function() {});
+};
+
+ME.stopLayer = function(id) {
+  var layer = ME.layers[id];
+  if (!layer) return;
+  layer.sources.forEach(function(a) {
+    try { a.pause(); a.currentTime = 0; } catch (e) {}
+  });
+  layer.sources = [];
+};
+
+ME.setLayerGain = function(id, v) {
+  var layer = ME.layers[id];
+  if (layer) layer.gain.gain.value = v;
+};
+
+// ============================================================
+// AUTO-ADVANCE
+// Stores target only. Timer is set inside triggerPassage once
+// the narration audio's duration is known via loadedmetadata.
+// ============================================================
+
+ME.setAutoAdvance = function(target) {
+  ME.nextPassageTarget = target;
+};
+
+// ============================================================
+// LMA ANNOTATION (progressive reveal + toggle)
+// ============================================================
+
+ME.revealLMA = function() {
+  if (ME.revealTimer) clearTimeout(ME.revealTimer);
+  ME.revealTimer = setTimeout(function() {
+    if (!ME.lmaVisible) return;
+    var spans = document.querySelectorAll('.lma');
+    spans.forEach(function(span, i) {
+      setTimeout(function() {
+        span.classList.add('revealed');
+      }, i * 120);
+    });
+  }, ME.revealDelay);
+};
+
+ME.hideLMA = function() {
+  document.querySelectorAll('.lma').forEach(function(s) {
+    s.classList.remove('revealed');
+    s.classList.add('lma-hidden');
+  });
+};
+
+ME.showLMA = function() {
+  document.querySelectorAll('.lma').forEach(function(s) {
+    s.classList.remove('lma-hidden');
+  });
+  ME.revealLMA();
+};
+
+ME.toggleLMA = function() {
+  ME.lmaVisible = !ME.lmaVisible;
+  var dot = document.getElementById('me-lma-toggle-dot');
+  var legend = document.getElementById('me-lma-legend');
+  if (ME.lmaVisible) {
+    if (dot) dot.classList.add('active');
+    if (legend) legend.classList.add('visible');
+    ME.showLMA();
+  } else {
+    if (dot) dot.classList.remove('active');
+    if (legend) legend.classList.remove('visible');
+    ME.hideLMA();
+  }
+};
+
+// ============================================================
+// PASSAGE TRIGGER (called from each Twine passage)
+// ============================================================
+
+ME.triggerPassage = function(pid, bessData) {
+  // Update BESS
+  ME.targetBess = bessData;
+  if (!ME.currentBess) ME.currentBess = Object.assign({}, bessData);
+
+  // Send to TD
+  ME.sendBESS(bessData);
+
+  // Resume AudioContext on first interaction
+  if (ME.audioCtx && ME.audioCtx.state === 'suspended') {
+    ME.audioCtx.resume();
+  }
+
+  // Update UI
+  var dn = document.getElementById('me-drive-name');
+  if (dn) dn.textContent = bessData.action_drive || '';
+
+  var ctr = document.getElementById('me-counter');
+  if (ctr) ctr.textContent = pid > 0 ? pid + ' / 10' : '';
+
+  var prog = document.getElementById('me-progress');
+  if (prog) prog.style.width = (pid / 10 * 100) + '%';
+
+  // Apply default mix
+  var mix = ME.PASSAGE_MIX[pid];
+  if (mix) {
+    Object.keys(mix).forEach(function(id) {
+      ME.setLayerGain(id, mix[id]);
+      var sl = document.getElementById('me-slider-' + id);
+      if (sl) sl.value = mix[id] * 100;
+    });
+  }
+
+  // --- NARRATION with duration-based auto-advance ---
+  ME.stopLayer('narration');
+  if (ME.autoTimer) clearTimeout(ME.autoTimer);
+  ME.nextPassageTarget = null;
+
+  if (pid >= 1 && pid <= 10) {
+    var narrAudio = ME.playLayer('narration',
+      'audio/narration/narr_p' + String(pid).padStart(2, '0') + '.mp3'
+    );
+
+    if (narrAudio) {
+      narrAudio.addEventListener('loadedmetadata', function() {
+        if (ME.nextPassageTarget && narrAudio.duration > 0) {
+          // Wait for narration duration + 3 second buffer
+          var waitMs = (narrAudio.duration * 1000) + 3000;
+          console.log('ME: narration p' + pid + ' duration ' +
+            narrAudio.duration.toFixed(1) + 's, auto-advance in ' +
+            (waitMs / 1000).toFixed(1) + 's');
+          if (ME.autoTimer) clearTimeout(ME.autoTimer);
+          ME.autoTimer = setTimeout(function() {
+            Engine.play(ME.nextPassageTarget);
+          }, waitMs);
+        }
+      });
+    }
+  }
+
+  // --- BODY VOCALIZATION (10s delay, none for p10) ---
+  ME.stopLayer('body_vox');
+  if (pid >= 1 && pid <= 9) {
+    ME.playLayer('body_vox',
+      'audio/body_vox/body_vox_p' + String(pid).padStart(2, '0') + '.mp3',
+      { delay: 10000 }
+    );
+  }
+
+  // --- DRONE ---
+  ME.stopLayer('drone');
+  var dk = ME.DRONE_PASSAGE[pid];
+  if (dk) {
+    ME.playLayer('drone', ME.DRONE_MAP[dk], { loop: true });
+  }
+
+  // --- SFX ---
+  (ME.SFX_MAP[pid] || []).forEach(function(f) {
+    ME.fireSound('sfx', f);
+  });
+
+  // --- CHARACTERS ---
+  (ME.CHAR_MAP[pid] || []).forEach(function(f) {
+    ME.fireSound('characters', f);
+  });
+
+  // --- LMA reveal ---
+  ME.revealLMA();
+};
+
+// ============================================================
+// BESS INTERPOLATION
+// ============================================================
+
+ME.lerpBess = function() {
+  if (!ME.currentBess || !ME.targetBess) return;
+  var keys = [
+    'flow', 'intensity', 'weight_passive',
+    'shape_grow', 'shape_rise', 'shape_advance',
+    'body_connectivity', 'body_sequencing',
+    'kinesphere', 'space_approach', 'space_plane'
+  ];
+  keys.forEach(function(k) {
+    if (ME.targetBess[k] !== undefined && ME.currentBess[k] !== undefined) {
+      ME.currentBess[k] += (ME.targetBess[k] - ME.currentBess[k]) * 0.02;
+    }
+  });
+};
+
+// ============================================================
+// ANIMATION LOOP
+// ============================================================
+
+ME.animate = function() {
+  ME.lerpBess();
+  if (ME.useFallback) ME.drawFallback();
+  requestAnimationFrame(ME.animate);
+};
+
+// ============================================================
+// BUILD UI CONTROLS
+// ============================================================
+
+ME.buildControls = function() {
+  var ctr = document.getElementById('me-controls');
+  if (!ctr) return;
+
+  // Voice sliders
+  Object.keys(ME.layers).forEach(function(id) {
+    var layer = ME.layers[id];
+    var row = document.createElement('div');
+    row.className = 'me-slider-row';
+
+    var lbl = document.createElement('label');
+    lbl.textContent = layer.label;
+    lbl.setAttribute('for', 'me-slider-' + id);
+
+    var sl = document.createElement('input');
+    sl.type = 'range';
+    sl.id = 'me-slider-' + id;
+    sl.min = '0';
+    sl.max = '100';
+    sl.value = String(layer.defaultGain * 100);
+    sl.addEventListener('input', function() {
+      ME.setLayerGain(id, this.value / 100);
+    });
+
+    row.appendChild(lbl);
+    row.appendChild(sl);
+    ctr.appendChild(row);
+  });
+
+  // Divider
+  var div = document.createElement('div');
+  div.className = 'me-controls-divider';
+  ctr.appendChild(div);
+
+  // LMA annotation toggle
+  var toggle = document.createElement('div');
+  toggle.id = 'me-lma-toggle';
+  toggle.innerHTML = '<label>LMA Annotation</label><div id="me-lma-toggle-dot" class="active"></div>';
+  toggle.addEventListener('click', ME.toggleLMA);
+  ctr.appendChild(toggle);
+
+  // BESS category legend
+  var legend = document.createElement('div');
+  legend.id = 'me-lma-legend';
+  legend.className = 'visible';
+  legend.innerHTML =
+    '<span class="me-legend-item"><span class="me-legend-dot effort"></span>Effort</span>' +
+    '<span class="me-legend-item"><span class="me-legend-dot shape"></span>Shape</span>' +
+    '<span class="me-legend-item"><span class="me-legend-dot body"></span>Body</span>' +
+    '<span class="me-legend-item"><span class="me-legend-dot space"></span>Space</span>';
+  ctr.appendChild(legend);
+};
+
+// ============================================================
+// CLEANUP ON PASSAGE CHANGE
+// ============================================================
+
+$(document).on(':passageinit', function() {
+  if (ME.autoTimer) clearTimeout(ME.autoTimer);
+  if (ME.revealTimer) clearTimeout(ME.revealTimer);
+  ME.nextPassageTarget = null;
+});
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+
+$(document).one(':storyready', function() {
+  var body = document.body;
+
+  // Canvas
+  var canvas = document.createElement('canvas');
+  canvas.id = 'me-canvas';
+  body.insertBefore(canvas, body.firstChild);
+
+  // Vignette
+  var vig = document.createElement('div');
+  vig.id = 'me-vignette';
+  body.insertBefore(vig, body.children[1]);
+
+  // Drive indicator
+  var drv = document.createElement('div');
+  drv.id = 'me-drive';
+  drv.innerHTML = '<span id="me-drive-name">--</span><span id="me-drive-emotion"></span>';
+  body.appendChild(drv);
+
+  // Connection status
+  var st = document.createElement('div');
+  st.id = 'me-status';
+  st.innerHTML = '<span id="me-dot"></span><span id="me-label">connecting</span>';
+  body.appendChild(st);
+
+  // Passage counter
+  var ct = document.createElement('div');
+  ct.id = 'me-counter';
+  body.appendChild(ct);
+
+  // Progress bar
+  var pb = document.createElement('div');
+  pb.id = 'me-progress';
+  pb.style.width = '0%';
+  body.appendChild(pb);
+
+  // Controls panel
+  var cp = document.createElement('div');
+  cp.id = 'me-controls';
+  cp.innerHTML = '<div id="me-controls-label">Voices</div>';
+  body.appendChild(cp);
+
+  // Initialize everything
+  ME.initCanvas();
+  ME.initAudio();
+  ME.buildControls();
+  ME.connectWS();
+  ME.animate();
+});</script><tw-passagedata pid="1" name="StoryInit" tags="" position="0,0" size="100,100">&lt;&lt;set $passageNum to 0&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Title" tags="" position="300,50" size="100,100">&lt;div class=&quot;title-screen&quot;&gt;\
 &lt;div class=&quot;title&quot;&gt;Metamorphic Efforts&lt;/div&gt;\
 &lt;div class=&quot;subtitle&quot;&gt;after Kafka&lt;/div&gt;\
 &lt;div class=&quot;continue&quot;&gt;[[Begin|Passage 1]]&lt;/div&gt;\
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Passage 1" tags="" position="300,200" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(1,{passage_id:1,action_drive:&quot;press&quot;,flow:0.15,intensity:0.4,weight_passive:0.0,shape_grow:0.1,shape_rise:0.0,shape_advance:0.0,body_connectivity:0.5,body_sequencing:0.3,kinesphere:0.3,space_approach:0.9,space_plane:0.2});ME.setAutoAdvance(&#39;Passage 2&#39;,30000);&lt;&lt;/script&gt;&gt;\
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Passage 1" tags="" position="300,200" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(1, {
+  passage_id: 1, action_drive: &quot;press&quot;,
+  flow: 0.15, intensity: 0.4, weight_passive: 0.0,
+  shape_grow: 0.1, shape_rise: 0.0, shape_advance: 0.0,
+  body_connectivity: 0.5, body_sequencing: 0.3,
+  kinesphere: 0.3, space_approach: 0.9, space_plane: 0.2
+});
+ME.setAutoAdvance(&#39;Passage 2&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 1&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Waking&lt;/div&gt;
 
 One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sustained&quot;&gt;lay&lt;/span&gt; on his &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight&quot;&gt;armour-like&lt;/span&gt; back, and if he &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Minimal Rise&quot;&gt;lifted his head a little&lt;/span&gt; he could see his brown belly, slightly domed and &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Fragmented Connectivity&quot;&gt;divided by arches into stiff sections&lt;/span&gt;. The bedding was &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight&quot;&gt;hardly able to cover it&lt;/span&gt; and seemed ready to slide off any moment. His many legs, &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Low Connectivity&quot;&gt;pitifully thin compared with the size of the rest of him&lt;/span&gt;, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow&quot;&gt;waved about helplessly&lt;/span&gt; as he looked.
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 2]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="Passage 2" tags="" position="300,350" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(2,{passage_id:2,action_drive:&quot;press&quot;,flow:0.15,intensity:0.35,weight_passive:0.0,shape_grow:0.1,shape_rise:0.0,shape_advance:0.1,body_connectivity:0.5,body_sequencing:0.25,kinesphere:0.35,space_approach:0.85,space_plane:0.25});ME.setAutoAdvance(&#39;Passage 3&#39;,30000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 2]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="Passage 2" tags="" position="300,350" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(2, {
+  passage_id: 2, action_drive: &quot;press&quot;,
+  flow: 0.15, intensity: 0.35, weight_passive: 0.0,
+  shape_grow: 0.1, shape_rise: 0.0, shape_advance: 0.1,
+  body_connectivity: 0.5, body_sequencing: 0.25,
+  kinesphere: 0.35, space_approach: 0.85, space_plane: 0.25
+});
+ME.setAutoAdvance(&#39;Passage 3&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 2&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;The room&lt;/div&gt;
 
 &quot;What&#39;s happened to me?&quot; he thought. It wasn&#39;t a dream. His room, a proper human room although a little too small, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained Time&quot;&gt;lay peacefully&lt;/span&gt; between its four familiar walls. A collection of textile samples lay spread out on the table and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.
 
 Gregor then &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Minimal Advance&quot;&gt;turned to look out the window&lt;/span&gt; at the dull weather. &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Indirect, Free (environment)&quot;&gt;Drops of rain could be heard hitting the pane&lt;/span&gt;, which made him feel quite sad.
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 3]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Passage 3" tags="" position="300,500" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(3,{passage_id:3,action_drive:&quot;press&quot;,flow:0.2,intensity:0.55,weight_passive:0.0,shape_grow:0.15,shape_rise:0.1,shape_advance:0.1,body_connectivity:0.45,body_sequencing:0.35,kinesphere:0.35,space_approach:0.8,space_plane:0.3});ME.setAutoAdvance(&#39;Passage 4&#39;,35000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 3]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Passage 3" tags="" position="300,500" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(3, {
+  passage_id: 3, action_drive: &quot;press&quot;,
+  flow: 0.2, intensity: 0.55, weight_passive: 0.0,
+  shape_grow: 0.15, shape_rise: 0.1, shape_advance: 0.1,
+  body_connectivity: 0.45, body_sequencing: 0.35,
+  kinesphere: 0.35, space_approach: 0.8, space_plane: 0.3
+});
+ME.setAutoAdvance(&#39;Passage 4&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 3&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Anxiety about work&lt;/div&gt;
 
 &quot;How about if I sleep a little bit longer and forget all this nonsense,&quot; he thought, but that was something he was unable to do because he was used to sleeping on his right, and in his present state couldn&#39;t get into that position. However hard he &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sudden burst&quot;&gt;threw himself onto his right&lt;/span&gt;, he always &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Failed Advance&quot;&gt;rolled back to where he was&lt;/span&gt;.
 
 &quot;Oh, God,&quot; he thought, &quot;what a strenuous career it is that I&#39;ve chosen! It can all go to Hell!&quot; He felt a slight itch up on his belly; &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sustained&quot;&gt;pushed himself slowly up&lt;/span&gt; on his back towards the headboard so that he could lift his head better; found where the itch was, and saw that it was covered with lots of little white spots which he didn&#39;t know what to make of; and when he tried to feel the place with one of his legs he &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden Time&quot;&gt;drew it quickly back&lt;/span&gt; because as soon as he touched it he was overcome by a &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Involuntary response&quot;&gt;cold shudder&lt;/span&gt;.
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 4]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="Passage 4" tags="" position="300,650" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(4,{passage_id:4,action_drive:&quot;press&quot;,flow:0.25,intensity:0.65,weight_passive:0.0,shape_grow:0.15,shape_rise:0.15,shape_advance:0.2,body_connectivity:0.45,body_sequencing:0.3,kinesphere:0.4,space_approach:0.75,space_plane:0.3});ME.setAutoAdvance(&#39;Passage 5&#39;,30000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 4]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="Passage 4" tags="" position="300,650" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(4, {
+  passage_id: 4, action_drive: &quot;press&quot;,
+  flow: 0.25, intensity: 0.65, weight_passive: 0.0,
+  shape_grow: 0.15, shape_rise: 0.15, shape_advance: 0.2,
+  body_connectivity: 0.45, body_sequencing: 0.3,
+  kinesphere: 0.4, space_approach: 0.75, space_plane: 0.3
+});
+ME.setAutoAdvance(&#39;Passage 5&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 4&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Clock strikes, mother knocks&lt;/div&gt;
 
 And he looked over at the alarm clock, &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Sustained, Bound (environment)&quot;&gt;ticking&lt;/span&gt; on the chest of drawers. &quot;God in Heaven!&quot; he thought. It was half past six and the hands were &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained Time&quot;&gt;quietly moving forwards&lt;/span&gt;, it was even later than half past, more like quarter to seven. Had the alarm clock not rung?
 
 He was still hurriedly thinking all this through, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow&quot;&gt;unable to decide to get out of the bed&lt;/span&gt;, when the clock struck quarter to seven. There was a &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden, Direct (external)&quot;&gt;cautious knock&lt;/span&gt; at the door near his head. &quot;Gregor,&quot; somebody called. It was his mother. &quot;It&#39;s quarter to seven. Didn&#39;t you want to go somewhere?&quot;
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 5]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="7" name="Passage 5" tags="" position="300,800" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(5,{passage_id:5,action_drive:&quot;wring&quot;,flow:0.3,intensity:0.75,weight_passive:0.0,shape_grow:0.15,shape_rise:0.2,shape_advance:0.3,body_connectivity:0.4,body_sequencing:0.4,kinesphere:0.4,space_approach:0.5,space_plane:0.3});ME.setAutoAdvance(&#39;Passage 6&#39;,30000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 5]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="7" name="Passage 5" tags="" position="300,800" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(5, {
+  passage_id: 5, action_drive: &quot;wring&quot;,
+  flow: 0.3, intensity: 0.75, weight_passive: 0.0,
+  shape_grow: 0.15, shape_rise: 0.2, shape_advance: 0.3,
+  body_connectivity: 0.4, body_sequencing: 0.4,
+  kinesphere: 0.4, space_approach: 0.5, space_plane: 0.3
+});
+ME.setAutoAdvance(&#39;Passage 6&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 5&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Trying to speak&lt;/div&gt;
 
 Gregor was &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden Time&quot;&gt;shocked&lt;/span&gt; when he heard his own voice answering, it could hardly be recognised as the voice he had had before. As if from deep inside him, there was a &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Loss of Connectivity&quot;&gt;painful and uncontrollable squeaking&lt;/span&gt; mixed in with it, the words could be made out at first but then there was a &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Indirect Space&quot;&gt;sort of echo which made them unclear&lt;/span&gt;, leaving the hearer unsure whether he had heard properly or not.
 
 Gregor had wanted to give a full answer and explain everything, but in the circumstances contented himself with saying: &quot;Yes, mother, yes, thank-you, I&#39;m getting up now.&quot;
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 6]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="Passage 6" tags="" position="300,950" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(6,{passage_id:6,action_drive:&quot;press&quot;,flow:0.2,intensity:0.8,weight_passive:0.0,shape_grow:0.2,shape_rise:0.2,shape_advance:0.5,body_connectivity:0.35,body_sequencing:0.45,kinesphere:0.45,space_approach:0.7,space_plane:0.4});ME.setAutoAdvance(&#39;Passage 7&#39;,35000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 6]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="Passage 6" tags="" position="300,950" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(6, {
+  passage_id: 6, action_drive: &quot;press&quot;,
+  flow: 0.2, intensity: 0.8, weight_passive: 0.0,
+  shape_grow: 0.2, shape_rise: 0.2, shape_advance: 0.5,
+  body_connectivity: 0.35, body_sequencing: 0.45,
+  kinesphere: 0.45, space_approach: 0.7, space_plane: 0.4
+});
+ME.setAutoAdvance(&#39;Passage 7&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 6&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Getting out of bed&lt;/div&gt;
 
 It was a simple matter to throw off the covers; he only had to &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Grow&quot;&gt;blow himself up a little&lt;/span&gt; and they fell off by themselves. But it became difficult after that, especially as he was so &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Lateral presence&quot;&gt;exceptionally broad&lt;/span&gt;. He would have used his arms and his hands to push himself up; but instead of them he only had all those &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow, Indirect Space&quot;&gt;little legs continuously moving in different directions&lt;/span&gt;, and which he was moreover &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Loss of Connectivity&quot;&gt;unable to control&lt;/span&gt;.
 
 The first thing he wanted to do was get the lower part of his body out of the bed, but he had &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Fragmented Connectivity&quot;&gt;never seen this lower part, and could not imagine what it looked like&lt;/span&gt;; it turned out to be too hard to move; it went so slowly; and finally, almost in a frenzy, when he &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, maximum force&quot;&gt;carelessly shoved himself forwards with all the force he could gather&lt;/span&gt;, he chose the wrong direction, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden, Strong, Direct&quot;&gt;hit hard against the lower bedpost&lt;/span&gt;, and learned from the &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Sensory feedback&quot;&gt;burning pain&lt;/span&gt; he felt that the lower part of his body might well, at present, be the most sensitive.
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 7]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="Passage 7" tags="" position="300,1100" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(7,{passage_id:7,action_drive:&quot;wring&quot;,flow:0.35,intensity:0.8,weight_passive:0.0,shape_grow:0.2,shape_rise:0.25,shape_advance:0.4,body_connectivity:0.35,body_sequencing:0.45,kinesphere:0.45,space_approach:0.45,space_plane:0.35});ME.setAutoAdvance(&#39;Passage 8&#39;,35000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 7]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="Passage 7" tags="" position="300,1100" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(7, {
+  passage_id: 7, action_drive: &quot;wring&quot;,
+  flow: 0.35, intensity: 0.8, weight_passive: 0.0,
+  shape_grow: 0.2, shape_rise: 0.25, shape_advance: 0.4,
+  body_connectivity: 0.35, body_sequencing: 0.45,
+  kinesphere: 0.45, space_approach: 0.45, space_plane: 0.35
+});
+ME.setAutoAdvance(&#39;Passage 8&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 7&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;The manager speaks&lt;/div&gt;
 
 The chief clerk now &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight (external voice)&quot;&gt;raised his voice&lt;/span&gt;. &quot;Mr. Samsa, what is wrong? You &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Enclosed, Bound&quot;&gt;barricade yourself in your room&lt;/span&gt;, give us no more than yes or no for an answer, you are causing serious and unnecessary concern to your parents and you fail to carry out your business duties in a way that is quite unheard of. I&#39;m speaking here on behalf of your parents and of your employer, and really must request a &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Direct Space, Sudden (external)&quot;&gt;clear and immediate explanation&lt;/span&gt;.&quot;
 
 &quot;But Sir,&quot; called Gregor, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Free Flow (loss of restraint)&quot;&gt;beside himself and forgetting all else in the excitement&lt;/span&gt;, &quot;I&#39;ll open up immediately, just a moment. I&#39;m slightly unwell, an attack of dizziness, I haven&#39;t been able to get up. I&#39;m still in bed now.&quot;
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 8]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="Passage 8" tags="" position="300,1250" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(8,{passage_id:8,action_drive:&quot;glide&quot;,flow:0.2,intensity:0.6,weight_passive:0.0,shape_grow:0.2,shape_rise:0.3,shape_advance:0.6,body_connectivity:0.55,body_sequencing:0.6,kinesphere:0.5,space_approach:0.8,space_plane:0.5});ME.setAutoAdvance(&#39;Passage 9&#39;,30000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 8]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="Passage 8" tags="" position="300,1250" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(8, {
+  passage_id: 8, action_drive: &quot;glide&quot;,
+  flow: 0.2, intensity: 0.6, weight_passive: 0.0,
+  shape_grow: 0.2, shape_rise: 0.3, shape_advance: 0.6,
+  body_connectivity: 0.55, body_sequencing: 0.6,
+  kinesphere: 0.5, space_approach: 0.8, space_plane: 0.5
+});
+ME.setAutoAdvance(&#39;Passage 9&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 8&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Reaching the door&lt;/div&gt;
 
 Gregor &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained Time, Light Weight&quot;&gt;slowly pushed his way over to the door&lt;/span&gt; with the chair. Once there he let go of it and threw himself onto the door, &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;High Connectivity&quot;&gt;holding himself upright against it using the adhesive on the tips of his legs&lt;/span&gt;. He &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained, controlled&quot;&gt;rested there a little while&lt;/span&gt; to recover from the effort involved and then set himself to the task of &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;High Sequencing, Direct Space&quot;&gt;turning the key in the lock with his mouth&lt;/span&gt;.
 
 Using the jaw, he really was able to start the key turning, ignoring the fact that he must have been causing some kind of damage as a &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Material consequence&quot;&gt;brown fluid came from his mouth&lt;/span&gt;, flowed over the key and dripped onto the floor.
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 9]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="Passage 9" tags="" position="300,1400" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(9,{passage_id:9,action_drive:&quot;punch&quot;,flow:0.4,intensity:0.85,weight_passive:0.0,shape_grow:0.5,shape_rise:0.4,shape_advance:0.8,body_connectivity:0.5,body_sequencing:0.3,kinesphere:0.6,space_approach:0.7,space_plane:0.6});ME.setAutoAdvance(&#39;Passage 10&#39;,30000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 9]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="Passage 9" tags="" position="300,1400" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(9, {
+  passage_id: 9, action_drive: &quot;punch&quot;,
+  flow: 0.4, intensity: 0.85, weight_passive: 0.0,
+  shape_grow: 0.5, shape_rise: 0.4, shape_advance: 0.8,
+  body_connectivity: 0.5, body_sequencing: 0.3,
+  kinesphere: 0.6, space_approach: 0.7, space_plane: 0.6
+});
+ME.setAutoAdvance(&#39;Passage 10&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 9&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;The door opens&lt;/div&gt;
 
 Because he had to open the door in this way, it was already &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Maximum Grow, Advance&quot;&gt;wide open&lt;/span&gt; before he could be seen. He had first to &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained amidst Sudden&quot;&gt;slowly turn himself around&lt;/span&gt; one of the double doors, and he had to do it &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow (precarious)&quot;&gt;very carefully&lt;/span&gt; if he did not want to fall flat on his back before entering the room.
 
 Now he also saw the chief clerk, his hand pressed against his open mouth and &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Retreat (external)&quot;&gt;slowly retreating&lt;/span&gt; as if driven by a steady and invisible force. Gregor&#39;s mother &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Sink (external)&quot;&gt;sank down onto the floor&lt;/span&gt;. His father &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight (external)&quot;&gt;clenched his fists&lt;/span&gt; as if wanting to knock Gregor back into his room. Then he looked uncertainly round the living room, covered his eyes with his hands and &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Core collapse (external)&quot;&gt;wept so that his powerful chest shook&lt;/span&gt;.
 
-&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 10]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="Passage 10" tags="" position="300,1550" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(10,{passage_id:10,action_drive:&quot;slash&quot;,flow:0.15,intensity:0.8,weight_passive:0.1,shape_grow:0.1,shape_rise:0.0,shape_advance:0.0,body_connectivity:0.3,body_sequencing:0.15,kinesphere:0.2,space_approach:0.35,space_plane:0.3});ME.setAutoAdvance(&#39;End&#39;,35000);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 10]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="Passage 10" tags="" position="300,1550" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(10, {
+  passage_id: 10, action_drive: &quot;slash&quot;,
+  flow: 0.15, intensity: 0.8, weight_passive: 0.1,
+  shape_grow: 0.1, shape_rise: 0.0, shape_advance: 0.0,
+  body_connectivity: 0.3, body_sequencing: 0.15,
+  kinesphere: 0.2, space_approach: 0.35, space_plane: 0.3
+});
+ME.setAutoAdvance(&#39;End&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 10&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Driven back&lt;/div&gt;
 
 Gregor&#39;s father seized the chief clerk&#39;s stick in his right hand, picked up a large newspaper from the table with his left, and used them to &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Forced Retreat&quot;&gt;drive Gregor back into his room&lt;/span&gt;, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong, Sudden (external)&quot;&gt;stamping his foot&lt;/span&gt; at him as he went. Nothing would stop Gregor&#39;s father as he drove him back, &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Indirect, chaotic (external)&quot;&gt;making hissing noises at him like a wild man&lt;/span&gt;.
 
 Gregor pushed himself into the doorway without regard for what might happen. &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Fragmented, uncontrolled&quot;&gt;One side of his body lifted itself&lt;/span&gt;, he lay at an angle in the doorway, one flank scraped on the white door and was painfully injured, leaving vile brown flecks on it. Soon he was &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Ultimate Bound Flow&quot;&gt;stuck fast&lt;/span&gt; and &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Zero Sequencing&quot;&gt;would not have been able to move at all by himself&lt;/span&gt;. Then his father gave him a &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Maximum Strong, Sudden, Direct&quot;&gt;hefty shove from behind&lt;/span&gt; which released him from where he was held and sent him flying, and heavily bleeding, deep into his room. The door was &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden, Strong, Direct (final)&quot;&gt;slammed shut&lt;/span&gt; with the stick, then, finally, all was quiet.
 
-&lt;div class=&quot;continue&quot;&gt;[[End]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="End" tags="" position="300,1700" size="100,100">&lt;&lt;script&gt;&gt;ME.triggerPassage(0,{passage_id:0,action_drive:&quot;silence&quot;,flow:0.0,intensity:0.0,weight_passive:1.0,shape_grow:0.0,shape_rise:0.0,shape_advance:0.0,body_connectivity:0.0,body_sequencing:0.0,kinesphere:0.0,space_approach:0.0,space_plane:0.0});ME.stopLayer(&#39;narration&#39;);ME.stopLayer(&#39;body_vox&#39;);ME.stopLayer(&#39;sfx&#39;);ME.stopLayer(&#39;characters&#39;);&lt;&lt;/script&gt;&gt;\
+&lt;div class=&quot;continue&quot;&gt;[[End]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="End" tags="" position="300,1700" size="100,100">&lt;&lt;script&gt;&gt;
+ME.triggerPassage(0, {
+  passage_id: 0, action_drive: &quot;silence&quot;,
+  flow: 0.0, intensity: 0.0, weight_passive: 1.0,
+  shape_grow: 0.0, shape_rise: 0.0, shape_advance: 0.0,
+  body_connectivity: 0.0, body_sequencing: 0.0,
+  kinesphere: 0.0, space_approach: 0.0, space_plane: 0.0
+});
+ME.stopLayer(&#39;narration&#39;);
+ME.stopLayer(&#39;body_vox&#39;);
+ME.stopLayer(&#39;sfx&#39;);
+ME.stopLayer(&#39;characters&#39;);
+&lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;end-screen&quot;&gt;Then, finally, all was quiet.&lt;/div&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
