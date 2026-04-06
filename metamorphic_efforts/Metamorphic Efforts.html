@@ -166,11 +166,11 @@ html, body { background: #0a0806; margin: 0; padding: 0; height: 100%; overflow:
 .me-legend-dot.shape { background: rgba(39,174,96,0.7); }
 .me-legend-dot.body { background: rgba(41,128,185,0.7); }
 .me-legend-dot.space { background: rgba(243,156,18,0.7); }</style><script role="script" id="twine-user-script" type="text/twine-javascript">// ============================================================
-// METAMORPHIC EFFORTS v2 -- Story JavaScript
-// Hybrid architecture. Twine = interface. TD = headless visuals.
-// Bidirectional WebSocket. Five polyphonic audio layers.
+// METAMORPHIC EFFORTS - Story JavaScript
+// Hybrid architecture. Twine = interface. TouchDesigner = headless visuals.
+// Bidirectional WebSocket. 
+// Five polyphonic audio layers.
 // LMA annotation with progressive reveal and toggle.
-// Auto-advance: reads narration duration, waits for it + 3s buffer.
 // ============================================================
 
 window.ME = window.ME || {};
@@ -186,6 +186,7 @@ ME.revealDelay = 8000;
 ME.autoTimer = null;
 ME.revealTimer = null;
 ME.nextPassageTarget = null;
+ME.layerTimers = [];
 
 // ============================================================
 // AUDIO MAPS
@@ -243,7 +244,7 @@ ME.PASSAGE_MIX = {
 };
 
 // ============================================================
-// WEBSOCKET (bidirectional)
+// WEBSOCKET
 // ============================================================
 
 ME.connectWS = function() {
@@ -310,7 +311,7 @@ ME.drawTDFrame = function(buf) {
 };
 
 // ============================================================
-// FALLBACK VISUALS (when TD not connected)
+// FALLBACK VISUALS
 // ============================================================
 
 ME.drawFallback = function() {
@@ -434,10 +435,57 @@ ME.setLayerGain = function(id, v) {
   if (layer) layer.gain.gain.value = v;
 };
 
+// Preload an audio file, read its duration, then schedule it
+// so it ends at targetEndSec (with optional offset before end)
+ME.scheduleLayerToEnd = function(layerId, path, targetEndSec, offsetBefore) {
+  offsetBefore = offsetBefore || 0;
+  var probe = new Audio(path);
+
+  probe.addEventListener('loadedmetadata', function() {
+    var fileDur = probe.duration;
+    if (!fileDur || fileDur <= 0) return;
+
+    var startSec = Math.max(2, targetEndSec - fileDur - offsetBefore);
+    var startMs = startSec * 1000;
+
+    console.log('ME: ' + layerId + ' (' + path.split('/').pop() + ') dur ' +
+      fileDur.toFixed(1) + 's, starting at ' + startSec.toFixed(1) + 's');
+
+    var timer = setTimeout(function() {
+      ME.fireSound(layerId, path);
+    }, startMs);
+
+    ME.layerTimers.push(timer);
+  });
+
+  probe.addEventListener('error', function() {
+    // File missing, skip silently
+  });
+
+  probe.load();
+};
+
+// Fade drone out over durationMs
+ME.fadeDrone = function(durationMs) {
+  var layer = ME.layers['drone'];
+  if (!layer) return;
+  var startGain = layer.gain.gain.value;
+  var steps = 20;
+  var stepMs = durationMs / steps;
+  var stepVal = startGain / steps;
+  var fadeInterval = setInterval(function() {
+    var current = layer.gain.gain.value;
+    if (current > stepVal) {
+      layer.gain.gain.value = current - stepVal;
+    } else {
+      layer.gain.gain.value = 0;
+      clearInterval(fadeInterval);
+    }
+  }, stepMs);
+};
+
 // ============================================================
 // AUTO-ADVANCE
-// Stores target only. Timer is set inside triggerPassage once
-// the narration audio's duration is known via loadedmetadata.
 // ============================================================
 
 ME.setAutoAdvance = function(target) {
@@ -445,7 +493,7 @@ ME.setAutoAdvance = function(target) {
 };
 
 // ============================================================
-// LMA ANNOTATION (progressive reveal + toggle)
+// LMA ANNOTATION
 // ============================================================
 
 ME.revealLMA = function() {
@@ -491,7 +539,7 @@ ME.toggleLMA = function() {
 };
 
 // ============================================================
-// PASSAGE TRIGGER (called from each Twine passage)
+// PASSAGE TRIGGER
 // ============================================================
 
 ME.triggerPassage = function(pid, bessData) {
@@ -527,58 +575,77 @@ ME.triggerPassage = function(pid, bessData) {
     });
   }
 
-  // --- NARRATION with duration-based auto-advance ---
+  // --- NARRATION ---
   ME.stopLayer('narration');
+  ME.stopLayer('body_vox');
+  ME.stopLayer('sfx');
+  ME.stopLayer('characters');
+  ME.stopLayer('drone');
   if (ME.autoTimer) clearTimeout(ME.autoTimer);
   ME.nextPassageTarget = null;
 
-  if (pid >= 1 && pid <= 10) {
-    var narrAudio = ME.playLayer('narration',
-      'audio/narration/narr_p' + String(pid).padStart(2, '0') + '.mp3'
-    );
+  if (ME.layerTimers) {
+    ME.layerTimers.forEach(function(t) { clearTimeout(t); });
+  }
+  ME.layerTimers = [];
+
+  if (pid < 1 || pid > 10) {
+    ME.revealLMA();
+    return;
+  }
+
+  var narrAudio = ME.playLayer('narration',
+    'audio/narration/narr_p' + String(pid).padStart(2, '0') + '.mp3'
+  );
 
     if (narrAudio) {
       narrAudio.addEventListener('loadedmetadata', function() {
-        if (ME.nextPassageTarget && narrAudio.duration > 0) {
-          // Wait for narration duration + 3 second buffer
-          var waitMs = (narrAudio.duration * 1000) + 3000;
-          console.log('ME: narration p' + pid + ' duration ' +
-            narrAudio.duration.toFixed(1) + 's, auto-advance in ' +
-            (waitMs / 1000).toFixed(1) + 's');
+        var narrDur = narrAudio.duration;
+        if (!narrDur || narrDur <= 0) return;
+
+        console.log('ME: p' + pid + ' narration duration ' + narrDur.toFixed(1) + 's');
+
+        if (ME.nextPassageTarget) {
+          var advanceMs = (narrDur * 1000) + 3000;
           if (ME.autoTimer) clearTimeout(ME.autoTimer);
+
+          ME.layerTimers.push(setTimeout(function() {
+            ME.fadeDrone(2000);
+          }, advanceMs - 2000));
+
           ME.autoTimer = setTimeout(function() {
             Engine.play(ME.nextPassageTarget);
-          }, waitMs);
+          }, advanceMs);
         }
+
+        if (pid <= 9) {
+          var bvPath = 'audio/body_vox/body_vox_p' + String(pid).padStart(2, '0') + '.mp3';
+          ME.scheduleLayerToEnd('body_vox', bvPath, narrDur);
+        }
+
+        var sfxFiles = ME.SFX_MAP[pid] || [];
+        sfxFiles.forEach(function(f, idx) {
+          ME.scheduleLayerToEnd('sfx', f, narrDur, idx * 0.5);
+        });
+
+        var charFiles = ME.CHAR_MAP[pid] || [];
+        charFiles.forEach(function(f, idx) {
+          ME.scheduleLayerToEnd('characters', f, narrDur, idx * 0.3);
+        });
       });
     }
-  }
-
-  // --- BODY VOCALIZATION (10s delay, none for p10) ---
-  ME.stopLayer('body_vox');
-  if (pid >= 1 && pid <= 9) {
-    ME.playLayer('body_vox',
-      'audio/body_vox/body_vox_p' + String(pid).padStart(2, '0') + '.mp3',
-      { delay: 10000 }
-    );
-  }
 
   // --- DRONE ---
-  ME.stopLayer('drone');
   var dk = ME.DRONE_PASSAGE[pid];
   if (dk) {
     ME.playLayer('drone', ME.DRONE_MAP[dk], { loop: true });
   }
 
   // --- SFX ---
-  (ME.SFX_MAP[pid] || []).forEach(function(f) {
-    ME.fireSound('sfx', f);
-  });
+  // These are scheduled once narration metadata is available.
 
   // --- CHARACTERS ---
-  (ME.CHAR_MAP[pid] || []).forEach(function(f) {
-    ME.fireSound('characters', f);
-  });
+  // These are scheduled once narration metadata is available.
 
   // --- LMA reveal ---
   ME.revealLMA();
@@ -732,7 +799,8 @@ $(document).one(':storyready', function() {
   ME.buildControls();
   ME.connectWS();
   ME.animate();
-});</script><tw-passagedata pid="1" name="StoryInit" tags="" position="0,0" size="100,100">&lt;&lt;set $passageNum to 0&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Title" tags="" position="300,50" size="100,100">&lt;div class=&quot;title-screen&quot;&gt;\
+});
+</script><tw-passagedata pid="1" name="StoryInit" tags="" position="0,0" size="100,100">&lt;&lt;set $passageNum to 0&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Title" tags="" position="300,50" size="100,100">&lt;div class=&quot;title-screen&quot;&gt;\
 &lt;div class=&quot;title&quot;&gt;Metamorphic Efforts&lt;/div&gt;\
 &lt;div class=&quot;subtitle&quot;&gt;after Kafka&lt;/div&gt;\
 &lt;div class=&quot;continue&quot;&gt;[[Begin|Passage 1]]&lt;/div&gt;\
