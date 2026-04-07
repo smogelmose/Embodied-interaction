@@ -209,8 +209,8 @@ ME.SFX_MAP = {
   1:  ['audio/sfx/sfx_room_ambience.mp3', 'audio/sfx/sfx_body_rustle.mp3'],
   2:  ['audio/sfx/sfx_rain_window.mp3', 'audio/sfx/sfx_clock_ticking.mp3'],
   3:  ['audio/sfx/sfx_body_thrashing.mp3', 'audio/sfx/sfx_insect_legs.mp3'],
-  4:  ['audio/sfx/sfx_clock_ticking.mp3'],
-  5:  [],
+  4:  ['audio/sfx/sfx_clock_ticking.mp3', 'audio/sfx/sfx_clock_strike.mp3'],
+  5: ['audio/sfx/sfx_voice_distortion.mp3'],
   6:  ['audio/sfx/sfx_body_thrashing.mp3', 'audio/sfx/sfx_insect_legs.mp3'],
   7:  [],
   8:  ['audio/sfx/sfx_key_turning.mp3', 'audio/sfx/sfx_fluid_drip.mp3'],
@@ -799,7 +799,7 @@ $(document).one(':storyready', function() {
   ME.animate();
 });</script><tw-passagedata pid="1" name="StoryInit" tags="" position="0,0" size="100,100">&lt;&lt;set $passageNum to 0&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="Title" tags="" position="300,50" size="100,100">&lt;div class=&quot;title-screen&quot;&gt;\
 &lt;div class=&quot;title&quot;&gt;Metamorphic Efforts&lt;/div&gt;\
-&lt;div class=&quot;subtitle&quot;&gt;after Kafka&lt;/div&gt;\
+&lt;div class=&quot;subtitle&quot;&gt;after Kafka &lt;/div&gt;\
 &lt;div class=&quot;continue&quot;&gt;[[Begin|Passage 1]]&lt;/div&gt;\
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Passage 1" tags="" position="300,200" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(1, {
@@ -845,7 +845,7 @@ ME.setAutoAdvance(&#39;Passage 4&#39;);
 
 &quot;How about if I sleep a little bit longer and forget all this nonsense,&quot; he thought, but that was something he was unable to do because he was used to sleeping on his right, and in his present state couldn&#39;t get into that position. However hard he &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sudden burst&quot;&gt;threw himself onto his right&lt;/span&gt;, he always &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Failed Advance&quot;&gt;rolled back to where he was&lt;/span&gt;.
 
-&quot;Oh, God,&quot; he thought, &quot;what a strenuous career it is that I&#39;ve chosen! It can all go to Hell!&quot; He felt a slight itch up on his belly; &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sustained&quot;&gt;pushed himself slowly up&lt;/span&gt; on his back towards the headboard so that he could lift his head better; found where the itch was, and saw that it was covered with lots of little white spots which he didn&#39;t know what to make of; and when he tried to feel the place with one of his legs he &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden Time&quot;&gt;drew it quickly back&lt;/span&gt; because as soon as he touched it he was overcome by a &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Involuntary response&quot;&gt;cold shudder&lt;/span&gt;.
+&quot;Oh, God,&quot; he thought, &quot;what a strenuous career it is that I&#39;ve chosen! Travelling day in and day out. It can all go to Hell!&quot; He felt a slight itch up on his belly; &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sustained&quot;&gt;pushed himself slowly up&lt;/span&gt; on his back towards the headboard so that he could lift his head better; found where the itch was, and saw that it was covered with lots of little white spots which he didn&#39;t know what to make of; and when he tried to feel the place with one of his legs he &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden Time&quot;&gt;drew it quickly back&lt;/span&gt; because as soon as he touched it he was overcome by a &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Involuntary response&quot;&gt;cold shudder&lt;/span&gt;.
 
 &lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 4]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="Passage 4" tags="" position="300,650" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(4, {
