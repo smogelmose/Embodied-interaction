@@ -47,7 +47,7 @@ ME.DRONE_PASSAGE = {
 ME.BODY_VOX_MAP = {
   1:  { f: 'audio/body_vox/body_vox_p01.mp3', end: true },
   2:  { f: 'audio/body_vox/body_vox_p02.mp3', end: true },
-  3:  { f: 'audio/body_vox/body_vox_p03.mp3', end: true },
+  3:  { f: 'audio/body_vox/body_vox_p03.mp3', at: 3 },
   4:  { f: 'audio/body_vox/body_vox_p04.mp3', end: true },
   5:  { f: 'audio/body_vox/body_vox_p05.mp3', at: 3 },
   6:  { f: 'audio/body_vox/body_vox_p06.mp3', end: true },
@@ -67,10 +67,10 @@ ME.SFX_MAP = {
   4:  [{ f: 'audio/sfx/sfx_clock_ticking.mp3', at: 0 },
        { f: 'audio/sfx/sfx_clock_strike.mp3', at: -11 }],
   5:  [{ f: 'audio/sfx/sfx_voice_distortion.mp3', at: -5 },
-       { f: 'audio/sfx/sfx_squeaking.mp3', at: -8 }],
+       { f: 'audio/sfx/sfx_squeaking.mp3', at: -7 }],
   6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', end: true },
        { f: 'audio/sfx/sfx_insect_legs.mp3', end: true },
-       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -3 }],
+       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -5 }],
   7:  [],
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 }],
@@ -105,8 +105,8 @@ ME.PASSAGE_MIX = {
   5:  { narration: 0.8,  body_vox: 0.4,  drone: 0.6,  sfx: 0.5,  characters: 0.0 },
   6:  { narration: 0.8,  body_vox: 0.45, drone: 0.55, sfx: 0.45, characters: 0.0 },
   7:  { narration: 0.75, body_vox: 0.4,  drone: 0.6,  sfx: 0.35, characters: 0.6 },
-  8:  { narration: 0.9,  body_vox: 0.3,  drone: 0.5,  sfx: 0.55, characters: 0.0 },
-  9:  { narration: 0.7,  body_vox: 0.45, drone: 0.45, sfx: 0.5,  characters: 0.5 },
+  8:  { narration: 0.9,  body_vox: 0.3,  drone: 0.5,  sfx: 0.6,  characters: 0.0 },
+  9:  { narration: 0.7,  body_vox: 0.45, drone: 0.3,  sfx: 0.5,  characters: 0.5 },
   10: { narration: 0.8,  body_vox: 0.3,  drone: 0.7,  sfx: 0.6,  characters: 0.7 }
 };
 
