@@ -2,8 +2,14 @@
 // METAMORPHIC EFFORTS - Story JavaScript
 // Hybrid architecture. Twine = interface. TouchDesigner = headless visuals.
 // Bidirectional WebSocket.
-// Five polyphonic audio layers.
+// Five polyphonic audio layers with per-file timing control.
 // LMA annotation with progressive reveal and toggle.
+//
+// Audio timing modes per file:
+//   at: 0      plays immediately on passage start
+//   at: 5      plays 5 seconds into passage (absolute from start)
+//   at: -7     plays 7 seconds before narration ends (relative to end)
+//   end: true  reads file duration, schedules so it ends with narration
 // ============================================================
 
 window.ME = window.ME || {};
@@ -38,40 +44,70 @@ ME.DRONE_PASSAGE = {
   10: 'slash'
 };
 
+ME.BODY_VOX_MAP = {
+  1:  { f: 'audio/body_vox/body_vox_p01.mp3', end: true },
+  2:  { f: 'audio/body_vox/body_vox_p02.mp3', end: true },
+  3:  { f: 'audio/body_vox/body_vox_p03.mp3', end: true },
+  4:  { f: 'audio/body_vox/body_vox_p04.mp3', end: true },
+  5:  { f: 'audio/body_vox/body_vox_p05.mp3', at: 3 },
+  6:  { f: 'audio/body_vox/body_vox_p06.mp3', end: true },
+  7:  { f: 'audio/body_vox/body_vox_p07.mp3', at: 3 },
+  8:  { f: 'audio/body_vox/body_vox_p08.mp3', end: true },
+  9:  { f: 'audio/body_vox/body_vox_p09.mp3', end: true },
+  10: { f: 'audio/body_vox/body_vox_p10.mp3', at: 2 }
+};
+
 ME.SFX_MAP = {
-  1:  ['audio/sfx/sfx_room_ambience.mp3', 'audio/sfx/sfx_body_rustle.mp3'],
-  2:  ['audio/sfx/sfx_rain_window.mp3', 'audio/sfx/sfx_clock_ticking.mp3'],
-  3:  ['audio/sfx/sfx_body_thrashing.mp3', 'audio/sfx/sfx_insect_legs.mp3'],
-  4:  ['audio/sfx/sfx_clock_ticking.mp3'],
-  5:  [],
-  6:  ['audio/sfx/sfx_body_thrashing.mp3', 'audio/sfx/sfx_insect_legs.mp3'],
+  1:  [{ f: 'audio/sfx/sfx_room_ambience.mp3', at: 0 },
+       { f: 'audio/sfx/sfx_body_rustle.mp3', at: 0 }],
+  2:  [{ f: 'audio/sfx/sfx_rain_window.mp3', end: true },
+       { f: 'audio/sfx/sfx_clock_ticking.mp3', at: 0 }],
+  3:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', end: true },
+       { f: 'audio/sfx/sfx_insect_legs.mp3', end: true }],
+  4:  [{ f: 'audio/sfx/sfx_clock_ticking.mp3', at: 0 },
+       { f: 'audio/sfx/sfx_clock_strike.mp3', at: -11 }],
+  5:  [{ f: 'audio/sfx/sfx_voice_distortion.mp3', at: -5 },
+       { f: 'audio/sfx/sfx_squeaking.mp3', at: -8 }],
+  6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', end: true },
+       { f: 'audio/sfx/sfx_insect_legs.mp3', end: true },
+       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -3 }],
   7:  [],
-  8:  ['audio/sfx/sfx_key_turning.mp3', 'audio/sfx/sfx_fluid_drip.mp3'],
-  9:  ['audio/sfx/sfx_door_open.mp3', 'audio/sfx/sfx_gasp.mp3', 'audio/sfx/sfx_body_thud.mp3'],
-  10: ['audio/sfx/sfx_newspaper_swat.mp3', 'audio/sfx/sfx_body_scrape.mp3', 'audio/sfx/sfx_door_slam.mp3']
+  8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
+       { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 }],
+  9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
+       { f: 'audio/sfx/sfx_gasp.mp3', at: -10 },
+       { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
+  10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 5 },
+       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 3 },
+       { f: 'audio/sfx/sfx_door_slam.mp3', end: true }]
 };
 
 ME.CHAR_MAP = {
   1: [], 2: [], 3: [],
-  4:  ['audio/characters/char_knock_door.mp3', 'audio/characters/char_mother_call.mp3'],
+  4:  [{ f: 'audio/characters/char_knock_door.mp3', at: -9 },
+       { f: 'audio/characters/char_mother_call.mp3', at: -7 }],
   5:  [], 6: [],
-  7:  ['audio/characters/char_knock_loud.mp3', 'audio/characters/char_manager_footsteps.mp3', 'audio/characters/char_grete_cry.mp3'],
+  7:  [{ f: 'audio/characters/char_knock_loud.mp3', at: 0 },
+       { f: 'audio/characters/char_manager_footsteps.mp3', at: 0 },
+       { f: 'audio/characters/char_grete_cry.mp3', end: true }],
   8:  [],
-  9:  ['audio/characters/char_grete_cry.mp3'],
-  10: ['audio/characters/char_father_hissing.mp3', 'audio/characters/char_father_pacing.mp3', 'audio/characters/char_door_slam.mp3']
+  9:  [{ f: 'audio/characters/char_grete_cry.mp3', end: true }],
+  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 0 },
+       { f: 'audio/characters/char_father_pacing.mp3', at: 0 },
+       { f: 'audio/characters/char_door_slam.mp3', end: true }]
 };
 
 ME.PASSAGE_MIX = {
   1:  { narration: 0.9,  body_vox: 0.3,  drone: 0.4,  sfx: 0.3,  characters: 0.0 },
   2:  { narration: 0.9,  body_vox: 0.25, drone: 0.45, sfx: 0.35, characters: 0.0 },
   3:  { narration: 0.85, body_vox: 0.35, drone: 0.5,  sfx: 0.35, characters: 0.0 },
-  4:  { narration: 0.85, body_vox: 0.35, drone: 0.55, sfx: 0.4,  characters: 0.4 },
-  5:  { narration: 0.8,  body_vox: 0.4,  drone: 0.6,  sfx: 0.3,  characters: 0.0 },
+  4:  { narration: 0.85, body_vox: 0.35, drone: 0.55, sfx: 0.4,  characters: 0.55 },
+  5:  { narration: 0.8,  body_vox: 0.4,  drone: 0.6,  sfx: 0.5,  characters: 0.0 },
   6:  { narration: 0.8,  body_vox: 0.45, drone: 0.55, sfx: 0.45, characters: 0.0 },
   7:  { narration: 0.75, body_vox: 0.4,  drone: 0.6,  sfx: 0.35, characters: 0.6 },
-  8:  { narration: 0.9,  body_vox: 0.3,  drone: 0.5,  sfx: 0.4,  characters: 0.0 },
-  9:  { narration: 0.7,  body_vox: 0.45, drone: 0.65, sfx: 0.5,  characters: 0.5 },
-  10: { narration: 0.8,  body_vox: 0.0,  drone: 0.7,  sfx: 0.6,  characters: 0.7 }
+  8:  { narration: 0.9,  body_vox: 0.3,  drone: 0.5,  sfx: 0.55, characters: 0.0 },
+  9:  { narration: 0.7,  body_vox: 0.45, drone: 0.45, sfx: 0.5,  characters: 0.5 },
+  10: { narration: 0.8,  body_vox: 0.3,  drone: 0.7,  sfx: 0.6,  characters: 0.7 }
 };
 
 // ============================================================
@@ -271,19 +307,18 @@ ME.setLayerGain = function(id, v) {
 };
 
 // Preload audio, read duration, schedule to end with narration
-ME.scheduleLayerToEnd = function(layerId, path, narrDurSec, offsetBefore) {
-  offsetBefore = offsetBefore || 0;
+ME.scheduleLayerToEnd = function(layerId, path, narrDurSec) {
   var probe = new Audio(path);
 
   probe.addEventListener('loadedmetadata', function() {
     var fileDur = probe.duration;
     if (!fileDur || fileDur <= 0) return;
 
-    var startSec = Math.max(2, narrDurSec - fileDur - offsetBefore);
+    var startSec = Math.max(2, narrDurSec - fileDur);
     var startMs = startSec * 1000;
 
     console.log('ME: ' + layerId + ' (' + path.split('/').pop() + ') dur ' +
-      fileDur.toFixed(1) + 's, starting at ' + startSec.toFixed(1) + 's');
+      fileDur.toFixed(1) + 's, starting at ' + startSec.toFixed(1) + 's (ends with narration)');
 
     var timer = setTimeout(function() {
       ME.fireSound(layerId, path);
@@ -294,6 +329,19 @@ ME.scheduleLayerToEnd = function(layerId, path, narrDurSec, offsetBefore) {
 
   probe.addEventListener('error', function() {});
   probe.load();
+};
+
+// Schedule a file at a specific time (absolute seconds from start)
+ME.scheduleAt = function(layerId, path, atSec) {
+  if (atSec <= 0) {
+    ME.fireSound(layerId, path);
+  } else {
+    var timer = setTimeout(function() {
+      ME.fireSound(layerId, path);
+    }, atSec * 1000);
+    ME.layerTimers.push(timer);
+    console.log('ME: ' + layerId + ' (' + path.split('/').pop() + ') scheduled at ' + atSec.toFixed(1) + 's');
+  }
 };
 
 // Fade drone out over durationMs
@@ -313,6 +361,39 @@ ME.fadeDrone = function(durationMs) {
       clearInterval(fadeInterval);
     }
   }, stepMs);
+};
+
+// Process a file list (SFX or CHAR) with timing modes
+// Called from inside loadedmetadata when narrDur is known
+ME.processFileList = function(layerId, fileList, narrDur) {
+  fileList.forEach(function(item) {
+    if (item.end) {
+      ME.scheduleLayerToEnd(layerId, item.f, narrDur);
+    } else if (item.at !== undefined && item.at < 0) {
+      var atSec = Math.max(0, narrDur + item.at);
+      ME.scheduleAt(layerId, item.f, atSec);
+    }
+  });
+};
+
+// Fire immediate and absolute-timed files (does not need narrDur)
+ME.fireImmediateFiles = function(layerId, fileList) {
+  fileList.forEach(function(item) {
+    if (item.at !== undefined && item.at >= 0) {
+      ME.scheduleAt(layerId, item.f, item.at);
+    }
+  });
+};
+
+// Process a single body vox item with timing modes
+ME.processBodyVox = function(item, narrDur) {
+  if (!item) return;
+  if (item.end) {
+    ME.scheduleLayerToEnd('body_vox', item.f, narrDur);
+  } else if (item.at !== undefined && item.at < 0) {
+    var atSec = Math.max(0, narrDur + item.at);
+    ME.scheduleAt('body_vox', item.f, atSec);
+  }
 };
 
 // ============================================================
@@ -425,12 +506,30 @@ ME.triggerPassage = function(pid, bessData) {
     return;
   }
 
-  // Narration starts immediately
+  // --- NARRATION starts immediately ---
   var narrAudio = ME.playLayer('narration',
     'audio/narration/narr_p' + String(pid).padStart(2, '0') + '.mp3'
   );
 
-  // Once narration duration is known, schedule everything else
+  // --- DRONE starts immediately (loops, fades at end) ---
+  var dk = ME.DRONE_PASSAGE[pid];
+  if (dk) {
+    ME.playLayer('drone', ME.DRONE_MAP[dk], { loop: true });
+  }
+
+  // --- Fire immediate (at >= 0) SFX and characters now ---
+  var sfxFiles = ME.SFX_MAP[pid] || [];
+  var charFiles = ME.CHAR_MAP[pid] || [];
+  ME.fireImmediateFiles('sfx', sfxFiles);
+  ME.fireImmediateFiles('characters', charFiles);
+
+  // --- Fire immediate (at >= 0) body vox now ---
+  var bvItem = ME.BODY_VOX_MAP[pid];
+  if (bvItem && bvItem.at !== undefined && bvItem.at >= 0) {
+    ME.scheduleAt('body_vox', bvItem.f, bvItem.at);
+  }
+
+  // --- Once narration duration is known, schedule everything else ---
   if (narrAudio) {
     narrAudio.addEventListener('loadedmetadata', function() {
       var narrDur = narrAudio.duration;
@@ -453,33 +552,18 @@ ME.triggerPassage = function(pid, bessData) {
         }, advanceMs);
       }
 
-      // Body vox: schedule to end with narration
-      if (pid <= 9) {
-        var bvPath = 'audio/body_vox/body_vox_p' + String(pid).padStart(2, '0') + '.mp3';
-        ME.scheduleLayerToEnd('body_vox', bvPath, narrDur);
-      }
+      // Body vox: process end and negative-at items
+      ME.processBodyVox(bvItem, narrDur);
 
-      // SFX: schedule to end with narration
-      var sfxFiles = ME.SFX_MAP[pid] || [];
-      sfxFiles.forEach(function(f, idx) {
-        ME.scheduleLayerToEnd('sfx', f, narrDur, idx * 0.5);
-      });
+      // SFX: process end and negative-at items
+      ME.processFileList('sfx', sfxFiles, narrDur);
 
-      // Characters: schedule to end with narration
-      var charFiles = ME.CHAR_MAP[pid] || [];
-      charFiles.forEach(function(f, idx) {
-        ME.scheduleLayerToEnd('characters', f, narrDur, idx * 0.3);
-      });
+      // Characters: process end and negative-at items
+      ME.processFileList('characters', charFiles, narrDur);
     });
   }
 
-  // Drone starts immediately (loops, fades at end)
-  var dk = ME.DRONE_PASSAGE[pid];
-  if (dk) {
-    ME.playLayer('drone', ME.DRONE_MAP[dk], { loop: true });
-  }
-
-  // LMA reveal
+  // --- LMA reveal ---
   ME.revealLMA();
 };
 
