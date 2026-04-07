@@ -71,9 +71,10 @@ ME.SFX_MAP = {
   6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', end: true },
        { f: 'audio/sfx/sfx_insect_legs.mp3', end: true },
        { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -5 }],
-  7:  [],
+  7:  [{ f: 'audio/sfx/sfx_bed_sit_up.mp3', at: 0 }],
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
-       { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 }],
+       { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
+       { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
        { f: 'audio/sfx/sfx_gasp.mp3', at: -10 },
        { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
@@ -94,6 +95,7 @@ ME.CHAR_MAP = {
   9:  [{ f: 'audio/characters/char_grete_cry.mp3', end: true }],
   10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 0 },
        { f: 'audio/characters/char_father_pacing.mp3', at: 0 },
+       { f: 'audio/characters/char_father_stomp.mp3', at: 3 },
        { f: 'audio/characters/char_door_slam.mp3', end: true }]
 };
 
