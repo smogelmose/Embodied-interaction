@@ -78,10 +78,10 @@ ME.SFX_MAP = {
        { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 },
        { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: -5 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_gasp.mp3', at: -10 },
+       { f: 'audio/sfx/sfx_gasp.mp3', at: -12 },
        { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
   10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 5 },
-       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 3 },
+       { f: 'audio/sfx/sfx_body_scrape.mp3', at: -11 },
        { f: 'audio/sfx/sfx_door_slam.mp3', end: true }]
 };
 
@@ -94,10 +94,9 @@ ME.CHAR_MAP = {
        { f: 'audio/characters/char_manager_footsteps.mp3', at: 0 }],
   8:  [],
   9:  [{ f: 'audio/characters/char_father_weeping.mp3', end: true }],
-  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 0 },
-       { f: 'audio/characters/char_father_pacing.mp3', at: 0 },
-       { f: 'audio/characters/char_father_stomp.mp3', at: 3 },
-       { f: 'audio/characters/char_door_slam.mp3', end: true }]
+  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: -15 },
+       { f: 'audio/characters/char_father_pacing.mp3', at: -12 },
+       { f: 'audio/characters/char_father_stomp.mp3', at: -18 }]
 };
 
 ME.PASSAGE_MIX = {
