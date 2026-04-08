@@ -42,7 +42,7 @@ ME.setAutoAdvance('Passage 2');
 <</script>>\
 <div class="passage-meta">Passage 1</div><div class="passage-scene">Waking</div>
 
-One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He <span class="lma" data-cat="effort" data-lma="Strong Weight, Sustained">lay</span> on his <span class="lma" data-cat="effort" data-lma="Strong Weight">armour-like</span> back, and if he <span class="lma" data-cat="shape" data-lma="Minimal Rise">lifted his head a little</span> he could see his brown belly, slightly domed and <span class="lma" data-cat="body" data-lma="Fragmented Connectivity">divided by arches into stiff sections</span>. The bedding was <span class="lma" data-cat="effort" data-lma="Strong Weight">hardly able to cover it</span> and seemed ready to slide off any moment. His many legs, <span class="lma" data-cat="body" data-lma="Low Connectivity">pitifully thin compared with the size of the rest of him</span>, <span class="lma" data-cat="effort" data-lma="Bound Flow">waved about helplessly</span> as he looked.
+One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He <span class="lma" data-cat="effort" data-lma="Strong Weight, Sustained">lay</span> on his <span class="lma" data-cat="effort" data-lma="Strong Weight">armour-like</span> back, and if he <span class="lma" data-cat="shape" data-lma="Minimal Rise">lifted his head a little</span> he could see his brown belly, slightly domed and <span class="lma" data-cat="body" data-lma="Fragmented Connectivity">divided by arches into stiff sections</span>. The bedding was <span class="lma" data-cat="effort" data-lma="Strong Weight">hardly able to cover it</span> and seemed ready to slide off any moment. His many legs, <span class="lma" data-cat="body" data-lma="Low Connectivity">pitifully thin compared with the size of the rest of him</span>, <span class="lma" data-cat="effort" data-lma="Free Flow">waved about helplessly</span> as he looked.
 
 <div class="continue">[[Continue|Passage 2]]</div>
 
@@ -160,7 +160,7 @@ ME.setAutoAdvance('Passage 7');
 <</script>>\
 <div class="passage-meta">Passage 6</div><div class="passage-scene">Getting out of bed</div>
 
-It was a simple matter to throw off the covers; he only had to <span class="lma" data-cat="shape" data-lma="Grow">blow himself up a little</span> and they fell off by themselves. But it became difficult after that, especially as he was so <span class="lma" data-cat="shape" data-lma="Lateral presence">exceptionally broad</span>. He would have used his arms and his hands to push himself up; but instead of them he only had all those <span class="lma" data-cat="effort" data-lma="Bound Flow, Indirect Space">little legs continuously moving in different directions</span>, and which he was moreover <span class="lma" data-cat="body" data-lma="Loss of Connectivity">unable to control</span>.
+It was a simple matter to throw off the covers; he only had to <span class="lma" data-cat="shape" data-lma="Grow">blow himself up a little</span> and they fell off by themselves. But it became difficult after that, especially as he was so <span class="lma" data-cat="shape" data-lma="Lateral presence">exceptionally broad</span>. He would have used his arms and his hands to push himself up; but instead of them he only had all those <span class="lma" data-cat="effort" data-lma="Free Flow, Indirect Space">little legs continuously moving in different directions</span>, and which he was moreover <span class="lma" data-cat="body" data-lma="Loss of Connectivity">unable to control</span>.
 
 The first thing he wanted to do was get the lower part of his body out of the bed, but he had <span class="lma" data-cat="body" data-lma="Fragmented Connectivity">never seen this lower part, and could not imagine what it looked like</span>; it turned out to be too hard to move; it went so slowly; and finally, almost in a frenzy, when he <span class="lma" data-cat="effort" data-lma="Strong Weight, maximum force">carelessly shoved himself forwards with all the force he could gather</span>, he chose the wrong direction, <span class="lma" data-cat="effort" data-lma="Sudden, Strong, Direct">hit hard against the lower bedpost</span>, and learned from the <span class="lma" data-cat="body" data-lma="Sensory feedback">burning pain</span> he felt that the lower part of his body might well, at present, be the most sensitive.
 
@@ -949,7 +949,7 @@ $(document).one(':storyready', function() {
   // Controls panel
   var cp = document.createElement('div');
   cp.id = 'me-controls';
-  cp.innerHTML = '<div id="me-controls-label">Voices</div>';
+  cp.innerHTML = '<div id="me-controls-label">Polyphonic Voices</div>';
   body.appendChild(cp);
 
   // Initialize everything
@@ -961,13 +961,13 @@ $(document).one(':storyready', function() {
 });
 
 :: StoryStylesheet [stylesheet]
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
 html, body { background: #0a0806; margin: 0; padding: 0; height: 100%; overflow: hidden; }
 #ui-bar, #ui-bar-toggle { display: none; }
 #me-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; }
 #me-vignette { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 40%, rgba(10,8,6,0.7) 100%); }
 #story { position: relative; z-index: 10; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 0; }
-.passage { max-width: 640px; padding: 2rem; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.85; color: #e8dcc8; text-shadow: 0 0 30px rgba(10,8,6,0.9), 0 0 60px rgba(10,8,6,0.7); animation: passageFadeIn 1.8s ease forwards; opacity: 0; }
+.passage { max-width: 640px; padding: 2rem; font-family: 'EB Garamond', Georgia, serif; font-size: 1.25rem; line-height: 1.85; color: #e8dcc8; text-shadow: 0 0 30px rgba(10,8,6,0.9), 0 0 60px rgba(10,8,6,0.7); animation: passageFadeIn 1.8s ease forwards; opacity: 0; }
 .passage p { margin-bottom: 1.2em; }
 .passage a { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: #c4935a; text-decoration: none; border-bottom: 1px solid rgba(196,147,90,0.3); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
 .passage a:hover { color: #e8dcc8; border-color: #e8dcc8; }
@@ -993,8 +993,8 @@ html, body { background: #0a0806; margin: 0; padding: 0; height: 100%; overflow:
 .lma.revealed:hover::after { opacity: 1; }
 .lma.lma-hidden { border-bottom-color: transparent !important; color: #e8dcc8 !important; cursor: default !important; }
 .lma.lma-hidden::after { display: none !important; }
-#me-drive { position: fixed; top: 1.5rem; left: 1.5rem; z-index: 50; font-family: 'DM Sans', sans-serif; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #8a7e6e; opacity: 0.3; transition: opacity 0.3s; }
-#me-drive:hover { opacity: 0.8; }
+#me-drive { position: fixed; top: 1.5rem; left: 1.5rem; z-index: 50; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #c4935a; opacity: 0.75; transition: opacity 0.3s; }
+#me-drive:hover { opacity: 1; }
 #me-drive-name { color: #c4935a; }
 #me-drive-emotion { display: block; margin-top: 0.2rem; font-size: 0.55rem; font-weight: 300; letter-spacing: 0.15em; }
 #me-status { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 50; font-family: 'DM Sans', sans-serif; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: #8a7e6e; opacity: 0.3; display: flex; align-items: center; gap: 0.4rem; }
@@ -1003,7 +1003,7 @@ html, body { background: #0a0806; margin: 0; padding: 0; height: 100%; overflow:
 #me-dot.fallback { background: #c4935a; }
 #me-counter { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 50; font-family: 'DM Sans', sans-serif; font-size: 0.6rem; font-weight: 300; letter-spacing: 0.15em; color: #8a7e6e; opacity: 0.3; }
 #me-progress { position: fixed; bottom: 0; left: 0; height: 2px; background: rgba(196,147,90,0.3); z-index: 50; transition: width 0.8s ease; }
-#me-controls { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 100; background: rgba(10,8,6,0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(196,147,90,0.12); padding: 1rem 1.2rem 0.8rem; border-radius: 6px; display: flex; flex-direction: column; gap: 0.5rem; opacity: 0.2; transition: opacity 0.4s ease; min-width: 190px; }
+#me-controls { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 100; background: rgba(10,8,6,0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(196,147,90,0.12); padding: 1rem 1.2rem 0.8rem; border-radius: 6px; display: flex; flex-direction: column; gap: 0.5rem; opacity: 0.7; transition: opacity 0.4s ease; min-width: 190px; }
 #me-controls:hover { opacity: 1; }
 #me-controls-label { font-family: 'DM Sans', sans-serif; font-size: 0.55rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #8a7e6e; margin-bottom: 0.2rem; }
 .me-slider-row { display: flex; align-items: center; gap: 0.6rem; }

@@ -707,7 +707,7 @@ $(document).one(':storyready', function() {
   // Controls panel
   var cp = document.createElement('div');
   cp.id = 'me-controls';
-  cp.innerHTML = '<div id="me-controls-label">Voices</div>';
+  cp.innerHTML = '<div id="me-controls-label">Polyphonic Voices</div>';
   body.appendChild(cp);
 
   // Initialize everything
