@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/x-icon" href="bess_author_favicon.ico">
+<title>BESS Author</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 900px; margin: 2rem auto;
+  padding: 0 1.25rem 4rem;
+  background: #fafaf9; color: #1a1a18;
+  font-size: 14px; line-height: 1.5;
+}
+h1 { font-size: 16px; font-weight: 600; }
+
+/* Header */
+.header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.header h1 { margin-right: auto; }
+.action-btn {
+  font-family: inherit; font-size: 12px; font-weight: 500;
+  padding: 5px 12px; border-radius: 6px; border: 1px solid #ccc;
+  background: #fff; color: #555; cursor: pointer; transition: all 0.1s;
+}
+.action-btn:hover { background: #f0f0ee; }
+.action-btn.clear-all { color: #999; font-size: 11px; }
+.action-btn.clear-all:hover { border-color: #e24b4a; color: #e24b4a; }
+.passage-controls { display: flex; align-items: center; gap: 8px; }
+.passage-controls label { font-size: 13px; color: #666; }
+.passage-input {
+  font-family: inherit; font-size: 13px; width: 52px;
+  padding: 5px 8px; border-radius: 6px; border: 1px solid #ccc;
+  background: #fff; color: #1a1a18; text-align: center;
+}
+.file-input { display: none; }
+
+/* Section labels */
+.sec-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; color: #888; margin-bottom: 8px;
+}
+
+/* File / passage select */
+.file-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; }
+.file-passage-select {
+  font-family: inherit; font-size: 12px; padding: 5px 8px;
+  border-radius: 6px; border: 1px solid #ccc;
+  background: #fff; color: #1a1a18; flex: 1; display: none;
+}
+.file-name { font-size: 12px; color: #888; }
+
+/* Text editor area */
+.text-section { margin-bottom: 1.25rem; }
+.text-toolbar {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 6px; flex-wrap: wrap;
+}
+.cat-select, .lma-input {
+  font-family: inherit; font-size: 12px; padding: 4px 8px;
+  border-radius: 6px; border: 1px solid #ccc;
+  background: #fff; color: #1a1a18;
+}
+.cat-select { width: 110px; }
+.lma-input { flex: 1; min-width: 160px; }
+.lma-input::placeholder { color: #bbb; }
+.annotate-btn {
+  font-family: inherit; font-size: 12px; font-weight: 500;
+  padding: 4px 12px; border-radius: 6px;
+  border: 1px solid #3C3489; color: #3C3489;
+  background: #fff; cursor: pointer; white-space: nowrap;
+}
+.annotate-btn:hover { background: #f4f3fd; }
+.clear-spans-btn {
+  font-family: inherit; font-size: 11px;
+  padding: 4px 10px; border-radius: 6px;
+  border: 1px solid #ccc; color: #999;
+  background: #fff; cursor: pointer;
+}
+.clear-spans-btn:hover { border-color: #e24b4a; color: #e24b4a; }
+.passage-title-row { display: flex; gap: 8px; margin-bottom: 6px; }
+.meta-input {
+  font-family: inherit; font-size: 13px; padding: 6px 10px;
+  border-radius: 6px; border: 1px solid #e0dfd8;
+  background: #fff; color: #1a1a18; flex: 1;
+}
+.meta-input::placeholder { color: #bbb; }
+#passageEditor {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 13px; line-height: 1.8; color: #1a1a18;
+  width: 100%; min-height: 120px; max-height: 280px;
+  padding: 10px 14px; border-radius: 8px;
+  border: 1px solid #e0dfd8; background: #fff;
+  overflow-y: auto; outline: none;
+}
+#passageEditor:focus { border-color: #3C3489; }
+#passageEditor .lma-span { border-radius: 3px; padding: 0 2px; cursor: pointer; position: relative; }
+#passageEditor .lma-span[data-cat="effort"]  { background: #EEF0FD; color: #3C3489; }
+#passageEditor .lma-span[data-cat="shape"]   { background: #E1F5EE; color: #0F6E56; }
+#passageEditor .lma-span[data-cat="body"]    { background: #FDF3EE; color: #993C1D; }
+#passageEditor .lma-span[data-cat="space"]   { background: #E6F1FB; color: #185FA5; }
+
+/* Drive buttons */
+.drive-row { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.drive-btn {
+  font-size: 12px; font-weight: 500; padding: 5px 14px;
+  border-radius: 6px; border: 1px solid #ccc;
+  background: #fff; color: #555; cursor: pointer; transition: all 0.1s;
+}
+.drive-btn:hover { background: #f0f0ee; }
+.drive-btn.active { border-color: transparent; color: #fff; }
+.drive-btn.press.active, .drive-btn.wring.active { background: #3C3489; }
+.drive-btn.glide.active, .drive-btn.float.active { background: #0F6E56; }
+.drive-btn.punch.active, .drive-btn.slash.active { background: #993C1D; }
+.drive-btn.dab.active,   .drive-btn.flick.active { background: #185FA5; }
+
+/* BESS sliders */
+.sections { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
+.section { background: #fff; border: 1px solid #e0dfd8; border-radius: 10px; padding: 1rem 1.125rem; }
+.section-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; color: #888; margin-bottom: 12px;
+}
+.param { margin-bottom: 10px; }
+.param:last-child { margin-bottom: 0; }
+.param-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+.param-name { font-size: 13px; font-weight: 500; }
+.param-hint { font-size: 11px; color: #aaa; flex: 1; text-align: center; padding: 0 8px; }
+.param-val { font-size: 13px; font-weight: 600; min-width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
+input[type=range] {
+  -webkit-appearance: none; width: 100%; height: 4px;
+  border-radius: 2px; background: #e0dfd8; outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+  background: #3C3489; border: 2px solid #fff; box-shadow: 0 0 0 1px #3C3489;
+}
+input[type=range]::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #3C3489; border: 2px solid #fff; box-shadow: 0 0 0 1px #3C3489;
+}
+
+/* Output */
+.output-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.toggle-wrap { display: flex; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; }
+.toggle-btn {
+  font-family: inherit; font-size: 11px; font-weight: 500;
+  padding: 4px 12px; border: none; background: #fff;
+  color: #888; cursor: pointer;
+}
+.toggle-btn:first-child { border-right: 1px solid #ccc; }
+.toggle-btn.active { background: #1a1a18; color: #fff; }
+.output-area {
+  background: #f2f1ec; border: 1px solid #e0dfd8;
+  border-radius: 8px; padding: 1rem 1.125rem; margin-bottom: 1rem;
+}
+.output-code {
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Mono', monospace;
+  font-size: 12px; color: #1a1a18; white-space: pre-wrap; word-break: break-all; line-height: 1.7;
+}
+.btn-row { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+.copy-btn {
+  font-family: inherit; font-size: 13px; padding: 7px 18px;
+  border-radius: 6px; border: 1px solid #ccc;
+  background: #fff; color: #1a1a18; cursor: pointer;
+}
+.copy-btn:hover { background: #f0f0ee; }
+.copy-btn.ok { color: #0F6E56; border-color: #0F6E56; background: #f0faf6; }
+
+/* Saved chips */
+
+/* Annotation legend */
+.legend { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.legend-item { font-size: 11px; padding: 2px 8px; border-radius: 4px; }
+.legend-item.effort { background: #EEF0FD; color: #3C3489; }
+.legend-item.shape  { background: #E1F5EE; color: #0F6E56; }
+.legend-item.body   { background: #FDF3EE; color: #993C1D; }
+.legend-item.space  { background: #E6F1FB; color: #185FA5; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>BESS Author</h1>
+  <button class="action-btn" id="fileLoadTweeBtn">Open .twee</button>
+  <button class="action-btn" id="fileLoadTxtBtn">Open .txt</button>
+</div>
+<input type="file" class="file-input" id="fileInputTwee" accept=".twee">
+<input type="file" class="file-input" id="fileInputTxt" accept=".txt,.md">
+
+<div class="file-row">
+  <select class="file-passage-select" id="filePassageSelect"></select>
+  <span class="file-name" id="fileName"></span>
+</div>
+
+<!-- Passage metadata -->
+<div class="text-section">
+  <div class="sec-label">Passage</div>
+  <div class="passage-title-row">
+    <input class="meta-input" id="passageNum" type="number" min="1" value="1" placeholder="Passage #" style="max-width:90px;">
+    <input class="meta-input" id="passageScene" placeholder="Scene name (e.g. Waking)">
+    <input class="meta-input" id="nextPassage" placeholder="Next passage name (e.g. Passage 2)">
+  </div>
+
+  <!-- Text annotation toolbar -->
+  <div class="text-toolbar" style="margin-top:8px;">
+    <select class="cat-select" id="lmaCat">
+      <option value="effort">effort</option>
+      <option value="shape">shape</option>
+      <option value="body">body</option>
+      <option value="space">space</option>
+    </select>
+    <input class="lma-input" id="lmaLabel" placeholder="LMA label (e.g. Strong Weight, Sustained)">
+    <button class="annotate-btn" onclick="annotateSelection()">Wrap selection</button>
+    <button class="clear-spans-btn" onclick="clearSpans()">Remove all spans</button>
+  </div>
+  <div class="legend">
+    <span class="legend-item effort">effort</span>
+    <span class="legend-item shape">shape</span>
+    <span class="legend-item body">body</span>
+    <span class="legend-item space">space</span>
+    <span style="font-size:11px;color:#bbb;align-self:center;">click a span to remove it</span>
+  </div>
+  <div id="passageEditor" contenteditable="true" spellcheck="false"></div>
+</div>
+
+<!-- Action Drive -->
+<div class="sec-label">Action drive</div>
+<div class="drive-row">
+  <button class="drive-btn press"  data-d="press">press</button>
+  <button class="drive-btn wring"  data-d="wring">wring</button>
+  <button class="drive-btn glide"  data-d="glide">glide</button>
+  <button class="drive-btn float"  data-d="float">float</button>
+  <button class="drive-btn punch"  data-d="punch">punch</button>
+  <button class="drive-btn slash"  data-d="slash">slash</button>
+  <button class="drive-btn dab"    data-d="dab">dab</button>
+  <button class="drive-btn flick"  data-d="flick">flick</button>
+</div>
+
+<!-- BESS sliders -->
+<div class="sections">
+  <div class="section">
+    <div class="section-label">Effort</div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">flow</span><span class="param-hint">Bound ← → Free</span><span class="param-val" id="v-flow">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="flow" oninput="sliderChange(this)">
+    </div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">intensity</span><span class="param-hint">Light ← → Strong</span><span class="param-val" id="v-intensity">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="intensity" oninput="sliderChange(this)">
+    </div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">weight_passive</span><span class="param-hint">body collapse</span><span class="param-val" id="v-weight_passive">0.00</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.00" data-p="weight_passive" oninput="sliderChange(this)">
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Shape</div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">shape_grow</span><span class="param-hint">shrink ← → grow</span><span class="param-val" id="v-shape_grow">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="shape_grow" oninput="sliderChange(this)">
+    </div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">shape_rise</span><span class="param-hint">sink ← → rise</span><span class="param-val" id="v-shape_rise">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="shape_rise" oninput="sliderChange(this)">
+    </div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">shape_advance</span><span class="param-hint">retreat ← → advance</span><span class="param-val" id="v-shape_advance">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="shape_advance" oninput="sliderChange(this)">
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Body</div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">body_connectivity</span><span class="param-hint">fragmented ← → integrated</span><span class="param-val" id="v-body_connectivity">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="body_connectivity" oninput="sliderChange(this)">
+    </div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">body_sequencing</span><span class="param-hint">simultaneous ← → sequential</span><span class="param-val" id="v-body_sequencing">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="body_sequencing" oninput="sliderChange(this)">
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Space</div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">kinesphere</span><span class="param-hint">contracted ← → expanded</span><span class="param-val" id="v-kinesphere">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="kinesphere" oninput="sliderChange(this)">
+    </div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">space_approach</span><span class="param-hint">Indirect ← → Direct</span><span class="param-val" id="v-space_approach">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="space_approach" oninput="sliderChange(this)">
+    </div>
+    <div class="param">
+      <div class="param-header"><span class="param-name">space_plane</span><span class="param-hint">horizontal ← → vertical</span><span class="param-val" id="v-space_plane">0.50</span></div>
+      <input type="range" min="0" max="1" step="0.05" value="0.50" data-p="space_plane" oninput="sliderChange(this)">
+    </div>
+  </div>
+</div>
+
+<!-- Output -->
+<div class="output-header">
+  <span class="sec-label" style="margin:0;margin-right:auto;">Output</span>
+  <div class="toggle-wrap">
+    <button class="toggle-btn active" onclick="setOutputMode('twine')">Twine block</button>
+    <button class="toggle-btn" onclick="setOutputMode('json')">JSON</button>
+  </div>
+</div>
+<div class="output-area"><div class="output-code" id="outputCode"></div></div>
+<div class="btn-row"><button class="copy-btn" id="copyBtn">Copy</button></div>
+
+
+<script>
+var currentDrive = 'press';
+var outputMode = 'twine';
+var loadedPassages = [];
+
+var DRIVE_EFFORT = {
+  press:  { flow:0.15, intensity:0.75, space_approach:0.85 },
+  wring:  { flow:0.35, intensity:0.75, space_approach:0.25 },
+  glide:  { flow:0.80, intensity:0.45, space_approach:0.85 },
+  float:  { flow:0.85, intensity:0.25, space_approach:0.25 },
+  punch:  { flow:0.20, intensity:0.85, space_approach:0.90 },
+  slash:  { flow:0.70, intensity:0.85, space_approach:0.20 },
+  dab:    { flow:0.25, intensity:0.40, space_approach:0.90 },
+  flick:  { flow:0.75, intensity:0.40, space_approach:0.20 }
+};
+
+function f(n) { return parseFloat(n).toFixed(2); }
+
+function sliderChange(r) {
+  document.getElementById('v-' + r.dataset.p).textContent = f(r.value);
+  renderOutput();
+}
+
+function getPassageNum() { return parseInt(document.getElementById('passageNum').value) || 1; }
+
+function getValues() {
+  var vals = { passage_id: getPassageNum(), action_drive: currentDrive };
+  document.querySelectorAll('input[type=range]').forEach(function(r) {
+    vals[r.dataset.p] = parseFloat(r.value);
+  });
+  return vals;
+}
+
+function setSliders(vals, fromLoad) {
+  document.querySelectorAll('input[type=range]').forEach(function(r) {
+    var p = r.dataset.p;
+    if (vals[p] !== undefined) {
+      r.value = vals[p];
+      document.getElementById('v-' + p).textContent = f(vals[p]);
+    }
+  });
+  if (vals.action_drive) setActiveDrive(vals.action_drive, true);
+  if (fromLoad) {
+    if (vals.scene !== undefined) document.getElementById('passageScene').value = vals.scene;
+    if (vals.nextPassage !== undefined) document.getElementById('nextPassage').value = vals.nextPassage;
+    if (vals.editorHTML !== undefined) document.getElementById('passageEditor').innerHTML = vals.editorHTML;
+    reattachSpanListeners();
+  }
+}
+
+function resetAll() {
+  document.querySelectorAll('input[type=range]').forEach(function(r) {
+    var def = r.dataset.p === 'weight_passive' ? 0.00 : 0.50;
+    r.value = def;
+    document.getElementById('v-' + r.dataset.p).textContent = def.toFixed(2);
+  });
+  document.getElementById('passageEditor').innerHTML = '';
+  document.getElementById('passageScene').value = '';
+  document.getElementById('nextPassage').value = '';
+  setActiveDrive('press', true);
+}
+
+function setActiveDrive(d, fromLoad) {
+  currentDrive = d;
+  document.querySelectorAll('.drive-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.d === d);
+  });
+  var colors = { press:'#3C3489', wring:'#3C3489', glide:'#0F6E56', float:'#0F6E56', punch:'#993C1D', slash:'#993C1D', dab:'#185FA5', flick:'#185FA5' };
+  var c = colors[d] || '#3C3489';
+  document.querySelectorAll('input[type=range]').forEach(function(r) { r.style.accentColor = c; });
+  if (!fromLoad && DRIVE_EFFORT[d]) {
+    var ef = DRIVE_EFFORT[d];
+    Object.keys(ef).forEach(function(p) {
+      var input = document.querySelector('input[data-p="' + p + '"]');
+      if (input) { input.value = ef[p]; input.style.accentColor = c; }
+      var label = document.getElementById('v-' + p);
+      if (label) label.textContent = ef[p].toFixed(2);
+    });
+  }
+  renderOutput();
+}
+
+function setOutputMode(mode) {
+  outputMode = mode;
+  document.querySelectorAll('.toggle-btn').forEach(function(b, i) {
+    b.classList.toggle('active', (i === 0 && mode === 'twine') || (i === 1 && mode === 'json'));
+  });
+  renderOutput();
+}
+
+function getEditorText() {
+  var el = document.getElementById('passageEditor');
+  var clone = el.cloneNode(true);
+  clone.querySelectorAll('.lma-span').forEach(function(s) {
+    var cat = s.getAttribute('data-cat');
+    var lma = s.getAttribute('data-lma');
+    var text = s.textContent;
+    var replacement = document.createTextNode('%%SPAN%%' + cat + '%%' + lma + '%%' + text + '%%ENDSPAN%%');
+    s.parentNode.replaceChild(replacement, s);
+  });
+  return clone.textContent;
+}
+
+function editorTextToTwineHTML(raw) {
+  return raw.replace(/%%SPAN%%([^%]+)%%([^%]+)%%([^%]+)%%ENDSPAN%%/g, function(m, cat, lma, text) {
+    return '<span class="lma" data-cat="' + cat + '" data-lma="' + lma + '">' + text + '</span>';
+  });
+}
+
+function editorTextToPlain(raw) {
+  return raw.replace(/%%SPAN%%[^%]+%%[^%]+%%([^%]+)%%ENDSPAN%%/g, '$1');
+}
+
+function renderOutput() {
+  var v = getValues();
+  var pid = v.passage_id;
+  var scene = document.getElementById('passageScene').value || '';
+  var nextName = document.getElementById('nextPassage').value || ('Passage ' + (pid + 1));
+  var rawText = getEditorText();
+  var twineText = editorTextToTwineHTML(rawText);
+
+  if (outputMode === 'twine') {
+    var out = '<<script>>\n' +
+      'ME.triggerPassage(' + pid + ', {\n' +
+      '  passage_id: ' + pid + ', action_drive: "' + v.action_drive + '",\n' +
+      '  flow: ' + f(v.flow) + ', intensity: ' + f(v.intensity) + ', weight_passive: ' + f(v.weight_passive) + ',\n' +
+      '  shape_grow: ' + f(v.shape_grow) + ', shape_rise: ' + f(v.shape_rise) + ', shape_advance: ' + f(v.shape_advance) + ',\n' +
+      '  body_connectivity: ' + f(v.body_connectivity) + ', body_sequencing: ' + f(v.body_sequencing) + ',\n' +
+      '  kinesphere: ' + f(v.kinesphere) + ', space_approach: ' + f(v.space_approach) + ', space_plane: ' + f(v.space_plane) + '\n' +
+      '});\n' +
+      "ME.setAutoAdvance('" + nextName + "');\n" +
+      '<' + '<' + '/script>\\' + '\n';
+    if (scene) out += '<div class="passage-meta">Passage ' + pid + '</div><div class="passage-scene">' + scene + '</div>\n';
+    out += twineText + '\n';
+    out += '<div class="continue">[[Continue|' + nextName + ']]</div>';
+    document.getElementById('outputCode').textContent = out;
+  } else {
+    var plain = '{\n' +
+      '  "passage_id": ' + pid + ',\n' +
+      '  "action_drive": "' + v.action_drive + '",\n' +
+      '  "flow": ' + f(v.flow) + ',\n' +
+      '  "intensity": ' + f(v.intensity) + ',\n' +
+      '  "weight_passive": ' + f(v.weight_passive) + ',\n' +
+      '  "shape_grow": ' + f(v.shape_grow) + ',\n' +
+      '  "shape_rise": ' + f(v.shape_rise) + ',\n' +
+      '  "shape_advance": ' + f(v.shape_advance) + ',\n' +
+      '  "body_connectivity": ' + f(v.body_connectivity) + ',\n' +
+      '  "body_sequencing": ' + f(v.body_sequencing) + ',\n' +
+      '  "kinesphere": ' + f(v.kinesphere) + ',\n' +
+      '  "space_approach": ' + f(v.space_approach) + ',\n' +
+      '  "space_plane": ' + f(v.space_plane) + '\n' +
+      '}';
+    document.getElementById('outputCode').textContent = plain;
+  }
+}
+
+/* LMA span annotation */
+function annotateSelection() {
+  var cat = document.getElementById('lmaCat').value;
+  var label = document.getElementById('lmaLabel').value.trim();
+  if (!label) { document.getElementById('lmaLabel').focus(); return; }
+  var sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  var range = sel.getRangeAt(0);
+  var editor = document.getElementById('passageEditor');
+  if (!editor.contains(range.commonAncestorContainer)) return;
+  if (range.collapsed) return;
+  var span = document.createElement('span');
+  span.className = 'lma-span';
+  span.setAttribute('data-cat', cat);
+  span.setAttribute('data-lma', label);
+  span.title = cat + ': ' + label;
+  try {
+    range.surroundContents(span);
+    attachSpanListener(span);
+    sel.removeAllRanges();
+    renderOutput();
+  } catch(e) {}
+}
+
+function attachSpanListener(span) {
+  span.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (confirm('Remove annotation "' + span.getAttribute('data-lma') + '"?')) {
+      var text = document.createTextNode(span.textContent);
+      span.parentNode.replaceChild(text, span);
+      renderOutput();
+    }
+  });
+}
+
+function reattachSpanListeners() {
+  document.querySelectorAll('#passageEditor .lma-span').forEach(attachSpanListener);
+}
+
+function clearSpans() {
+  var editor = document.getElementById('passageEditor');
+  editor.querySelectorAll('.lma-span').forEach(function(s) {
+    var text = document.createTextNode(s.textContent);
+    s.parentNode.replaceChild(text, s);
+  });
+  renderOutput();
+}
+
+document.getElementById('passageEditor').addEventListener('input', renderOutput);
+
+/* File loading */
+function parseTweePassages(raw) {
+  var passages = [];
+  var lines = raw.split(/\r?\n/);
+  var current = null;
+  for (var i = 0; i < lines.length; i++) {
+    var m = lines[i].match(/^::\s*(.+?)(?:\s*\{[^}]*\})?\s*$/);
+    if (m) {
+      if (current) passages.push(current);
+      current = { title: m[1].trim(), body: [] };
+    } else if (current) {
+      current.body.push(lines[i]);
+    }
+  }
+  if (current) passages.push(current);
+  return passages.filter(function(p) {
+    return !p.title.match(/^Story(Title|Data|CSS|JavaScript|Init|Menu|Caption|Banner|Sidebar|Footer|Share|Options|Annotations|Bookmark|Toolbar|Toolbar Links|Jump To|Definition List|Beta Notice|Config|Popup|Overlay)/i);
+  });
+}
+
+function parseBESSFromPassage(body) {
+  var raw = body.join('\n');
+  var vals = {};
+  var driveM = raw.match(/action_drive:\s*"([^"]+)"/);
+  if (driveM) vals.action_drive = driveM[1];
+  var params = ['flow','intensity','weight_passive','shape_grow','shape_rise','shape_advance','body_connectivity','body_sequencing','kinesphere','space_approach','space_plane'];
+  params.forEach(function(p) {
+    var re = new RegExp(p + ':\\s*([0-9.]+)');
+    var m = raw.match(re);
+    if (m) vals[p] = parseFloat(m[1]);
+  });
+  return vals;
+}
+
+function parseTextFromPassage(body) {
+  var raw = body.join('\n');
+  raw = raw.replace(/<<script>>[\s\S]*?<<\/script>>\\\n?/g, '');
+  raw = raw.replace(/<div class="passage-meta">[^<]*<\/div><div class="passage-scene">[^<]*<\/div>\n?/g, '');
+  raw = raw.replace(/<div class="continue">\[\[Continue\|[^\]]*\]\]<\/div>\n?/g, '');
+  return raw.trim();
+}
+
+function parseSceneFromPassage(body) {
+  var raw = body.join('\n');
+  var m = raw.match(/<div class="passage-scene">([^<]*)<\/div>/);
+  return m ? m[1] : '';
+}
+
+function parseNextFromPassage(body) {
+  var raw = body.join('\n');
+  var m = raw.match(/ME\.setAutoAdvance\('([^']+)'\)/);
+  if (m) return m[1];
+  m = raw.match(/\[\[Continue\|([^\]]+)\]\]/);
+  return m ? m[1] : '';
+}
+
+function twineHTMLToEditor(html) {
+  return html.replace(/<span class="lma" data-cat="([^"]+)" data-lma="([^"]+)">([^<]*)<\/span>/g,
+    function(m, cat, lma, text) {
+      return '<span class="lma-span" data-cat="' + cat + '" data-lma="' + lma + '" title="' + cat + ': ' + lma + '">' + text + '</span>';
+    });
+}
+
+function loadPassageFromFile(passage) {
+  var bess = parseBESSFromPassage(passage.body);
+  var text = parseTextFromPassage(passage.body);
+  var scene = parseSceneFromPassage(passage.body);
+  var next = parseNextFromPassage(passage.body);
+  var pidM = passage.title.match(/(\d+)/);
+  if (pidM) document.getElementById('passageNum').value = parseInt(pidM[1]);
+  document.getElementById('passageScene').value = scene;
+  document.getElementById('nextPassage').value = next;
+  document.getElementById('passageEditor').innerHTML = twineHTMLToEditor(text);
+  reattachSpanListeners();
+  setSliders(bess, false);
+  renderOutput();
+}
+
+document.getElementById('fileLoadTweeBtn').addEventListener('click', function() {
+  document.getElementById('fileInputTwee').click();
+});
+
+document.getElementById('fileLoadTxtBtn').addEventListener('click', function() {
+  document.getElementById('fileInputTxt').click();
+});
+
+function handleFile(file) {
+  if (!file) return;
+  document.getElementById('fileName').textContent = file.name;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var raw = ev.target.result;
+    var isTwee = file.name.match(/\.twee$/i);
+    if (isTwee) {
+      loadedPassages = parseTweePassages(raw);
+      var sel = document.getElementById('filePassageSelect');
+      sel.innerHTML = '';
+      loadedPassages.forEach(function(p, i) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = p.title;
+        sel.appendChild(opt);
+      });
+      sel.style.display = loadedPassages.length > 0 ? 'inline-block' : 'none';
+      if (loadedPassages.length > 0) loadPassageFromFile(loadedPassages[0]);
+    } else {
+      loadedPassages = [];
+      document.getElementById('filePassageSelect').style.display = 'none';
+      document.getElementById('passageEditor').innerHTML = raw.trim();
+      renderOutput();
+    }
+  };
+  reader.readAsText(file);
+}
+
+document.getElementById('fileInputTwee').addEventListener('change', function(e) {
+  handleFile(e.target.files[0]);
+  this.value = '';
+});
+
+document.getElementById('fileInputTxt').addEventListener('change', function(e) {
+  handleFile(e.target.files[0]);
+  this.value = '';
+});
+
+document.getElementById('filePassageSelect').addEventListener('change', function() {
+  var idx = parseInt(this.value);
+  if (loadedPassages[idx]) loadPassageFromFile(loadedPassages[idx]);
+});
+
+
+document.querySelectorAll('.drive-btn').forEach(function(b) {
+  b.addEventListener('click', function() { setActiveDrive(b.dataset.d, false); });
+});
+document.getElementById('passageNum').addEventListener('change', renderOutput);
+document.getElementById('passageScene').addEventListener('input', renderOutput);
+document.getElementById('nextPassage').addEventListener('input', renderOutput);
+document.getElementById('copyBtn').addEventListener('click', function() {
+  var text = document.getElementById('outputCode').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    document.getElementById('copyBtn').textContent = 'Copied';
+    document.getElementById('copyBtn').classList.add('ok');
+    setTimeout(function() {
+      document.getElementById('copyBtn').textContent = 'Copy';
+      document.getElementById('copyBtn').classList.remove('ok');
+    }, 1500);
+  });
+});
+
+setActiveDrive('press', true);
+renderOutput();
+</script>
+</body>
+</html>
