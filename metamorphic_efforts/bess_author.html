@@ -14,9 +14,7 @@ body {
   font-size: 14px; line-height: 1.5;
 }
 h1 { font-size: 16px; font-weight: 600; }
-
-/* Header */
-.header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; }
 .header h1 { margin-right: auto; }
 .action-btn {
   font-family: inherit; font-size: 12px; font-weight: 500;
@@ -24,24 +22,11 @@ h1 { font-size: 16px; font-weight: 600; }
   background: #fff; color: #555; cursor: pointer; transition: all 0.1s;
 }
 .action-btn:hover { background: #f0f0ee; }
-.action-btn.clear-all { color: #999; font-size: 11px; }
-.action-btn.clear-all:hover { border-color: #e24b4a; color: #e24b4a; }
-.passage-controls { display: flex; align-items: center; gap: 8px; }
-.passage-controls label { font-size: 13px; color: #666; }
-.passage-input {
-  font-family: inherit; font-size: 13px; width: 52px;
-  padding: 5px 8px; border-radius: 6px; border: 1px solid #ccc;
-  background: #fff; color: #1a1a18; text-align: center;
-}
 .file-input { display: none; }
-
-/* Section labels */
 .sec-label {
   font-size: 10px; font-weight: 600; letter-spacing: 0.07em;
   text-transform: uppercase; color: #888; margin-bottom: 8px;
 }
-
-/* File / passage select */
 .file-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; }
 .file-passage-select {
   font-family: inherit; font-size: 12px; padding: 5px 8px;
@@ -49,17 +34,11 @@ h1 { font-size: 16px; font-weight: 600; }
   background: #fff; color: #1a1a18; flex: 1; display: none;
 }
 .file-name { font-size: 12px; color: #888; }
-
-/* Text editor area */
 .text-section { margin-bottom: 1.25rem; }
-.text-toolbar {
-  display: flex; align-items: center; gap: 6px;
-  margin-bottom: 6px; flex-wrap: wrap;
-}
+.text-toolbar { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
 .cat-select, .lma-input {
   font-family: inherit; font-size: 12px; padding: 4px 8px;
-  border-radius: 6px; border: 1px solid #ccc;
-  background: #fff; color: #1a1a18;
+  border-radius: 6px; border: 1px solid #ccc; background: #fff; color: #1a1a18;
 }
 .cat-select { width: 110px; }
 .lma-input { flex: 1; min-width: 160px; }
@@ -72,12 +51,30 @@ h1 { font-size: 16px; font-weight: 600; }
 }
 .annotate-btn:hover { background: #f4f3fd; }
 .clear-spans-btn {
-  font-family: inherit; font-size: 11px;
-  padding: 4px 10px; border-radius: 6px;
-  border: 1px solid #ccc; color: #999;
+  font-family: inherit; font-size: 11px; padding: 4px 10px;
+  border-radius: 6px; border: 1px solid #ccc; color: #999;
   background: #fff; cursor: pointer;
 }
 .clear-spans-btn:hover { border-color: #e24b4a; color: #e24b4a; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 5px; margin: 6px 0 8px; min-height: 28px; }
+.lma-tag {
+  font-size: 11px; padding: 3px 9px; border-radius: 20px;
+  cursor: pointer; border: 1px solid transparent; line-height: 1.4;
+}
+.lma-tag.effort { background: #EEF0FD; color: #3C3489; border-color: #CCC9F0; }
+.lma-tag.effort:hover { background: #3C3489; color: #fff; }
+.lma-tag.shape  { background: #E1F5EE; color: #0F6E56; border-color: #9FE1CB; }
+.lma-tag.shape:hover  { background: #0F6E56; color: #fff; }
+.lma-tag.body   { background: #FDF3EE; color: #993C1D; border-color: #F5C4B3; }
+.lma-tag.body:hover   { background: #993C1D; color: #fff; }
+.lma-tag.space  { background: #E6F1FB; color: #185FA5; border-color: #B5D4F4; }
+.lma-tag.space:hover  { background: #185FA5; color: #fff; }
+.legend { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.legend-item { font-size: 11px; padding: 2px 8px; border-radius: 4px; }
+.legend-item.effort { background: #EEF0FD; color: #3C3489; }
+.legend-item.shape  { background: #E1F5EE; color: #0F6E56; }
+.legend-item.body   { background: #FDF3EE; color: #993C1D; }
+.legend-item.space  { background: #E6F1FB; color: #185FA5; }
 .passage-title-row { display: flex; gap: 8px; margin-bottom: 6px; }
 .meta-input {
   font-family: inherit; font-size: 13px; padding: 6px 10px;
@@ -86,21 +83,17 @@ h1 { font-size: 16px; font-weight: 600; }
 }
 .meta-input::placeholder { color: #bbb; }
 #passageEditor {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 13px; line-height: 1.8; color: #1a1a18;
+  font-family: Georgia, serif; font-size: 13px; line-height: 1.8;
   width: 100%; min-height: 120px; max-height: 280px;
-  padding: 10px 14px; border-radius: 8px;
-  border: 1px solid #e0dfd8; background: #fff;
-  overflow-y: auto; outline: none;
+  padding: 10px 14px; border-radius: 8px; border: 1px solid #e0dfd8;
+  background: #fff; overflow-y: auto; outline: none;
 }
 #passageEditor:focus { border-color: #3C3489; }
-#passageEditor .lma-span { border-radius: 3px; padding: 0 2px; cursor: pointer; position: relative; }
-#passageEditor .lma-span[data-cat="effort"]  { background: #EEF0FD; color: #3C3489; }
-#passageEditor .lma-span[data-cat="shape"]   { background: #E1F5EE; color: #0F6E56; }
-#passageEditor .lma-span[data-cat="body"]    { background: #FDF3EE; color: #993C1D; }
-#passageEditor .lma-span[data-cat="space"]   { background: #E6F1FB; color: #185FA5; }
-
-/* Drive buttons */
+#passageEditor .lma-span { border-radius: 3px; padding: 0 2px; cursor: pointer; }
+#passageEditor .lma-span[data-cat="effort"] { background: #EEF0FD; color: #3C3489; }
+#passageEditor .lma-span[data-cat="shape"]  { background: #E1F5EE; color: #0F6E56; }
+#passageEditor .lma-span[data-cat="body"]   { background: #FDF3EE; color: #993C1D; }
+#passageEditor .lma-span[data-cat="space"]  { background: #E6F1FB; color: #185FA5; }
 .drive-row { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
 .drive-btn {
   font-size: 12px; font-weight: 500; padding: 5px 14px;
@@ -113,8 +106,6 @@ h1 { font-size: 16px; font-weight: 600; }
 .drive-btn.glide.active, .drive-btn.float.active { background: #0F6E56; }
 .drive-btn.punch.active, .drive-btn.slash.active { background: #993C1D; }
 .drive-btn.dab.active,   .drive-btn.flick.active { background: #185FA5; }
-
-/* BESS sliders */
 .sections { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
 .section { background: #fff; border: 1px solid #e0dfd8; border-radius: 10px; padding: 1rem 1.125rem; }
 .section-label {
@@ -139,14 +130,11 @@ input[type=range]::-moz-range-thumb {
   width: 14px; height: 14px; border-radius: 50%;
   background: #3C3489; border: 2px solid #fff; box-shadow: 0 0 0 1px #3C3489;
 }
-
-/* Output */
 .output-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .toggle-wrap { display: flex; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; }
 .toggle-btn {
   font-family: inherit; font-size: 11px; font-weight: 500;
-  padding: 4px 12px; border: none; background: #fff;
-  color: #888; cursor: pointer;
+  padding: 4px 12px; border: none; background: #fff; color: #888; cursor: pointer;
 }
 .toggle-btn:first-child { border-right: 1px solid #ccc; }
 .toggle-btn.active { background: #1a1a18; color: #fff; }
@@ -155,8 +143,8 @@ input[type=range]::-moz-range-thumb {
   border-radius: 8px; padding: 1rem 1.125rem; margin-bottom: 1rem;
 }
 .output-code {
-  font-family: ui-monospace, 'Cascadia Code', 'Fira Mono', monospace;
-  font-size: 12px; color: #1a1a18; white-space: pre-wrap; word-break: break-all; line-height: 1.7;
+  font-family: ui-monospace, monospace; font-size: 12px;
+  color: #1a1a18; white-space: pre-wrap; word-break: break-all; line-height: 1.7;
 }
 .btn-row { display: flex; gap: 8px; margin-bottom: 1.5rem; }
 .copy-btn {
@@ -166,16 +154,6 @@ input[type=range]::-moz-range-thumb {
 }
 .copy-btn:hover { background: #f0f0ee; }
 .copy-btn.ok { color: #0F6E56; border-color: #0F6E56; background: #f0faf6; }
-
-/* Saved chips */
-
-/* Annotation legend */
-.legend { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
-.legend-item { font-size: 11px; padding: 2px 8px; border-radius: 4px; }
-.legend-item.effort { background: #EEF0FD; color: #3C3489; }
-.legend-item.shape  { background: #E1F5EE; color: #0F6E56; }
-.legend-item.body   { background: #FDF3EE; color: #993C1D; }
-.legend-item.space  { background: #E6F1FB; color: #185FA5; }
 </style>
 </head>
 <body>
@@ -193,27 +171,25 @@ input[type=range]::-moz-range-thumb {
   <span class="file-name" id="fileName"></span>
 </div>
 
-<!-- Passage metadata -->
 <div class="text-section">
   <div class="sec-label">Passage</div>
   <div class="passage-title-row">
     <input class="meta-input" id="passageNum" type="number" min="1" value="1" placeholder="Passage #" style="max-width:90px;">
     <input class="meta-input" id="passageScene" placeholder="Scene name (e.g. Waking)">
-    <input class="meta-input" id="nextPassage" placeholder="Next passage name (e.g. Passage 2)">
+    <input class="meta-input" id="nextPassage" placeholder="Next passage (e.g. Passage 2)">
   </div>
-
-  <!-- Text annotation toolbar -->
-  <div class="text-toolbar" style="margin-top:8px;">
+  <div class="text-toolbar">
     <select class="cat-select" id="lmaCat">
       <option value="effort">effort</option>
       <option value="shape">shape</option>
       <option value="body">body</option>
       <option value="space">space</option>
     </select>
-    <input class="lma-input" id="lmaLabel" placeholder="LMA label (e.g. Strong Weight, Sustained)">
+    <input class="lma-input" id="lmaLabel" placeholder="LMA label">
     <button class="annotate-btn" onclick="annotateSelection()">Wrap selection</button>
     <button class="clear-spans-btn" onclick="clearSpans()">Remove all spans</button>
   </div>
+  <div class="tag-cloud" id="tagCloud"></div>
   <div class="legend">
     <span class="legend-item effort">effort</span>
     <span class="legend-item shape">shape</span>
@@ -224,7 +200,6 @@ input[type=range]::-moz-range-thumb {
   <div id="passageEditor" contenteditable="true" spellcheck="false"></div>
 </div>
 
-<!-- Action Drive -->
 <div class="sec-label">Action drive</div>
 <div class="drive-row">
   <button class="drive-btn press"  data-d="press">press</button>
@@ -237,7 +212,6 @@ input[type=range]::-moz-range-thumb {
   <button class="drive-btn flick"  data-d="flick">flick</button>
 </div>
 
-<!-- BESS sliders -->
 <div class="sections">
   <div class="section">
     <div class="section-label">Effort</div>
@@ -297,17 +271,15 @@ input[type=range]::-moz-range-thumb {
   </div>
 </div>
 
-<!-- Output -->
 <div class="output-header">
   <span class="sec-label" style="margin:0;margin-right:auto;">Output</span>
   <div class="toggle-wrap">
-    <button class="toggle-btn active" onclick="setOutputMode('twine')">Twine block</button>
-    <button class="toggle-btn" onclick="setOutputMode('json')">JSON</button>
+    <button class="toggle-btn active" id="toggleTwine" onclick="setOutputMode('twine')">Twine block</button>
+    <button class="toggle-btn" id="toggleJSON" onclick="setOutputMode('json')">JSON</button>
   </div>
 </div>
 <div class="output-area"><div class="output-code" id="outputCode"></div></div>
 <div class="btn-row"><button class="copy-btn" id="copyBtn">Copy</button></div>
-
 
 <script>
 var currentDrive = 'press';
@@ -315,14 +287,50 @@ var outputMode = 'twine';
 var loadedPassages = [];
 
 var DRIVE_EFFORT = {
-  press:  { flow:0.15, intensity:0.75, space_approach:0.85 },
-  wring:  { flow:0.35, intensity:0.75, space_approach:0.25 },
-  glide:  { flow:0.80, intensity:0.45, space_approach:0.85 },
-  float:  { flow:0.85, intensity:0.25, space_approach:0.25 },
-  punch:  { flow:0.20, intensity:0.85, space_approach:0.90 },
-  slash:  { flow:0.70, intensity:0.85, space_approach:0.20 },
-  dab:    { flow:0.25, intensity:0.40, space_approach:0.90 },
-  flick:  { flow:0.75, intensity:0.40, space_approach:0.20 }
+  press:  { flow: 0.15, intensity: 0.75, space_approach: 0.85 },
+  wring:  { flow: 0.35, intensity: 0.75, space_approach: 0.25 },
+  glide:  { flow: 0.80, intensity: 0.45, space_approach: 0.85 },
+  float:  { flow: 0.85, intensity: 0.25, space_approach: 0.25 },
+  punch:  { flow: 0.20, intensity: 0.85, space_approach: 0.90 },
+  slash:  { flow: 0.70, intensity: 0.85, space_approach: 0.20 },
+  dab:    { flow: 0.25, intensity: 0.40, space_approach: 0.90 },
+  flick:  { flow: 0.75, intensity: 0.40, space_approach: 0.20 }
+};
+
+var LMA_VOCAB = {
+  effort: [
+    'Strong Weight', 'Light Weight',
+    'Sudden Time', 'Sustained Time',
+    'Direct Space', 'Indirect Space',
+    'Bound Flow', 'Free Flow',
+    'Strong Weight, Sustained', 'Strong Weight, Sudden',
+    'Light Weight, Sustained', 'Light Weight, Sudden',
+    'Strong, Sudden, Direct', 'Strong, Sudden, Indirect',
+    'Strong, Sustained, Direct', 'Strong, Sustained, Indirect',
+    'Light, Sudden, Direct', 'Light, Sudden, Indirect',
+    'Light, Sustained, Direct', 'Light, Sustained, Indirect'
+  ],
+  shape: [
+    'Grow', 'Shrink', 'Rise', 'Sink', 'Advance', 'Retreat',
+    'Minimal Rise', 'Minimal Sink', 'Minimal Advance', 'Minimal Retreat',
+    'Maximum Grow', 'Maximum Advance',
+    'Lateral presence', 'Vertical extension', 'Sagittal reach'
+  ],
+  body: [
+    'High Connectivity', 'Low Connectivity', 'Fragmented Connectivity',
+    'High Sequencing', 'Low Sequencing', 'Zero Sequencing',
+    'Core support', 'Core collapse',
+    'Peripheral initiation', 'Core initiation',
+    'Sequential movement', 'Simultaneous movement',
+    'Involuntary response', 'Loss of Connectivity',
+    'Sensory feedback', 'Material consequence'
+  ],
+  space: [
+    'Direct approach', 'Indirect approach',
+    'Narrow kinesphere', 'Wide kinesphere',
+    'Horizontal plane', 'Vertical plane', 'Sagittal plane',
+    'Enclosed', 'Open', 'Near reach', 'Far reach'
+  ]
 };
 
 function f(n) { return parseFloat(n).toFixed(2); }
@@ -342,7 +350,7 @@ function getValues() {
   return vals;
 }
 
-function setSliders(vals, fromLoad) {
+function setSliders(vals) {
   document.querySelectorAll('input[type=range]').forEach(function(r) {
     var p = r.dataset.p;
     if (vals[p] !== undefined) {
@@ -351,12 +359,6 @@ function setSliders(vals, fromLoad) {
     }
   });
   if (vals.action_drive) setActiveDrive(vals.action_drive, true);
-  if (fromLoad) {
-    if (vals.scene !== undefined) document.getElementById('passageScene').value = vals.scene;
-    if (vals.nextPassage !== undefined) document.getElementById('nextPassage').value = vals.nextPassage;
-    if (vals.editorHTML !== undefined) document.getElementById('passageEditor').innerHTML = vals.editorHTML;
-    reattachSpanListeners();
-  }
 }
 
 function resetAll() {
@@ -376,9 +378,14 @@ function setActiveDrive(d, fromLoad) {
   document.querySelectorAll('.drive-btn').forEach(function(b) {
     b.classList.toggle('active', b.dataset.d === d);
   });
-  var colors = { press:'#3C3489', wring:'#3C3489', glide:'#0F6E56', float:'#0F6E56', punch:'#993C1D', slash:'#993C1D', dab:'#185FA5', flick:'#185FA5' };
+  var colors = {
+    press: '#3C3489', wring: '#3C3489', glide: '#0F6E56', float: '#0F6E56',
+    punch: '#993C1D', slash: '#993C1D', dab: '#185FA5', flick: '#185FA5'
+  };
   var c = colors[d] || '#3C3489';
-  document.querySelectorAll('input[type=range]').forEach(function(r) { r.style.accentColor = c; });
+  document.querySelectorAll('input[type=range]').forEach(function(r) {
+    r.style.accentColor = c;
+  });
   if (!fromLoad && DRIVE_EFFORT[d]) {
     var ef = DRIVE_EFFORT[d];
     Object.keys(ef).forEach(function(p) {
@@ -393,33 +400,30 @@ function setActiveDrive(d, fromLoad) {
 
 function setOutputMode(mode) {
   outputMode = mode;
-  document.querySelectorAll('.toggle-btn').forEach(function(b, i) {
-    b.classList.toggle('active', (i === 0 && mode === 'twine') || (i === 1 && mode === 'json'));
-  });
+  document.getElementById('toggleTwine').classList.toggle('active', mode === 'twine');
+  document.getElementById('toggleJSON').classList.toggle('active', mode === 'json');
   renderOutput();
 }
 
-function getEditorText() {
-  var el = document.getElementById('passageEditor');
-  var clone = el.cloneNode(true);
-  clone.querySelectorAll('.lma-span').forEach(function(s) {
+function getEditorInnerHTML() {
+  return document.getElementById('passageEditor').innerHTML;
+}
+
+function innerHTMLToTwineHTML(html) {
+  var tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  tmp.querySelectorAll('.lma-span').forEach(function(s) {
     var cat = s.getAttribute('data-cat');
     var lma = s.getAttribute('data-lma');
     var text = s.textContent;
-    var replacement = document.createTextNode('%%SPAN%%' + cat + '%%' + lma + '%%' + text + '%%ENDSPAN%%');
-    s.parentNode.replaceChild(replacement, s);
+    var rep = document.createElement('span');
+    rep.className = 'lma';
+    rep.setAttribute('data-cat', cat);
+    rep.setAttribute('data-lma', lma);
+    rep.textContent = text;
+    s.parentNode.replaceChild(rep, s);
   });
-  return clone.textContent;
-}
-
-function editorTextToTwineHTML(raw) {
-  return raw.replace(/%%SPAN%%([^%]+)%%([^%]+)%%([^%]+)%%ENDSPAN%%/g, function(m, cat, lma, text) {
-    return '<span class="lma" data-cat="' + cat + '" data-lma="' + lma + '">' + text + '</span>';
-  });
-}
-
-function editorTextToPlain(raw) {
-  return raw.replace(/%%SPAN%%[^%]+%%[^%]+%%([^%]+)%%ENDSPAN%%/g, '$1');
+  return tmp.innerHTML;
 }
 
 function renderOutput() {
@@ -427,55 +431,56 @@ function renderOutput() {
   var pid = v.passage_id;
   var scene = document.getElementById('passageScene').value || '';
   var nextName = document.getElementById('nextPassage').value || ('Passage ' + (pid + 1));
-  var rawText = getEditorText();
-  var twineText = editorTextToTwineHTML(rawText);
+  var twineHTML = innerHTMLToTwineHTML(getEditorInnerHTML());
 
   if (outputMode === 'twine') {
-    var out = '<<script>>\n' +
-      'ME.triggerPassage(' + pid + ', {\n' +
-      '  passage_id: ' + pid + ', action_drive: "' + v.action_drive + '",\n' +
-      '  flow: ' + f(v.flow) + ', intensity: ' + f(v.intensity) + ', weight_passive: ' + f(v.weight_passive) + ',\n' +
-      '  shape_grow: ' + f(v.shape_grow) + ', shape_rise: ' + f(v.shape_rise) + ', shape_advance: ' + f(v.shape_advance) + ',\n' +
-      '  body_connectivity: ' + f(v.body_connectivity) + ', body_sequencing: ' + f(v.body_sequencing) + ',\n' +
-      '  kinesphere: ' + f(v.kinesphere) + ', space_approach: ' + f(v.space_approach) + ', space_plane: ' + f(v.space_plane) + '\n' +
-      '});\n' +
-      "ME.setAutoAdvance('" + nextName + "');\n" +
-      '<' + '<' + '/script>\\' + '\n';
-    if (scene) out += '<div class="passage-meta">Passage ' + pid + '</div><div class="passage-scene">' + scene + '</div>\n';
-    out += twineText + '\n';
+    var scriptClose = '<' + '<' + '/script>';
+    var out = '<<script>>\n'
+      + 'ME.triggerPassage(' + pid + ', {\n'
+      + '  passage_id: ' + pid + ', action_drive: "' + v.action_drive + '",\n'
+      + '  flow: ' + f(v.flow) + ', intensity: ' + f(v.intensity) + ', weight_passive: ' + f(v.weight_passive) + ',\n'
+      + '  shape_grow: ' + f(v.shape_grow) + ', shape_rise: ' + f(v.shape_rise) + ', shape_advance: ' + f(v.shape_advance) + ',\n'
+      + '  body_connectivity: ' + f(v.body_connectivity) + ', body_sequencing: ' + f(v.body_sequencing) + ',\n'
+      + '  kinesphere: ' + f(v.kinesphere) + ', space_approach: ' + f(v.space_approach) + ', space_plane: ' + f(v.space_plane) + '\n'
+      + '});\n'
+      + "ME.setAutoAdvance('" + nextName + "');\n"
+      + scriptClose + '\\\n';
+    if (scene) {
+      out += '<div class="passage-meta">Passage ' + pid + '</div>'
+           + '<div class="passage-scene">' + scene + '</div>\n';
+    }
+    out += twineHTML + '\n';
     out += '<div class="continue">[[Continue|' + nextName + ']]</div>';
     document.getElementById('outputCode').textContent = out;
   } else {
-    var plain = '{\n' +
-      '  "passage_id": ' + pid + ',\n' +
-      '  "action_drive": "' + v.action_drive + '",\n' +
-      '  "flow": ' + f(v.flow) + ',\n' +
-      '  "intensity": ' + f(v.intensity) + ',\n' +
-      '  "weight_passive": ' + f(v.weight_passive) + ',\n' +
-      '  "shape_grow": ' + f(v.shape_grow) + ',\n' +
-      '  "shape_rise": ' + f(v.shape_rise) + ',\n' +
-      '  "shape_advance": ' + f(v.shape_advance) + ',\n' +
-      '  "body_connectivity": ' + f(v.body_connectivity) + ',\n' +
-      '  "body_sequencing": ' + f(v.body_sequencing) + ',\n' +
-      '  "kinesphere": ' + f(v.kinesphere) + ',\n' +
-      '  "space_approach": ' + f(v.space_approach) + ',\n' +
-      '  "space_plane": ' + f(v.space_plane) + '\n' +
-      '}';
-    document.getElementById('outputCode').textContent = plain;
+    var json = '{\n'
+      + '  "passage_id": ' + pid + ',\n'
+      + '  "action_drive": "' + v.action_drive + '",\n'
+      + '  "flow": ' + f(v.flow) + ',\n'
+      + '  "intensity": ' + f(v.intensity) + ',\n'
+      + '  "weight_passive": ' + f(v.weight_passive) + ',\n'
+      + '  "shape_grow": ' + f(v.shape_grow) + ',\n'
+      + '  "shape_rise": ' + f(v.shape_rise) + ',\n'
+      + '  "shape_advance": ' + f(v.shape_advance) + ',\n'
+      + '  "body_connectivity": ' + f(v.body_connectivity) + ',\n'
+      + '  "body_sequencing": ' + f(v.body_sequencing) + ',\n'
+      + '  "kinesphere": ' + f(v.kinesphere) + ',\n'
+      + '  "space_approach": ' + f(v.space_approach) + ',\n'
+      + '  "space_plane": ' + f(v.space_plane) + '\n'
+      + '}';
+    document.getElementById('outputCode').textContent = json;
   }
 }
 
-/* LMA span annotation */
 function annotateSelection() {
   var cat = document.getElementById('lmaCat').value;
   var label = document.getElementById('lmaLabel').value.trim();
   if (!label) { document.getElementById('lmaLabel').focus(); return; }
   var sel = window.getSelection();
-  if (!sel.rangeCount) return;
+  if (!sel.rangeCount || sel.isCollapsed) return;
   var range = sel.getRangeAt(0);
   var editor = document.getElementById('passageEditor');
   if (!editor.contains(range.commonAncestorContainer)) return;
-  if (range.collapsed) return;
   var span = document.createElement('span');
   span.className = 'lma-span';
   span.setAttribute('data-cat', cat);
@@ -505,23 +510,34 @@ function reattachSpanListeners() {
 }
 
 function clearSpans() {
-  var editor = document.getElementById('passageEditor');
-  editor.querySelectorAll('.lma-span').forEach(function(s) {
+  document.querySelectorAll('#passageEditor .lma-span').forEach(function(s) {
     var text = document.createTextNode(s.textContent);
     s.parentNode.replaceChild(text, s);
   });
   renderOutput();
 }
 
-document.getElementById('passageEditor').addEventListener('input', renderOutput);
+function renderTagCloud(cat) {
+  var cloud = document.getElementById('tagCloud');
+  cloud.innerHTML = '';
+  var tags = LMA_VOCAB[cat] || [];
+  tags.forEach(function(label) {
+    var btn = document.createElement('button');
+    btn.className = 'lma-tag ' + cat;
+    btn.textContent = label;
+    btn.addEventListener('click', function() {
+      document.getElementById('lmaLabel').value = label;
+    });
+    cloud.appendChild(btn);
+  });
+}
 
-/* File loading */
 function parseTweePassages(raw) {
   var passages = [];
   var lines = raw.split(/\r?\n/);
   var current = null;
   for (var i = 0; i < lines.length; i++) {
-    var m = lines[i].match(/^::\s*(.+?)(?:\s*\{[^}]*\})?\s*$/);
+    var m = lines[i].match(/^::\s*(.+?)(\s*\{[^}]*\})?\s*$/);
     if (m) {
       if (current) passages.push(current);
       current = { title: m[1].trim(), body: [] };
@@ -531,39 +547,32 @@ function parseTweePassages(raw) {
   }
   if (current) passages.push(current);
   return passages.filter(function(p) {
-    return !p.title.match(/^Story(Title|Data|CSS|JavaScript|Init|Menu|Caption|Banner|Sidebar|Footer|Share|Options|Annotations|Bookmark|Toolbar|Toolbar Links|Jump To|Definition List|Beta Notice|Config|Popup|Overlay)/i);
+    return !p.title.match(/^Story(Title|Data|CSS|JavaScript|Init)/i);
   });
 }
 
-function parseBESSFromPassage(body) {
+function parseBESSFromBody(body) {
   var raw = body.join('\n');
   var vals = {};
-  var driveM = raw.match(/action_drive:\s*"([^"]+)"/);
-  if (driveM) vals.action_drive = driveM[1];
-  var params = ['flow','intensity','weight_passive','shape_grow','shape_rise','shape_advance','body_connectivity','body_sequencing','kinesphere','space_approach','space_plane'];
+  var dm = raw.match(/action_drive:\s*"([^"]+)"/);
+  if (dm) vals.action_drive = dm[1];
+  var params = ['flow','intensity','weight_passive','shape_grow','shape_rise','shape_advance',
+                'body_connectivity','body_sequencing','kinesphere','space_approach','space_plane'];
   params.forEach(function(p) {
     var re = new RegExp(p + ':\\s*([0-9.]+)');
-    var m = raw.match(re);
-    if (m) vals[p] = parseFloat(m[1]);
+    var pm = raw.match(re);
+    if (pm) vals[p] = parseFloat(pm[1]);
   });
   return vals;
 }
 
-function parseTextFromPassage(body) {
+function parseSceneFromBody(body) {
   var raw = body.join('\n');
-  raw = raw.replace(/<<script>>[\s\S]*?<<\/script>>\\\n?/g, '');
-  raw = raw.replace(/<div class="passage-meta">[^<]*<\/div><div class="passage-scene">[^<]*<\/div>\n?/g, '');
-  raw = raw.replace(/<div class="continue">\[\[Continue\|[^\]]*\]\]<\/div>\n?/g, '');
-  return raw.trim();
-}
-
-function parseSceneFromPassage(body) {
-  var raw = body.join('\n');
-  var m = raw.match(/<div class="passage-scene">([^<]*)<\/div>/);
+  var m = raw.match(/class="passage-scene">([^<]*)<\/div>/);
   return m ? m[1] : '';
 }
 
-function parseNextFromPassage(body) {
+function parseNextFromBody(body) {
   var raw = body.join('\n');
   var m = raw.match(/ME\.setAutoAdvance\('([^']+)'\)/);
   if (m) return m[1];
@@ -571,35 +580,36 @@ function parseNextFromPassage(body) {
   return m ? m[1] : '';
 }
 
-function twineHTMLToEditor(html) {
+function parseTextFromBody(body) {
+  var raw = body.join('\n');
+  raw = raw.replace(/<<script>>[\s\S]*?<<\/script>>\\?[\r\n]*/g, '');
+  raw = raw.replace(/<div class="passage-meta">[^<]*<\/div>\s*/g, '');
+  raw = raw.replace(/<div class="passage-scene">[^<]*<\/div>\s*/g, '');
+  raw = raw.replace(/<div class="continue">[\s\S]*?<\/div>\s*/g, '');
+  return raw.trim();
+}
+
+function twineHTMLToEditorHTML(html) {
   return html.replace(/<span class="lma" data-cat="([^"]+)" data-lma="([^"]+)">([^<]*)<\/span>/g,
     function(m, cat, lma, text) {
       return '<span class="lma-span" data-cat="' + cat + '" data-lma="' + lma + '" title="' + cat + ': ' + lma + '">' + text + '</span>';
     });
 }
 
-function loadPassageFromFile(passage) {
-  var bess = parseBESSFromPassage(passage.body);
-  var text = parseTextFromPassage(passage.body);
-  var scene = parseSceneFromPassage(passage.body);
-  var next = parseNextFromPassage(passage.body);
-  var pidM = passage.title.match(/(\d+)/);
-  if (pidM) document.getElementById('passageNum').value = parseInt(pidM[1]);
+function loadPassageFromTwee(passage) {
+  var bess = parseBESSFromBody(passage.body);
+  var scene = parseSceneFromBody(passage.body);
+  var next = parseNextFromBody(passage.body);
+  var text = parseTextFromBody(passage.body);
+  var pidm = passage.title.match(/(\d+)/);
+  if (pidm) document.getElementById('passageNum').value = parseInt(pidm[1]);
   document.getElementById('passageScene').value = scene;
   document.getElementById('nextPassage').value = next;
-  document.getElementById('passageEditor').innerHTML = twineHTMLToEditor(text);
+  document.getElementById('passageEditor').innerHTML = twineHTMLToEditorHTML(text);
   reattachSpanListeners();
-  setSliders(bess, false);
+  setSliders(bess);
   renderOutput();
 }
-
-document.getElementById('fileLoadTweeBtn').addEventListener('click', function() {
-  document.getElementById('fileInputTwee').click();
-});
-
-document.getElementById('fileLoadTxtBtn').addEventListener('click', function() {
-  document.getElementById('fileInputTxt').click();
-});
 
 function handleFile(file) {
   if (!file) return;
@@ -607,7 +617,7 @@ function handleFile(file) {
   var reader = new FileReader();
   reader.onload = function(ev) {
     var raw = ev.target.result;
-    var isTwee = file.name.match(/\.twee$/i);
+    var isTwee = /\.twee$/i.test(file.name);
     if (isTwee) {
       loadedPassages = parseTweePassages(raw);
       var sel = document.getElementById('filePassageSelect');
@@ -619,7 +629,7 @@ function handleFile(file) {
         sel.appendChild(opt);
       });
       sel.style.display = loadedPassages.length > 0 ? 'inline-block' : 'none';
-      if (loadedPassages.length > 0) loadPassageFromFile(loadedPassages[0]);
+      if (loadedPassages.length > 0) loadPassageFromTwee(loadedPassages[0]);
     } else {
       loadedPassages = [];
       document.getElementById('filePassageSelect').style.display = 'none';
@@ -630,28 +640,32 @@ function handleFile(file) {
   reader.readAsText(file);
 }
 
+document.getElementById('fileLoadTweeBtn').addEventListener('click', function() {
+  document.getElementById('fileInputTwee').click();
+});
+document.getElementById('fileLoadTxtBtn').addEventListener('click', function() {
+  document.getElementById('fileInputTxt').click();
+});
 document.getElementById('fileInputTwee').addEventListener('change', function(e) {
-  handleFile(e.target.files[0]);
-  this.value = '';
+  handleFile(e.target.files[0]); this.value = '';
 });
-
 document.getElementById('fileInputTxt').addEventListener('change', function(e) {
-  handleFile(e.target.files[0]);
-  this.value = '';
+  handleFile(e.target.files[0]); this.value = '';
 });
-
 document.getElementById('filePassageSelect').addEventListener('change', function() {
   var idx = parseInt(this.value);
-  if (loadedPassages[idx]) loadPassageFromFile(loadedPassages[idx]);
+  if (loadedPassages[idx]) loadPassageFromTwee(loadedPassages[idx]);
 });
-
-
 document.querySelectorAll('.drive-btn').forEach(function(b) {
   b.addEventListener('click', function() { setActiveDrive(b.dataset.d, false); });
 });
+document.getElementById('passageEditor').addEventListener('input', renderOutput);
 document.getElementById('passageNum').addEventListener('change', renderOutput);
 document.getElementById('passageScene').addEventListener('input', renderOutput);
 document.getElementById('nextPassage').addEventListener('input', renderOutput);
+document.getElementById('lmaCat').addEventListener('change', function() {
+  renderTagCloud(this.value);
+});
 document.getElementById('copyBtn').addEventListener('click', function() {
   var text = document.getElementById('outputCode').textContent;
   navigator.clipboard.writeText(text).then(function() {
@@ -665,6 +679,7 @@ document.getElementById('copyBtn').addEventListener('click', function() {
 });
 
 setActiveDrive('press', true);
+renderTagCloud('effort');
 renderOutput();
 </script>
 </body>
