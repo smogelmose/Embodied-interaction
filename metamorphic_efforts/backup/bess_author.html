@@ -61,20 +61,20 @@ h1 { font-size: 16px; font-weight: 600; }
   font-size: 11px; padding: 3px 9px; border-radius: 20px;
   cursor: pointer; border: 1px solid transparent; line-height: 1.4;
 }
-.lma-tag.effort { background: #FCEBEB; color: #A32D2D; border-color: #F7C1C1; }
-.lma-tag.effort:hover { background: #A32D2D; color: #fff; }
+.lma-tag.effort { background: #EEF0FD; color: #3C3489; border-color: #CCC9F0; }
+.lma-tag.effort:hover { background: #3C3489; color: #fff; }
 .lma-tag.shape  { background: #E1F5EE; color: #0F6E56; border-color: #9FE1CB; }
 .lma-tag.shape:hover  { background: #0F6E56; color: #fff; }
-.lma-tag.body   { background: #E6F1FB; color: #0C447C; border-color: #B5D4F4; }
-.lma-tag.body:hover   { background: #0C447C; color: #fff; }
-.lma-tag.space  { background: #FAEEDA; color: #633806; border-color: #FAC775; }
-.lma-tag.space:hover  { background: #854F0B; color: #fff; }
+.lma-tag.body   { background: #FDF3EE; color: #993C1D; border-color: #F5C4B3; }
+.lma-tag.body:hover   { background: #993C1D; color: #fff; }
+.lma-tag.space  { background: #E6F1FB; color: #185FA5; border-color: #B5D4F4; }
+.lma-tag.space:hover  { background: #185FA5; color: #fff; }
 .legend { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
 .legend-item { font-size: 11px; padding: 2px 8px; border-radius: 4px; }
-.legend-item.effort { background: #FCEBEB; color: #A32D2D; }
+.legend-item.effort { background: #EEF0FD; color: #3C3489; }
 .legend-item.shape  { background: #E1F5EE; color: #0F6E56; }
-.legend-item.body   { background: #E6F1FB; color: #0C447C; }
-.legend-item.space  { background: #FAEEDA; color: #633806; }
+.legend-item.body   { background: #FDF3EE; color: #993C1D; }
+.legend-item.space  { background: #E6F1FB; color: #185FA5; }
 .passage-title-row { display: flex; gap: 8px; margin-bottom: 6px; }
 .meta-input {
   font-family: inherit; font-size: 13px; padding: 6px 10px;
@@ -90,10 +90,10 @@ h1 { font-size: 16px; font-weight: 600; }
 }
 #passageEditor:focus { border-color: #3C3489; }
 #passageEditor .lma-span { border-radius: 3px; padding: 0 2px; cursor: pointer; }
-#passageEditor .lma-span[data-cat="effort"] { background: #FCEBEB; color: #A32D2D; }
+#passageEditor .lma-span[data-cat="effort"] { background: #EEF0FD; color: #3C3489; }
 #passageEditor .lma-span[data-cat="shape"]  { background: #E1F5EE; color: #0F6E56; }
-#passageEditor .lma-span[data-cat="body"]   { background: #E6F1FB; color: #0C447C; }
-#passageEditor .lma-span[data-cat="space"]  { background: #FAEEDA; color: #633806; }
+#passageEditor .lma-span[data-cat="body"]   { background: #FDF3EE; color: #993C1D; }
+#passageEditor .lma-span[data-cat="space"]  { background: #E6F1FB; color: #185FA5; }
 .drive-row { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
 .drive-btn {
   font-size: 12px; font-weight: 500; padding: 5px 14px;
@@ -154,18 +154,6 @@ input[type=range]::-moz-range-thumb {
 }
 .copy-btn:hover { background: #f0f0ee; }
 .copy-btn.ok { color: #0F6E56; border-color: #0F6E56; background: #f0faf6; }
-
-.v3-tag { display: inline; background: #FAEEDA; color: #633806; border-radius: 3px; padding: 0 3px; font-family: ui-monospace, monospace; font-size: 11px; cursor: pointer; user-select: none; }
-.v3-tag:hover { background: #EF9F27; color: #fff; }
-.v3-toolbar { display: flex; align-items: center; gap: 6px; margin: 8px 0 6px; flex-wrap: wrap; }
-.v3-tag-cloud { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 8px; }
-.v3-pill { font-size: 11px; padding: 3px 9px; border-radius: 20px; cursor: pointer; border: 1px solid #FAC775; background: #FAEEDA; color: #633806; font-family: ui-monospace, monospace; }
-.v3-pill:hover { background: #EF9F27; color: #fff; border-color: #EF9F27; }
-.v3-input { font-family: ui-monospace, monospace; font-size: 12px; padding: 4px 8px; border-radius: 6px; border: 1px solid #ccc; background: #fff; color: #1a1a18; flex: 1; min-width: 160px; }
-.v3-input::placeholder { color: #bbb; font-style: italic; }
-.v3-insert-btn { font-family: inherit; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 6px; border: 1px solid #EF9F27; color: #633806; background: #fff; cursor: pointer; white-space: nowrap; }
-.v3-insert-btn:hover { background: #FAEEDA; }
-.v3-section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: #888; margin-bottom: 6px; }
 </style>
 </head>
 <body>
@@ -212,16 +200,6 @@ input[type=range]::-moz-range-thumb {
   <div id="passageEditor" contenteditable="true" spellcheck="false"></div>
 </div>
 
-
-<div style="margin-bottom:1.25rem;">
-  <div class="v3-section-label">ElevenLabs v3 delivery tags</div>
-  <div class="v3-toolbar">
-    <input class="v3-input" id="v3Input" placeholder="tag1, tag2, tag3">
-    <button class="v3-insert-btn" onclick="insertV3Tag()">Insert at cursor</button>
-    <button class="clear-spans-btn" onclick="clearV3Tags()">Remove all tags</button>
-  </div>
-  <div class="v3-tag-cloud" id="v3Cloud"></div>
-</div>
 <div class="sec-label">Action drive</div>
 <div class="drive-row">
   <button class="drive-btn press"  data-d="press">press</button>
@@ -298,7 +276,6 @@ input[type=range]::-moz-range-thumb {
   <div class="toggle-wrap">
     <button class="toggle-btn active" id="toggleTwine" onclick="setOutputMode('twine')">Twine block</button>
     <button class="toggle-btn" id="toggleJSON" onclick="setOutputMode('json')">JSON</button>
-    <button class="toggle-btn" id="toggleV3" onclick="setOutputMode('v3')">ElevenLabs script</button>
   </div>
 </div>
 <div class="output-area"><div class="output-code" id="outputCode"></div></div>
@@ -393,208 +370,7 @@ function resetAll() {
   document.getElementById('passageEditor').innerHTML = '';
   document.getElementById('passageScene').value = '';
   document.getElementById('nextPassage').value = '';
-  
-
-
-setActiveDrive('press', true);
-}
-
-function insertV3Tag() {
-  var val = document.getElementById('v3Input').value.trim();
-  if (!val) { document.getElementById('v3Input').focus(); return; }
-  var tag = '[' + val + ']';
-  var editor = document.getElementById('passageEditor');
-  editor.focus();
-  var sel = window.getSelection();
-  if (sel.rangeCount) {
-    var range = sel.getRangeAt(0);
-    if (editor.contains(range.commonAncestorContainer)) {
-      range.collapse(true);
-      var span = document.createElement('span');
-      span.className = 'v3-tag';
-      span.setAttribute('data-v3', val);
-      span.contentEditable = 'false';
-      span.textContent = tag;
-      span.title = 'v3 tag: ' + val + ' (click to remove)';
-      attachV3Listener(span);
-      range.insertNode(span);
-      range.setStartAfter(span);
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
-      document.getElementById('v3Input').value = '';
-      renderOutput();
-      return;
-    }
-  }
-  // Fallback: append at end
-  var span = document.createElement('span');
-  span.className = 'v3-tag';
-  span.setAttribute('data-v3', val);
-  span.contentEditable = 'false';
-  span.textContent = tag;
-  span.title = 'v3 tag: ' + val + ' (click to remove)';
-  attachV3Listener(span);
-  editor.appendChild(span);
-  document.getElementById('v3Input').value = '';
-  renderOutput();
-}
-
-function attachV3Listener(span) {
-  span.addEventListener('click', function(e) {
-    e.stopPropagation();
-    span.parentNode.removeChild(span);
-    renderOutput();
-  });
-}
-
-function reattachV3Listeners() {
-  document.querySelectorAll('#passageEditor .v3-tag').forEach(attachV3Listener);
-}
-
-function clearV3Tags() {
-  document.querySelectorAll('#passageEditor .v3-tag').forEach(function(s) {
-    s.parentNode.removeChild(s);
-  });
-  renderOutput();
-}
-
-function getV3Script() {
-  var editor = document.getElementById('passageEditor');
-  var clone = editor.cloneNode(true);
-  // LMA spans: strip tags, keep text
-  clone.querySelectorAll('.lma-span').forEach(function(s) {
-    var text = document.createTextNode(s.textContent);
-    s.parentNode.replaceChild(text, s);
-  });
-  // v3 tags: keep as-is (they render as [tag] text)
-  clone.querySelectorAll('.v3-tag').forEach(function(s) {
-    var text = document.createTextNode(s.textContent);
-    s.parentNode.replaceChild(text, s);
-  });
-  return clone.textContent.trim();
-}
-
-
-var V3_USED = [
-  'aggressive', 'agitated', 'anguished', 'anxious', 'authoritative',
-  'bitter', 'breaking', 'calm', 'careful', 'cold', 'concerned', 'confused',
-  'defeated', 'deliberate', 'desperate', 'distressed', 'disturbed',
-  'eerily calm', 'effortful', 'exhausted', 'final', 'flatly', 'focused',
-  'forcing words out', 'frantic', 'frustrated', 'gasps', 'gentle', 'groggy',
-  'heavy', 'horrified', 'intense', 'matter-of-fact', 'measured', 'melancholy',
-  'observational', 'pained', 'panicking', 'quiet', 'quietly', 'resigned',
-  'rushed', 'shocked', 'shudders', 'slow', 'sorrowful', 'startled', 'stern',
-  'strained', 'tense', 'tired', 'uncomfortable', 'urgent', 'violent impact',
-  'pause', 'short pause'
-];
-
-var V3_CATEGORIES = [
-  {
-    label: 'pace',
-    tags: ['slow', 'fast', 'unhurried', 'rushed', 'deliberate', 'hesitant', 'measured', 'erratic', 'slow, observational']
-  },
-  {
-    label: 'weight',
-    tags: ['heavy', 'light', 'groggy', 'alert', 'tired', 'energetic', 'laboured', 'effortless', 'slow, heavy, groggy']
-  },
-  {
-    label: 'tone',
-    tags: ['quiet', 'loud', 'whispering', 'shouting', 'flatly', 'expressively', 'monotone', 'animated', 'matter-of-fact', 'cold']
-  },
-  {
-    label: 'emotion',
-    tags: ['melancholy', 'cheerful', 'bitter', 'warm', 'resigned', 'hopeful', 'despairing', 'haunted',
-           'disturbed', 'uncomfortable', 'shudders', 'startled', 'gentle, concerned']
-  },
-  {
-    label: 'tension',
-    tags: ['calm', 'agitated', 'anxious', 'tense', 'controlled', 'intense', 'urgent',
-           'tense, careful', 'anxious, urgent', 'aggressive, urgent']
-  },
-  {
-    label: 'distress',
-    tags: ['distressed', 'anguished', 'sorrowful', 'strained', 'exhausted', 'defeated', 'breaking',
-           'distressed, strained', 'strained, effortful', 'strained, forcing words out',
-           'sorrowful, breaking', 'exhausted, defeated', 'defeated, quietly', 'desperate, pained']
-  },
-  {
-    label: 'panic',
-    tags: ['panicking', 'rushed, frantic', 'rushed, tense', 'desperate, rushed, panicking',
-           'bitter, agitated', 'tired, frustrated', 'frustrated, exhausted']
-  },
-  {
-    label: 'shock',
-    tags: ['shocked', 'horrified', 'stunned', 'confused', 'alarmed', 'confused, quiet']
-  },
-  {
-    label: 'authority',
-    tags: ['stern', 'authoritative', 'commanding', 'firm', 'imploring', 'pleading',
-           'stern, authoritative', 'tired, deliberate', 'calm, measured, deliberate',
-           'quiet, focused', 'eerily calm', 'disturbed, quiet']
-  },
-  {
-    label: 'impact',
-    tags: ['gasps', 'violent impact', 'intense', 'flatly, final']
-  },
-  {
-    label: 'pause',
-    tags: ['pause', 'short pause', 'long pause', 'beat', 'trailing off']
-  }
-];
-
-var v3ShowFull = false;
-
-function addTagToInput(tag) {
-  var input = document.getElementById('v3Input');
-  input.value = input.value.trim() ? input.value.trim() + ', ' + tag : tag;
-}
-
-function renderV3Cloud() {
-  var cloud = document.getElementById('v3Cloud');
-  cloud.innerHTML = '';
-  if (!v3ShowFull) {
-    V3_USED.forEach(function(tag) {
-      var btn = document.createElement('button');
-      btn.className = 'v3-pill';
-      btn.textContent = tag;
-      btn.addEventListener('click', function() { addTagToInput(tag); });
-      cloud.appendChild(btn);
-    });
-    var toggle = document.createElement('button');
-    toggle.className = 'v3-pill';
-    toggle.style.borderStyle = 'dashed';
-    toggle.textContent = 'show all categories';
-    toggle.addEventListener('click', function() { v3ShowFull = true; renderV3Cloud(); });
-    cloud.appendChild(toggle);
-    return;
-  }
-  V3_CATEGORIES.forEach(function(cat) {
-    var group = document.createElement('div');
-    group.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-bottom:4px;width:100%;';
-    var lbl = document.createElement('span');
-    lbl.style.cssText = 'font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#aaa;min-width:70px;';
-    lbl.textContent = cat.label;
-    group.appendChild(lbl);
-    cat.tags.forEach(function(tag) {
-      var btn = document.createElement('button');
-      btn.className = 'v3-pill';
-      btn.textContent = tag;
-      btn.addEventListener('click', function() { addTagToInput(tag); });
-      group.appendChild(btn);
-    });
-    cloud.appendChild(group);
-  });
-  var toggle = document.createElement('button');
-  toggle.className = 'v3-pill';
-  toggle.style.borderStyle = 'dashed';
-  toggle.textContent = v3ShowFull ? 'show less' : 'show all categories';
-  toggle.style.cssText = 'border-style:dashed;background:#E1F5EE;color:#085041;border-color:#5DCAA5;';
-  toggle.addEventListener('click', function() {
-    v3ShowFull = !v3ShowFull;
-    renderV3Cloud();
-  });
-  cloud.appendChild(toggle);
+  setActiveDrive('press', true);
 }
 
 function setActiveDrive(d, fromLoad) {
@@ -626,7 +402,6 @@ function setOutputMode(mode) {
   outputMode = mode;
   document.getElementById('toggleTwine').classList.toggle('active', mode === 'twine');
   document.getElementById('toggleJSON').classList.toggle('active', mode === 'json');
-  document.getElementById('toggleV3').classList.toggle('active', mode === 'v3');
   renderOutput();
 }
 
@@ -647,9 +422,6 @@ function innerHTMLToTwineHTML(html) {
     rep.setAttribute('data-lma', lma);
     rep.textContent = text;
     s.parentNode.replaceChild(rep, s);
-  });
-  tmp.querySelectorAll('.v3-tag').forEach(function(s) {
-    s.parentNode.removeChild(s);
   });
   return tmp.innerHTML;
 }
@@ -680,7 +452,7 @@ function renderOutput() {
     out += twineHTML + '\n';
     out += '<div class="continue">[[Continue|' + nextName + ']]</div>';
     document.getElementById('outputCode').textContent = out;
-  } else if (outputMode === 'json') {
+  } else {
     var json = '{\n'
       + '  "passage_id": ' + pid + ',\n'
       + '  "action_drive": "' + v.action_drive + '",\n'
@@ -697,8 +469,6 @@ function renderOutput() {
       + '  "space_plane": ' + f(v.space_plane) + '\n'
       + '}';
     document.getElementById('outputCode').textContent = json;
-  } else {
-    document.getElementById('outputCode').textContent = getV3Script();
   }
 }
 
@@ -910,7 +680,6 @@ document.getElementById('copyBtn').addEventListener('click', function() {
 
 setActiveDrive('press', true);
 renderTagCloud('effort');
-renderV3Cloud();
 renderOutput();
 </script>
 </body>
