@@ -24,6 +24,8 @@ ME.autoTimer = null;
 ME.revealTimer = null;
 ME.nextPassageTarget = null;
 ME.layerTimers = [];
+ME.bessHistory = [];  // stores per-passage BESS values for descriptor computation
+ME.DESCRIPTOR_WINDOW = 3;  // number of recent passages to compute descriptors over
 
 // ============================================================
 // AUDIO MAPS
@@ -71,12 +73,12 @@ ME.SFX_MAP = {
        { f: 'audio/sfx/sfx_bed_throw_roll.mp3', at: 0 }],
   6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', at: 1 },
        { f: 'audio/sfx/sfx_insect_legs.mp3', end: true },
-       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -3 }],
+       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -7 }],
   7:  [{ f: 'audio/sfx/sfx_bed_sit_up.mp3', at: 0 }],
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
        { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: -5 }],
+       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: 3 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
        { f: 'audio/sfx/sfx_gasp.mp3', at: -12 },
        { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
@@ -174,6 +176,79 @@ ME.connectWS = function() {
   } catch (e) {
     console.warn('ME: WS connection failed', e);
   }
+};
+
+
+// ============================================================
+// MOVEMENT DESCRIPTORS (Larboulette & Gibet, 2015)
+// Computed on the BESS trajectory across recent passages.
+// These modulate TD visual parameters rather than replacing
+// the preset lookup -- preset sets target, descriptors shape
+// the transition behavior.
+//
+// Weight(t)  = max kinetic energy over window
+//              = max(intensity) over last W passages
+// Time(t)    = summed acceleration
+//              = mean absolute delta of intensity + flow over window
+// Space(t)   = path/displacement ratio of space_approach trajectory
+//              = sum(|delta|) / |total displacement|, normalized 0-1
+// Flow(t)    = aggregated jerk
+//              = mean of |delta[t] - delta[t-1]| over window, normalized 0-1
+// ============================================================
+
+ME.computeDescriptors = function(history) {
+  if (!history || history.length < 2) {
+    return { ld_weight: 0.5, ld_time: 0.5, ld_space: 0.5, ld_flow: 0.5 };
+  }
+
+  var w = Math.min(ME.DESCRIPTOR_WINDOW, history.length);
+  var window = history.slice(-w);
+  var n = window.length;
+
+  // Weight: max intensity over window (peak kinetic energy)
+  var ld_weight = 0;
+  for (var i = 0; i < n; i++) {
+    if (window[i].intensity > ld_weight) ld_weight = window[i].intensity;
+  }
+
+  // Time: mean absolute delta of intensity across window (summed acceleration)
+  var timeSum = 0;
+  var timeSamples = 0;
+  for (var i = 1; i < n; i++) {
+    timeSum += Math.abs(window[i].intensity - window[i-1].intensity);
+    timeSum += Math.abs(window[i].flow - window[i-1].flow);
+    timeSamples += 2;
+  }
+  var ld_time = timeSamples > 0 ? Math.min(1, (timeSum / timeSamples) * 5) : 0.5;
+
+  // Space: path/displacement ratio of space_approach (directness)
+  // Ratio near 1 = Direct, high ratio = Indirect. Normalize to 0-1 (1 = Direct)
+  var pathLen = 0;
+  for (var i = 1; i < n; i++) {
+    pathLen += Math.abs(window[i].space_approach - window[i-1].space_approach);
+  }
+  var displacement = Math.abs(window[n-1].space_approach - window[0].space_approach);
+  var ratio = displacement > 0.01 ? pathLen / displacement : 1.0;
+  var ld_space = Math.max(0, Math.min(1, 1 - (ratio - 1) / 4));
+
+  // Flow: aggregated jerk -- second derivative of trajectory (smoothness)
+  // Low jerk = Free (smooth), high jerk = Bound (controlled, stoppable)
+  var jerkSum = 0;
+  var jerkSamples = 0;
+  for (var i = 2; i < n; i++) {
+    var d1 = window[i].flow - window[i-1].flow;
+    var d0 = window[i-1].flow - window[i-2].flow;
+    jerkSum += Math.abs(d1 - d0);
+    jerkSamples++;
+  }
+  var ld_flow = jerkSamples > 0 ? Math.min(1, (jerkSum / jerkSamples) * 10) : 0.5;
+
+  return {
+    ld_weight: parseFloat(ld_weight.toFixed(3)),
+    ld_time:   parseFloat(ld_time.toFixed(3)),
+    ld_space:  parseFloat(ld_space.toFixed(3)),
+    ld_flow:   parseFloat(ld_flow.toFixed(3))
+  };
 };
 
 ME.sendBESS = function(data) {
@@ -461,8 +536,13 @@ ME.triggerPassage = function(pid, bessData) {
   ME.targetBess = bessData;
   if (!ME.currentBess) ME.currentBess = Object.assign({}, bessData);
 
-  // Send to TD
-  ME.sendBESS(bessData);
+  // Append to history and compute movement descriptors
+  ME.bessHistory.push(bessData);
+  var descriptors = ME.computeDescriptors(ME.bessHistory);
+
+  // Send to TD: BESS values + computed descriptors
+  var payload = Object.assign({}, bessData, descriptors);
+  ME.sendBESS(payload);
 
   // Resume AudioContext on first interaction
   if (ME.audioCtx && ME.audioCtx.state === 'suspended') {
@@ -502,6 +582,8 @@ ME.triggerPassage = function(pid, bessData) {
     ME.layerTimers.forEach(function(t) { clearTimeout(t); });
   }
   ME.layerTimers = [];
+ME.bessHistory = [];  // stores per-passage BESS values for descriptor computation
+ME.DESCRIPTOR_WINDOW = 3;  // number of recent passages to compute descriptors over
 
   if (pid < 1 || pid > 10) {
     ME.revealLMA();

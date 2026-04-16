@@ -622,7 +622,7 @@ ME.SFX_MAP = {
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
        { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: 5 }],
+       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: -5 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
        { f: 'audio/sfx/sfx_gasp.mp3', at: -12 },
        { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
@@ -1287,12 +1287,12 @@ ME.setAutoAdvance(&#39;Passage 2&#39;);
 &lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 1&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Waking&lt;/div&gt;
 
-One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sustained&quot;&gt;lay&lt;/span&gt; on his &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight&quot;&gt;armour-like&lt;/span&gt; back, and if he &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Minimal Rise&quot;&gt;lifted his head a little&lt;/span&gt; he could see his brown belly, slightly domed and &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Fragmented Connectivity&quot;&gt;divided by arches into stiff sections&lt;/span&gt;. The bedding was &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight&quot;&gt;hardly able to cover it&lt;/span&gt; and seemed ready to slide off any moment. His many legs, &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Low Connectivity&quot;&gt;pitifully thin compared with the size of the rest of him&lt;/span&gt;, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Free Flow&quot;&gt;waved about helplessly&lt;/span&gt; as he looked.
+One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, Sustained&quot;&gt;lay&lt;/span&gt; on his &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight&quot;&gt;armour-like&lt;/span&gt; back, and if he &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Minimal Rise&quot;&gt;lifted his head a little&lt;/span&gt; he could see his brown belly, slightly domed and &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Fragmented Connectivity&quot;&gt;divided by arches into stiff sections&lt;/span&gt;. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Low Connectivity&quot;&gt;pitifully thin compared with the size of the rest of him&lt;/span&gt;, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Free Flow&quot;&gt;waved about helplessly&lt;/span&gt; as he looked.
 
 &lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 2]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Passage 10" tags="" position="300,1550" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(10, {
   passage_id: 10, action_drive: &quot;slash&quot;,
-  flow: 0.15, intensity: 0.8, weight_passive: 0.1,
+  flow: 0.65, intensity: 0.8, weight_passive: 0.1,
   shape_grow: 0.1, shape_rise: 0.0, shape_advance: 0.0,
   body_connectivity: 0.3, body_sequencing: 0.15,
   kinesphere: 0.2, space_approach: 0.35, space_plane: 0.3
@@ -1327,7 +1327,7 @@ ME.triggerPassage(3, {
   flow: 0.2, intensity: 0.55, weight_passive: 0.0,
   shape_grow: 0.15, shape_rise: 0.1, shape_advance: 0.1,
   body_connectivity: 0.45, body_sequencing: 0.35,
-  kinesphere: 0.35, space_approach: 0.8, space_plane: 0.3
+  kinesphere: 0.35, space_approach: 0.65, space_plane: 0.3
 });
 ME.setAutoAdvance(&#39;Passage 4&#39;);
 &lt;&lt;/script&gt;&gt;\
@@ -1340,7 +1340,7 @@ ME.setAutoAdvance(&#39;Passage 4&#39;);
 &lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 4]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="Passage 4" tags="" position="300,650" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(4, {
   passage_id: 4, action_drive: &quot;press&quot;,
-  flow: 0.25, intensity: 0.65, weight_passive: 0.0,
+  flow: 0.18, intensity: 0.65, weight_passive: 0.0,
   shape_grow: 0.15, shape_rise: 0.15, shape_advance: 0.2,
   body_connectivity: 0.45, body_sequencing: 0.3,
   kinesphere: 0.4, space_approach: 0.75, space_plane: 0.3
@@ -1349,9 +1349,9 @@ ME.setAutoAdvance(&#39;Passage 5&#39;);
 &lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 4&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Clock strikes, mother knocks&lt;/div&gt;
 
-And he looked over at the alarm clock, &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Sustained, Bound (environment)&quot;&gt;ticking&lt;/span&gt; on the chest of drawers. &quot;God in Heaven!&quot; he thought. It was half past six and the hands were &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained Time&quot;&gt;quietly moving forwards&lt;/span&gt;, it was even later than half past, more like quarter to seven. Had the alarm clock not rung?
+And he looked over at the alarm clock, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained, Bound (environment)&quot;&gt;ticking&lt;/span&gt; on the chest of drawers. &quot;God in Heaven!&quot; he thought. It was half past six and the hands were &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained Time&quot;&gt;quietly moving forwards&lt;/span&gt;, it was even later than half past, more like quarter to seven. Had the alarm clock not rung?
 
-He was still hurriedly thinking all this through, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow&quot;&gt;unable to decide to get out of the bed&lt;/span&gt;, when the clock struck quarter to seven. There was a &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden, Direct (external)&quot;&gt;cautious knock&lt;/span&gt; at the door near his head. &quot;Gregor,&quot; somebody called. It was his mother. &quot;It&#39;s quarter to seven. Didn&#39;t you want to go somewhere?&quot;
+He was still hurriedly thinking all this through, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow&quot;&gt;unable to decide to get out of the bed&lt;/span&gt;, when the clock struck quarter to seven. There was a &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound, Direct (external)&quot;&gt;cautious knock&lt;/span&gt; at the door near his head. &quot;Gregor,&quot; somebody called. It was his mother. &quot;It&#39;s quarter to seven. Didn&#39;t you want to go somewhere?&quot;
 
 &lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 5]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="7" name="Passage 5" tags="" position="300,800" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(5, {
@@ -1359,20 +1359,20 @@ ME.triggerPassage(5, {
   flow: 0.3, intensity: 0.75, weight_passive: 0.0,
   shape_grow: 0.15, shape_rise: 0.2, shape_advance: 0.3,
   body_connectivity: 0.4, body_sequencing: 0.4,
-  kinesphere: 0.4, space_approach: 0.5, space_plane: 0.3
+  kinesphere: 0.4, space_approach: 0.32, space_plane: 0.3
 });
 ME.setAutoAdvance(&#39;Passage 6&#39;);
 &lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 5&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Trying to speak&lt;/div&gt;
 
-Gregor was &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden Time&quot;&gt;shocked&lt;/span&gt; when he heard his own voice answering, it could hardly be recognised as the voice he had had before. As if from deep inside him, there was a &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Loss of Connectivity&quot;&gt;painful and uncontrollable squeaking&lt;/span&gt; mixed in with it, the words could be made out at first but then there was a &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Indirect Space&quot;&gt;sort of echo which made them unclear&lt;/span&gt;, leaving the hearer unsure whether he had heard properly or not.
+Gregor was &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden Time&quot;&gt;shocked&lt;/span&gt; when he heard his own voice answering, it could hardly be recognised as the voice he had had before. As if from deep inside him, there was a &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow failing&quot;&gt;painful and uncontrollable squeaking&lt;/span&gt; mixed in with it, the words could be made out at first but then there was a &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Indirect Space&quot;&gt;sort of echo which made them unclear&lt;/span&gt;, leaving the hearer unsure whether he had heard properly or not.
 
 Gregor had wanted to give a full answer and explain everything, but in the circumstances contented himself with saying: &quot;Yes, mother, yes, thank-you, I&#39;m getting up now.&quot;
 
 &lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 6]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="Passage 6" tags="" position="300,950" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(6, {
   passage_id: 6, action_drive: &quot;press&quot;,
-  flow: 0.2, intensity: 0.8, weight_passive: 0.0,
+  flow: 0.5, intensity: 0.8, weight_passive: 0.0,
   shape_grow: 0.2, shape_rise: 0.2, shape_advance: 0.5,
   body_connectivity: 0.35, body_sequencing: 0.45,
   kinesphere: 0.45, space_approach: 0.7, space_plane: 0.4
@@ -1381,7 +1381,7 @@ ME.setAutoAdvance(&#39;Passage 7&#39;);
 &lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 6&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Getting out of bed&lt;/div&gt;
 
-It was a simple matter to throw off the covers; he only had to &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Grow&quot;&gt;blow himself up a little&lt;/span&gt; and they fell off by themselves. But it became difficult after that, especially as he was so &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Lateral presence&quot;&gt;exceptionally broad&lt;/span&gt;. He would have used his arms and his hands to push himself up; but instead of them he only had all those &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Free Flow, Indirect Space&quot;&gt;little legs continuously moving in different directions&lt;/span&gt;, and which he was moreover &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Loss of Connectivity&quot;&gt;unable to control&lt;/span&gt;.
+It was a simple matter to throw off the covers; he only had to &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Grow&quot;&gt;blow himself up a little&lt;/span&gt; and they fell off by themselves. But it became difficult after that, especially as he was so &lt;span class=&quot;lma&quot; data-cat=&quot;shape&quot; data-lma=&quot;Lateral presence&quot;&gt;exceptionally broad&lt;/span&gt;. He would have used his arms and his hands to push himself up; but instead of them he only had all those &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Free Flow&quot;&gt;little legs continuously moving in different directions&lt;/span&gt; &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Indirect Space&quot;&gt;in different directions&lt;/span&gt;, and which he was moreover &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Loss of Connectivity&quot;&gt;unable to control&lt;/span&gt;.
 
 The first thing he wanted to do was get the lower part of his body out of the bed, but he had &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Fragmented Connectivity&quot;&gt;never seen this lower part, and could not imagine what it looked like&lt;/span&gt;; it turned out to be too hard to move; it went so slowly; and finally, almost in a frenzy, when he &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight, maximum force&quot;&gt;carelessly shoved himself forwards with all the force he could gather&lt;/span&gt;, he chose the wrong direction, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sudden, Strong, Direct&quot;&gt;hit hard against the lower bedpost&lt;/span&gt;, and learned from the &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Sensory feedback&quot;&gt;burning pain&lt;/span&gt; he felt that the lower part of his body might well, at present, be the most sensitive.
 
@@ -1397,14 +1397,14 @@ ME.setAutoAdvance(&#39;Passage 8&#39;);
 &lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 7&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;The manager speaks&lt;/div&gt;
 
-The chief clerk now &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight (external voice)&quot;&gt;raised his voice&lt;/span&gt;. &quot;Mr. Samsa, what is wrong? You &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Enclosed, Bound&quot;&gt;barricade yourself in your room&lt;/span&gt;, give us no more than yes or no for an answer, you are causing serious and unnecessary concern to your parents and you fail to carry out your business duties in a way that is quite unheard of. I&#39;m speaking here on behalf of your parents and of your employer, and really must request a &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Direct Space, Sudden (external)&quot;&gt;clear and immediate explanation&lt;/span&gt;.&quot;
+The chief clerk now &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Strong Weight (external voice)&quot;&gt;raised his voice&lt;/span&gt;. &quot;Mr. Samsa, what is wrong? You &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Enclosed&quot;&gt;barricade yourself in your room&lt;/span&gt; &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Bound Flow&quot;&gt;barricade yourself in your room&lt;/span&gt;, give us no more than yes or no for an answer, you are causing serious and unnecessary concern to your parents and you fail to carry out your business duties in a way that is quite unheard of. I&#39;m speaking here on behalf of your parents and of your employer, and really must request a &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Direct Space (external)&quot;&gt;clear and immediate explanation&lt;/span&gt;.&quot;
 
 &quot;But Sir,&quot; called Gregor, &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Free Flow (loss of restraint)&quot;&gt;beside himself and forgetting all else in the excitement&lt;/span&gt;, &quot;I&#39;ll open up immediately, just a moment. I&#39;m slightly unwell, an attack of dizziness, I haven&#39;t been able to get up. I&#39;m still in bed now.&quot;
 
 &lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 8]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="Passage 8" tags="" position="300,1250" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(8, {
   passage_id: 8, action_drive: &quot;glide&quot;,
-  flow: 0.2, intensity: 0.6, weight_passive: 0.0,
+  flow: 0.75, intensity: 0.6, weight_passive: 0.0,
   shape_grow: 0.2, shape_rise: 0.3, shape_advance: 0.6,
   body_connectivity: 0.55, body_sequencing: 0.6,
   kinesphere: 0.5, space_approach: 0.8, space_plane: 0.5
@@ -1413,13 +1413,13 @@ ME.setAutoAdvance(&#39;Passage 9&#39;);
 &lt;&lt;/script&gt;&gt;\
 &lt;div class=&quot;passage-meta&quot;&gt;Passage 8&lt;/div&gt;&lt;div class=&quot;passage-scene&quot;&gt;Reaching the door&lt;/div&gt;
 
-Gregor &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained Time, Light Weight&quot;&gt;slowly pushed his way over to the door&lt;/span&gt; with the chair. Once there he let go of it and threw himself onto the door, &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;High Connectivity&quot;&gt;holding himself upright against it using the adhesive on the tips of his legs&lt;/span&gt;. He &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained, controlled&quot;&gt;rested there a little while&lt;/span&gt; to recover from the effort involved and then set himself to the task of &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;High Sequencing, Direct Space&quot;&gt;turning the key in the lock with his mouth&lt;/span&gt;.
+Gregor &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained Time, Light Weight&quot;&gt;slowly pushed his way over to the door&lt;/span&gt; with the chair. Once there he let go of it and threw himself onto the door, &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;High Connectivity&quot;&gt;holding himself upright against it using the adhesive on the tips of his legs&lt;/span&gt;. He &lt;span class=&quot;lma&quot; data-cat=&quot;effort&quot; data-lma=&quot;Sustained, controlled&quot;&gt;rested there a little while&lt;/span&gt; to recover from the effort involved and then set himself to the task of &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;High Sequencing&quot;&gt;turning the key in the lock with his mouth&lt;/span&gt; &lt;span class=&quot;lma&quot; data-cat=&quot;space&quot; data-lma=&quot;Direct Space&quot;&gt;turning the key in the lock with his mouth&lt;/span&gt;.
 
 Using the jaw, he really was able to start the key turning, ignoring the fact that he must have been causing some kind of damage as a &lt;span class=&quot;lma&quot; data-cat=&quot;body&quot; data-lma=&quot;Material consequence&quot;&gt;brown fluid came from his mouth&lt;/span&gt;, flowed over the key and dripped onto the floor.
 
 &lt;div class=&quot;continue&quot;&gt;[[Continue|Passage 9]]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="Passage 9" tags="" position="300,1400" size="100,100">&lt;&lt;script&gt;&gt;
 ME.triggerPassage(9, {
-  passage_id: 9, action_drive: &quot;punch&quot;,
+  passage_id: 9, action_drive: &quot;glide&quot;,
   flow: 0.4, intensity: 0.85, weight_passive: 0.0,
   shape_grow: 0.5, shape_rise: 0.4, shape_advance: 0.8,
   body_connectivity: 0.5, body_sequencing: 0.3,
