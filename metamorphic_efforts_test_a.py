@@ -71,19 +71,19 @@ GROUND_TRUTH = {
 }
 
 EFFORT_SCALES = [
-    ("weight", "Light",    "Heavy"),
-    ("time",   "Sudden",   "Sustained"),
-    ("space",  "Indirect", "Direct"),
-    ("flow",   "Free",     "Bound"),
+    ("weight", "Weight", "Light",    "Heavy"),
+    ("time",   "Time",   "Sudden",   "Sustained"),
+    ("space",  "Space",  "Indirect", "Direct"),
+    ("flow",   "Flow",   "Free",     "Bound"),
 ]
 
 EMOTION_SCALES = [
-    ("valence", "Unpleasant", "Pleasant"),
-    ("arousal", "Calm",       "Activated"),
+    ("valence", "Valence", "Unpleasant", "Pleasant"),
+    ("arousal", "Arousal", "Calm",       "Activated"),
 ]
 
 SCALES = EFFORT_SCALES + EMOTION_SCALES
-SCALE_Y = [0.10, -0.06, -0.22, -0.38, -0.60, -0.76]
+SCALE_Y = [0.08, -0.09, -0.26, -0.43, -0.63, -0.80]
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -142,7 +142,7 @@ stim_instr = visual.TextStim(win,
     anchorHoriz="center", anchorVert="center")
 
 stim_emotion_label = visual.TextStim(win, text="Your emotional response:",
-    pos=(0, -0.49), height=0.028, color=(-0.4, -0.4, -0.4),
+    pos=(0, -0.53), height=0.028, color=(-0.4, -0.4, -0.4),
     italic=True, font="Helvetica",
     anchorHoriz="center", anchorVert="center")
 
@@ -178,17 +178,18 @@ def record(pid, p_id, drive, scale_key, value):
 # Welcome and instructions
 # ---------------------------------------------------------------------------
 show_screen([
-    txt("Metamorphic Efforts", pos=(0, 0.65), height=0.080,
+    txt("Metamorphic Efforts", pos=(0, 0.75), height=0.080,
         color=(-0.85, -0.85, -0.85), bold=True),
-    txt("Text perception questionnaire", pos=(0, 0.47), height=0.050),
+    txt("Text perception questionnaire", pos=(0, 0.60), height=0.050),
     txt(
         "You will read ten passages from Kafka's The Metamorphosis.\n\n"
-        "After reading each passage, rate the movement quality you perceive\n"
-        "using four scales, and rate your emotional response\n"
-        "using two additional scales.\n\n"
+        "For each passage, focus on the movement described in the text --\n"
+        "how the characters' bodies move, struggle, reach, or hold still.\n\n"
+        "Rate the movement quality using four scales (Weight, Time, Space, Flow),\n"
+        "and rate your emotional response using two scales (Valence, Arousal).\n\n"
         "There are no right or wrong answers.\n"
-        "Respond based on your immediate impression.",
-        pos=(0, 0.02), height=0.044, wrap=1.55
+        "Respond based on your immediate impression of the text.",
+        pos=(0, 0.05), height=0.038, wrap=1.65
     ),
 ])
 
@@ -197,9 +198,15 @@ show_screen([
         color=(-0.85, -0.85, -0.85), bold=True),
     txt(
         "Read the passage carefully. You may re-read it as many times as you like.\n\n"
-        "Then rate all six scales. Each scale runs between two opposite qualities.\n\n"
+        "Rate all six scales:\n"
+        "  - Weight: from Light to Heavy\n"
+        "  - Time: from Sudden to Sustained\n"
+        "  - Space: from Indirect to Direct\n"
+        "  - Flow: from Free to Bound\n"
+        "  - Valence: from Unpleasant to Pleasant\n"
+        "  - Arousal: from Calm to Activated\n\n"
         "Click to place your rating, then press SPACE to continue.",
-        pos=(0, 0.05), height=0.044, wrap=1.55
+        pos=(0, 0.0), height=0.036, wrap=1.55
     ),
 ])
 
@@ -215,10 +222,13 @@ for i in range(1, 6):
 all_passage_sliders = []
 for passage in PASSAGES:
     passage_sliders = []
-    for i, (key, left, right) in enumerate(SCALES):
+    for i, (key, name, left, right) in enumerate(SCALES):
         y = SCALE_Y[i]
         slider = make_slider(pos=(0, y), left_label=left, right_label=right)
-        passage_sliders.append((key, slider))
+        label = visual.TextStim(win, text=name, pos=(0, y + 0.055),
+            height=0.026, color=(-0.5, -0.5, -0.5), bold=True,
+            font="Helvetica", anchorHoriz="center", anchorVert="center")
+        passage_sliders.append((key, slider, label))
     all_passage_sliders.append(passage_sliders)
 
 # Passage text divider (between text and scales)
@@ -253,10 +263,11 @@ for p_idx, passage in enumerate(PASSAGES):
 
         stim_emotion_label.draw()
 
-        for key, slider in sliders:
+        for key, slider, label in sliders:
+            label.draw()
             slider.draw()
 
-        all_rated = all(s.getRating() is not None for _, s in sliders)
+        all_rated = all(s.getRating() is not None for _, s, _ in sliders)
         if all_rated:
             stim_cont.draw()
         else:
@@ -270,7 +281,7 @@ for p_idx, passage in enumerate(PASSAGES):
         if "space" in keys and all_rated:
             break
 
-    for key, slider in sliders:
+    for key, slider, label in sliders:
         record(pid, p_id, drive, key, slider.getRating())
 
 # ---------------------------------------------------------------------------
