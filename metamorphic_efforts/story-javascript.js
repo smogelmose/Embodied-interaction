@@ -53,7 +53,7 @@ ME.BODY_VOX_MAP = {
   6:  { f: 'audio/body_vox/body_vox_p06.mp3', end: true },
   7:  { f: 'audio/body_vox/body_vox_p07.mp3', at: 3 },
   8:  { f: 'audio/body_vox/body_vox_p08.mp3', end: true },
-  9:  { f: 'audio/body_vox/body_vox_p09.mp3', end: true },
+  9:  { f: 'audio/body_vox/body_vox_p09.mp3', at: 8 },
   10: { f: 'audio/body_vox/body_vox_p10.mp3', at: 2 }
 };
 
@@ -77,10 +77,10 @@ ME.SFX_MAP = {
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
        { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_body_thud.mp3', at: -8 }],
-  10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 3 },
-       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 5 },
-       { f: 'audio/sfx/sfx_door_slam.mp3', end: true }]
+       { f: 'audio/sfx/sfx_body_thud.mp3', at: -18 }],
+  10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 5 },
+       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 24 },
+       { f: 'audio/sfx/sfx_door_slam.mp3', at: -6 }]
 };
 
 ME.CHAR_MAP = {
@@ -91,7 +91,7 @@ ME.CHAR_MAP = {
   7:  [{ f: 'audio/characters/char_manager_footsteps.mp3', at: 3 }],
   8:  [],
   9:  [{ f: 'audio/characters/char_father_weeping.mp3', end: true }],
-  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 5 },
+  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 18 },
        { f: 'audio/characters/char_father_pacing.mp3', at: 10 },
        { f: 'audio/characters/char_father_stomp.mp3', at: 6 }]
 };
