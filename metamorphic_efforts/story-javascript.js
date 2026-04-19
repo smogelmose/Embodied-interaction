@@ -71,7 +71,7 @@ ME.SFX_MAP = {
        { f: 'audio/sfx/sfx_bed_throw_roll.mp3', at: 0 }],
   6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', at: 1 },
        { f: 'audio/sfx/sfx_insect_legs.mp3', at: 2 },
-       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -8 }],
+       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -10 }],
   7:  [{ f: 'audio/sfx/sfx_bed_sit_up.mp3', at: 0 }],
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
