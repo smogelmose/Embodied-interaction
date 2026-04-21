@@ -10,23 +10,109 @@ This repository documents my work for the Embodied Interaction course at Aalborg
 
 ### Mini-Project
 
-Individual implementation of an embodied interaction concept,
-grounded in an academic reference and demonstrated through a
-working prototype.
+# Metamorphic Efforts
 
-*Metamorphic Efforts: Visualizing Laban Movement Qualities from Kafka's The Metamorphosis*
+**Visualizing Laban Movement Qualities from Kafka's *The Metamorphosis***
 
-The project extracts Laban Effort Action Drives from Kafka's *The Metamorphosis* by conducting a close reading and a full BESS (Body, Effort, Shape, Space) annotation of key passages. It then converts these qualities into generative audiovisuals using TouchDesigner. The pipeline inverts Fdili Alaoui et al. (2017): rather than body → sensors → Effort classification, the flow is text → close reading → BESS annotation → generative audiovisual output.
+*Embodied polyphony: enacting the kinesthetic body of prose.*
 
-Fdili Alaoui et al.'s framework for translating embodied movement expertise into computable parameters provides the theoretical bridge between literary movement description and generative media. Based on de Meijer's (1989) empirical Effort-to-emotion mapping, the passages are chosen for a five-minute prototype exploring Effort Action Drives. The TouchDesigner implementation uses a multi-layer visual architecture together with multi-layer ElevenLabs audio.
+Embodied Interaction Mini-Project, MED8, Aalborg University Copenhagen, Spring 2026
 
-In Siopa et al.'s *Ghostdance* (MOCO '24), a live VR dance performance, an LSTM classifier picks out the same eight LMA Action Drives from a dancer's live IMU data and controls a Unity particle swarm and spatial audio system in real time. Ghostdance goes live body → classification → audiovisuals; this project flips the sensing stage so that literary prose is the sensor and close reading is the classifier.
+Website: [mogelmose.org](https://mogelmose.org) | [Full portfolio report](report/full_report.md)
 
-- [Fdili Alaoui et al. (2017) — Seeing, Sensing and Recognizing Laban Movement Qualities](readings/fdili-alaoui-2017-seeing-sensing-recognizing-laban.md)
-- [Siopa et al. (2024) — LMA driven Dynamic Audiovisuals in a VR Live Dance Performance: Ghostdance](readings/ghostdance-moco24-notes.md)
+---
 
-**Website:** [https://mogelmose.org](https://mogelmose.org)  
-**GitHub:** [https://github.com/smogelmose/Embodied-interaction](https://github.com/smogelmose/Embodied-interaction)
+## 1. Main Reference
+
+**Fdili Alaoui, S., Francoise, J., Schiphorst, T., Studd, K., & Bevilacqua, F. (2017). "Seeing, Sensing and Recognizing Laban Movement Qualities." In *Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems* (CHI '17). ACM, 4009--4020.**
+
+Fdili Alaoui et al. investigate how Laban Movement Analysis (LMA) can be computationally modeled by integrating movement expertise into multimodal sensing systems. Working with certified LMA practitioners, they design feature sets from positional, dynamic, and physiological sensor data that correlate with how experts perceive Laban Effort qualities: Weight, Time, Space, and Flow. Their evaluation shows that combining multiple data modalities characterizes Effort significantly better than any single modality alone. The paper follows a phenomenological position (Merleau-Ponty, Dourish): computational systems should engage with movement as lived, expressive experience, not reduce it to functional input.
+
+### What I take from this paper
+
+Two things. First, the **pipeline structure**: BESS annotation as structured input, Effort factors as the central parameterization, generative output as the rendering target. Where their work goes from physical body to sensors to Effort classification, this project locates the moving body in literary prose -- Kafka's text encodes physical struggle in precise kinesthetic language. The close reading extracts Effort qualities through the same BESS framework used for physical bodies, and the generative system renders them.
+
+Second, the **multi-modal principle**: their finding that multiple modalities characterize Effort better than any single channel motivates the five-layer audio design and the integrated visual field. Each Effort factor is expressed simultaneously across narration (vocal delivery), body vocalizations, drone timbre, sound effects, character voices, and the visual noise texture. No single channel carries the full Effort signature alone.
+
+## 2. Supporting References
+
+### Siopa et al. (2024). "Ghostdance." In *Proceedings of MOCO '24*.
+
+In Ghostdance, a live VR dance performance, an LSTM classifier identifies the eight LMA Action Drives from a dancer's IMU data and routes them to Unity particle system presets and spatial audio in real time. The pipeline runs: live body to classification to audiovisuals.
+
+**What I take:** the **Action Drive preset-selector architecture**. Each of the eight Action Drives is a discrete preset that triggers a coordinated cross-modal state change. My project adopts this pattern directly: when a Twine passage transitions, its annotated Action Drive selects a visual preset (noise amplitude, speed, blur, zoom, color) and an audio configuration simultaneously. The difference is the input stage: close reading replaces LSTM classification, and TouchDesigner noise/feedback replaces Unity particle swarm.
+
+| | Ghostdance | Metamorphic Efforts |
+|---|---|---|
+| Movement input | Live dancer (IMU sensors) | Literary prose (close reading) |
+| Effort extraction | Real-time LSTM classification | Manual BESS annotation |
+| Output medium | Unity particles + spatial audio in VR | TouchDesigner noise/feedback + ElevenLabs TTS in browser |
+| Interaction model | Dancer performs, audience watches | Viewer reads, system responds |
+
+### Larboulette & Gibet (2015). "A Review of Computable Expressive Descriptors of Human Motion." In *Proceedings of MOCO '15*.
+
+Provides formalized, computable definitions for each Effort descriptor: Weight as maximum kinetic energy, Time as summed acceleration, Space as path-to-displacement ratio, Flow as aggregated jerk.
+
+**What I take:** the **parameter mappings** for the visual preset table. Each TouchDesigner parameter encodes the same physical quantity that the Effort factor measures in a moving body:
+
+| Effort factor | Computable definition | TD parameter | Strong/Sudden/Indirect end | Light/Sustained/Direct end |
+|---|---|---|---|---|
+| Weight | Max kinetic energy | Noise amplitude, period | High amp, large period | Low amp, fine grain |
+| Time | Summed acceleration | Noise animation speed | Fast | Slow |
+| Space | Path/displacement ratio | Blur, zoom | Diffuse, wide | Sharp, tight |
+| Flow | Aggregated jerk | Feedback decay | Fast decay (Bound) | Slow decay (Free) |
+
+### De Meijer (1989). "The contribution of general features of body movement to the attribution of emotions." *Journal of Nonverbal Behavior*, 13(4), 247--268.
+
+Demonstrates that naive viewers attribute stable, predictable emotions to movement sequences based on their Effort constellations alone, without knowing any context.
+
+**What I take:** **validation that the emotional arc is predicted by the Effort data**, not imposed by interpretation. The passage sequence (Press to Wring to Glide to Slash) carries measurable emotional signatures (determination to anguish to calm to shock). This also grounds the ElevenLabs TTS vocal direction: tag selection per passage (e.g., breathless/strained for Wring, calm/flowing for Glide) follows de Meijer's empirical correlates.
+
+## 3. Implementation
+
+The project extracts Effort Action Drives from the opening section of Kafka's *The Metamorphosis* (10 passages) through close reading and full BESS annotation, then renders them as a generative audiovisual experience.
+
+### System architecture (v2)
+
+Twine (SugarCube) is the single browser interface: text, audio, and visuals all appear in one window. TouchDesigner runs headless on the same machine, generating visuals and streaming JPEG frames to the browser via WebSocket. Audio plays from the browser using Web Audio API with five polyphonic layers (narration, body vocalizations, drones, SFX, character voices) under optional viewer volume control.
+
+```
+TWINE (browser, single interface)
+  |  Kafka text + LMA annotation overlay
+  |  5 audio layers (Web Audio API)
+  |  Canvas shows TD visual frames
+  |
+  |  WebSocket text: BESS JSON --->
+  |  <--- WebSocket binary: JPEG frames
+  |
+TOUCHDESIGNER (headless, same machine)
+  |  Receives BESS, updates noise/feedback/color chain
+  |  Encodes final_out as JPEG, streams at ~15fps
+```
+
+### Mapping derivations summary
+
+| Source | What it contributes | Where it appears |
+|---|---|---|
+| Fdili Alaoui et al. (2017) | Pipeline structure; multi-modal Effort expression | Overall architecture; 5 audio layers + visual field |
+| Larboulette & Gibet (2015) | Computable Effort-to-parameter formulas | Visual preset table (amp, period, speed, blur, zoom, feedback) |
+| De Meijer (1989) | Empirical Effort-to-emotion mapping | Emotional arc validation; TTS vocal tag selection |
+| Siopa et al. (2024) | Action Drive preset-selector architecture | TD preset lookup; coordinated cross-modal state changes |
+
+### Embodied interaction argument
+
+The theoretical grounding is Merleau-Ponty's phenomenology of perception, channeled through Dourish's (2004) embodied interaction framework. Perception is active bodily engagement, not passive reception. Reading Kafka's kinesthetic prose activates motor simulation (Gallese & Lakoff, 2005; Zwaan, 2004), making the act of reading a site of embodied experience. The system treats this literary movement data as computationally legible through the same BESS framework used for physical bodies, and the viewer's temporal engagement with the piece (pacing, attending, progressing) is itself a form of bodily participation in the unfolding Effort arc.
+
+This extends the concept of "embodied interaction" beyond gross motor movement, gesture, and touch to include the kinesthetic imagination activated by literary reading.
+
+## 4. Additional References
+
+- Dourish, P. (2004). *Where the Action Is: The Foundations of Embodied Interaction.* MIT Press.
+- Gallese, V. & Lakoff, G. (2005). "The brain's concepts: The role of the sensory-motor system in conceptual knowledge." *Cognitive Neuropsychology*, 22(3-4), 455--479.
+- Larboulette, C. & Gibet, S. (2015). "A Review of Computable Expressive Descriptors of Human Motion." *Proceedings of MOCO '15*.
+- Merleau-Ponty, M. (1945/2002). *Phenomenology of Perception.* Routledge.
+- Subyen, P. et al. (2011). "EMVIZ: The Poetics of Movement Quality Visualization." *Eurographics Workshop on Computational Aesthetics*, 121--128.
+- Zwaan, R. A. (2004). "The immersed experiencer: Toward an embodied theory of language comprehension." *Psychology of Learning and Motivation*, 44, 35--62.
 
 ## Course
 
