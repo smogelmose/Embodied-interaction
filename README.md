@@ -16,7 +16,7 @@ This repository documents my work for the Embodied Interaction course at Aalborg
 
 Embodied Interaction Mini-Project, MED8, Aalborg University Copenhagen, Spring 2026
 
-Website: [mogelmose.org](https://mogelmose.org) | [Full portfolio report](report/full_report.md)
+Website: [mogelmose.org](https://mogelmose.org) | [Full report](report/full_report.md)
 
 ---
 
