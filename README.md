@@ -6,11 +6,9 @@ Repository for the Embodied Interaction course at AAU Copenhagen - exploring bod
 
 This repository documents my work for the Embodied Interaction course at Aalborg University Copenhagen (MED8, Spring 2026).
 
-## Contents
+# Mini-Project
 
-### Mini-Project
-
-# Metamorphic Efforts
+## Metamorphic Efforts
 
 **Visualizing Laban Movement Qualities from Kafka's *The Metamorphosis***
 
@@ -30,7 +28,7 @@ Fdili Alaoui et al. investigate how Laban Movement Analysis (LMA) can be computa
 
 ### What I take from this paper
 
-Two things. First, the **pipeline structure**: BESS annotation as structured input, Effort factors as the central parameterization, generative output as the rendering target. Where their work goes from physical body to sensors to Effort classification, this project locates the moving body in literary prose -- Kafka's text encodes physical struggle in precise kinesthetic language. The close reading extracts Effort qualities through the same BESS framework used for physical bodies, and the generative system renders them.
+Two things. First, the **pipeline structure**: BESS annotation as structured input, Effort factors as the central parameterization, generative output as the rendering target. Where their work goes from physical body to sensors to Effort classification, this project locates the moving body in literary prose - Kafka's text encodes physical struggle in precise kinesthetic language. The close reading extracts Effort qualities through the same BESS framework used for physical bodies, and the generative system renders them.
 
 Second, the **multi-modal principle**: their finding that multiple modalities characterize Effort better than any single channel motivates the five-layer audio design and the integrated visual field. Each Effort factor is expressed simultaneously across narration (vocal delivery), body vocalizations, drone timbre, sound effects, character voices, and the visual noise texture. No single channel carries the full Effort signature alone.
 
