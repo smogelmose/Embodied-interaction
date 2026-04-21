@@ -316,12 +316,6 @@ Five volume sliders appear in the bottom-right panel (narration, body vox, drone
 
 ---
 
-## Planned evaluation
-
-A small formative evaluation with 4-6 participants will check whether the system's intended Effort translation lands with naive readers. Participants read two contrasting passages (P1 press, P10 slash), experience the full piece, and rate both on four Effort scales. A short semi-structured interview follows. The evaluation is descriptive only (N is too small for inferential statistics) and is intended as exam evidence. A larger follow-up study (N=12 to 15) is planned for paper submission, with ICC for inter-rater agreement, Wilcoxon signed-rank comparisons for text-only vs post-experience ratings, and thematic analysis across four a priori categories (kinesthetic imagery, motor verbs, somatic response, text-system relation). The protocol is documented separately in `study_protocol.md`.
-
----
-
 ## Contribution to the Embodied Interaction Field
 
 ### 1. Kinesthetically dense text as movement data source (methodological)
