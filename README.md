@@ -85,7 +85,7 @@ TWINE (browser, single interface)
   |
 TOUCHDESIGNER (headless, same machine)
   |  Receives BESS, updates noise/feedback/color chain
-  |  Encodes final_out as JPEG, streams at ~15fps
+  |  Encodes final_out as JPEG
 ```
 
 ### Mapping derivations summary
