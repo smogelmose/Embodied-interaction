@@ -4,9 +4,9 @@
 
 *Embodied polyphony: enacting the kinesthetic body of prose.*
 
-This project treats literary prose as a kinesthetic body: a site of movement qualities that can be extracted, annotated, and rendered as embodied audiovisual experience. Where conventional LMA systems go from physical body to sensor to Effort classification, this project locates the moving body in literary text and reads it through the same pipeline: from textual body to close reading to BESS annotation to generative output.
+In this project literary prose is seen as a kinesthetic body where movement qualities can be derived, annotated, and rendered into an embodied audiovisual experience. Unlike traditional LMA systems, which transition from the physical body to sensors and then to the classification, this project identifies the moving body in literary text and runs it through the same pipeline: from the textual body to close reading, BESS annotation, and generative output.
 
-The project argues three things. First, reading literary prose about embodied experience activates motor simulation in the reader's sensorimotor system, making the act of reading itself a bodily event rather than pure semantic decoding. Second, the viewer's temporal and attentional engagement with the text is the input that drives the system: the rhythm of reading, pacing, and attending is the "interaction" that triggers BESS transitions and audio events. Third, the multi-modal output converges on the same Effort qualities that the text encodes, amplifying the motor simulation already underway in reading. The viewer reads about heaviness while the visual field enacts heaviness and the voice performs heaviness; all three channels are driven by the same Effort analysis, so perception, text, and body are in sustained loop.
+The project proposes three things. 1) Motor simulation is triggered in the reader's sensorimotor system by the act of reading literary prose relating to the embodied experience, resulting in a bodily action rather than a pure semantic decoding. The system is determined by the viewer's temporal and attentional engagement with the text, which is the "interaction" that initiates BESS transitions and audio events. The motor simulation that is continuously in progress during reading is extended by the multi-modal output, which builds on the same Effort qualities that the text encodes. Readers read about heaviness, the visual field enacts heaviness, and the voice performs heaviness; perception, text, and body are all in a continuous loop because all three channels are powered by the same effort analysis.
 
 ---
 
@@ -16,17 +16,17 @@ The project argues three things. First, reading literary prose about embodied ex
 
 ### Review
 
-Fdili Alaoui et al. investigate how Laban Movement Analysis (LMA) can be computationally modeled by integrating movement expertise into the design of multimodal sensing systems. Working with certified LMA practitioners, they design feature sets drawn from positional, dynamic, and physiological sensor data that correlate with how experts perceive Laban Effort qualities: Weight, Time, Space, and Flow. Their evaluation demonstrates that combining multiple data modalities yields significantly better characterization of Efforts than any single modality alone.
+Fdili Alaoui et al. investigate how Laban Movement Analysis (LMA) can be computationally modeled by incorporating movement expertise into the design of multimodal sensing systems. Certified LMA practitioners develop feature sets that are in accordance with the way in which experts perceive the Laban Effort qualities of Weight, Time, Space, and Flow, applying positional, dynamic, and physiological sensor data. The study shows that merging several data modalities produces a much more accurate description of efforts than using just a single modality.
 
 The paper's philosophy is phenomenological: following Merleau-Ponty and Dourish's *embodied interaction*, it argues that computational systems should engage with movement as a lived, expressive phenomenon rather than reducing it to functional input.
 
 ### Relevance to this project
 
-Fdili Alaoui et al. establish the methodology for translating LMA expertise into computational models, designing sensor feature sets that correlate with how certified practitioners perceive Effort qualities. Their pipeline runs from body to sensors to Effort classification. This project locates the moving body in literary prose and reads it through the same parametric framework.
+Fdili Alaoui et al. establish the methodology for translating LMA expertise into computational models, designing sensor feature sets that correlate with how certified practitioners perceive Effort qualities. Their pipeline runs from body to sensors to Effort classification. This project recognizes the moving body in literary prose and translates it through the same type of parametric framework.
 
-Larboulette & Gibet (2015) provide the computable formulas that formalize the Effort descriptors used in Fdili Alaoui and others: Weight as maximum kinetic energy over a time window, Time as summed acceleration, Space as the ratio of path length to displacement (directness), and Flow as aggregated jerk. The project implements these descriptors computationally on the BESS trajectory across passages. As the viewer progresses, the story JavaScript maintains a history of per-passage BESS values and computes the four descriptors over a sliding window. The computed values are sent to TouchDesigner alongside the raw BESS data and modulate visual parameters: the Action Drive preset anchors each passage's identity, while the descriptor values shape transition behavior (lag time, amplitude scaling). This grounds the parameterization in a genuine implementation of Larboulette & Gibet's formulas rather than a conceptual approximation.
+Larboulette & Gibet (2015) provide the computable formulas that encode the Effort descriptors used in Fdili Alaoui and others: Weight as maximum kinetic energy over a time window, Time as summed acceleration, Space as the ratio of path length to displacement (directness), and Flow as aggregated jerk. The project handles these descriptors computationally on the BESS trajectory across passages. As the viewer progresses, the story JavaScript maintains a history of per-passage BESS values and computes the four descriptors over a sliding window. The computed values are sent to TouchDesigner alongside the raw BESS data and modulate visual parameters: the Action Drive preset frames each passage's distinctive qualities, while the descriptor values shape transition behavior (lag time, amplitude scaling). This grounds the parameterization in a functional implementation of Larboulette & Gibet's formulas rather than a conceptual approximation.
 
-De Meijer (1989) provides the empirical link between Effort and emotion. In a controlled experiment, 85 naive observers rated 96 body movements that were systematically varied across seven dimensions; three of those dimensions (force, velocity, directness) correspond to Laban's Weight, Time, and Space. Regression analysis found each emotion category predicted by a unique combination of features (R-squared .65 to .91); factor analysis extracted three underlying factors: Rejection-Acceptance, Withdrawal-Approach, and Preparation-Defeatedness. De Meijer did not test Laban Action Drives directly, so the Drive-to-emotion associations used in this project are interpretive applications of his regression findings rather than direct empirical mappings.
+De Meijer (1989) estabishes the empirical link between Effort and emotion. In a controlled experiment, 85 naive observers rated 96 body movements that were systematically varied across seven dimensions; three of those dimensions (force, velocity, directness) correspond to Laban's Weight, Time, and Space. Regression analysis found each emotion category predicted by a particular combination of features; factor analysis extracted three underlying factors: Rejection-Acceptance, Withdrawal-Approach, and Preparation-Defeatedness. De Meijer did not test Laban Action Drives directly, so the Drive-to-emotion associations used in this project are interpretive applications of his regression findings rather than direct mappings.
 
 | Action Drive | Effort constellation | Interpretive correlate (after de Meijer) |
 |---|---|---|
@@ -36,47 +36,47 @@ De Meijer (1989) provides the empirical link between Effort and emotion. In a co
 | Slash | Strong + Sudden + Indirect | Fear, chaos |
 | Glide | Light + Sustained + Direct | Calm focus |
 
-The visual and audio mappings in TouchDesigner are therefore parameterizations informed by de Meijer's empirical findings, with the interpretive step from regression-level data to Drive-level labels named explicitly rather than elided.
+The visual and audio mappings in TouchDesigner are subsequently parameterizations informed by de Meijer's empirical findings, with the interpretive step from regression-level data to Drive-level labels named unambiguously.
 
 ---
 
 ## Theoretical Framework
 
-This project sits at the intersection of four theoretical positions: a phenomenology of embodied perception, the Laban Movement Analysis descriptive system, the empirical psychology of movement-to-emotion attribution, and a Bakhtinian polyphony of movement voices. Together they build the argument that kinesthetically dense literary texts encode Effort with sufficient density to serve as annotation substrate for Effort-driven generative systems, and that the resulting audiovisual output constitutes a form of embodied interaction.
+This project sits at the junction of four theoretical positions: a phenomenology of embodied perception, the Laban Movement Analysis descriptive system, the empirical psychology of movement-to-emotion attribution, and a Bakhtinian polyphony of movement voices. Together they formulate the proposition that kinesthetically dense literary texts encode Effort with sufficiently high quality to serve as annotation substrate for Effort-driven generative systems, and that the resulting audiovisual output translates to a form of embodied interaction.
 
 ### Embodied perception and the act of reading
 
-The phenomenological foundation comes from Merleau-Ponty (1945/2002), for whom perception is active, bodily engagement with the world rather than passive registration of stimuli. Perception and action are co-constitutive: there is no seeing without the body that sees. Dourish (2004) translates this into interaction design with the concept of embodied interaction: systems should engage with the full range of human skills and capacities for action, including the qualitative, expressive, and improvisational dimensions of bodily experience. Most subsequent work in the field has interpreted "embodied" as gross motor movement, gesture, touch, or physiological sensing. This project extends the concept in a different direction.
+The phenomenological foundation comes from Merleau-Ponty (1945/2002), for whom perception is active, bodily engagement with the world rather than passive registration of stimuli. Perception and action are co-constitutive: there is no seeing without the body that sees. Dourish (2004) translates this into interaction design with the principles of embodied interaction: systems should engage with the full range of human skills and capacities for action, including the qualitative, expressive, and improvisational dimensions of bodily experience. 
 
-Reading literary prose about embodied experience activates what cognitive linguists call motor simulation: the reader's sensorimotor system partially reproduces the movement patterns described in the text (Gallese & Lakoff, 2005; Zwaan, 2004). When Kafka writes that Gregor's legs "waved about helplessly," the reader does not merely decode semantic content; they undergo a kinesthetic event, a momentary activation of the motor programs and postural schemas associated with helpless limb movement. Neuroimaging evidence supports this: Tettamanti et al. (2005) showed that listening to action-related sentences activates the premotor cortex somatotopically, with mouth-, hand-, and leg-related sentences producing distinct activations in the corresponding regions of the motor system.
+Reading literary prose about embodied experience activates what cognitive linguists call motor simulation: the reader's sensorimotor system partially reproduces the movement patterns described in the text (Gallese & Lakoff, 2005; Zwaan, 2004). When Kafka writes that Gregor's legs "waved about helplessly," the reader does not simply decode semantic content; they undergo a kinesthetic experience, a momentary activation of the motor and postural schemas associated with helpless limb movement. Neuroimaging research strongly supports this: Tettamanti et al. (2005) showed that listening to action-related sentences activates the premotor cortex somatotopically, with mouth-, hand-, and leg-related sentences producing distinct activations in the corresponding regions of the motor system.
 
-Kafka himself was attuned to this dimension of expression. His fascination with Yiddish theatre, encountered through a touring troupe from Lemberg in Prague in the winter of 1911-1912, centered on what he perceived as a union of spoken and bodily, gestural language (Pawel, 1984). Beck (1971) argues that this involvement shaped the dramatic, physically expressive style that emerged in Kafka's writing from 1912 onward, including *The Metamorphosis*. The kinesthetic precision in the text is consistent with a sensibility already oriented toward the expressive body as a site of meaning.
+Kafka himself was attracted to this dimension of expression. His fascination with Yiddish theatre, encountered through a touring troupe from Lemberg in Prague in the winter of 1911-1912, touched on what he perceived as a union of spoken and bodily, gestural language (Pawel, 1984). Beck (1971) argues that this involvement influenced the dramatic, physically expressive style that emerged in Kafka's writing from 1912 onward, including *The Metamorphosis*. The kinesthetic elegance in the text is coherent with a sensibility already oriented toward the expressive body as a source of meaning.
 
-The viewer's temporal and attentional engagement with Kafka's prose is the embodied input that drives the system. The Effort qualities encoded in the text are re-enacted in the reader's kinesthetic imagination as they read, and simultaneously rendered in the visual and sonic output. The three channels (text, image, sound) converge on the same movement quality, amplifying the motor simulation that the reading already initiates.
+The viewer's temporal and sensory engagement with Kafka's prose is the embodied input that drives the system. The Effort qualities encoded in the text are re-enacted in the reader's kinesthetic imagination as they read, and simultaneously projected in the visual and sonic output. The three channels (text, image, and sound) approach the same movement quality, heightening the motor simulation that the reading already induces.
 
 ### Laban Movement Analysis: the BESS framework
 
-LMA provides the descriptive system through which the project parameterizes movement quality. Developed by Rudolf Laban and extended by subsequent practitioners (Laban & Ullmann, 1971; Bartenieff, 1972; Hackney, 2002), LMA organizes movement observation into four categories known as BESS: Body, Effort, Shape, and Space.
+LMA provides the descriptive system through which the project parameterizes movement quality. Developed by Rudolf Laban and expanded by subsequent practitioners (Laban & Ullmann, 1971; Bartenieff, 1972; Hackney, 2002), LMA breaks down movement observation into four categories known as BESS: Body, Effort, Shape, and Space.
 
-**Effort** describes the dynamic, qualitative texture of movement through four factors: Weight (Strong/Light, the mover's relationship to gravity and force), Time (Sudden/Sustained, the sense of urgency), Space (Direct/Indirect, attentional focus), and Flow (Bound/Free, the continuity and controllability of movement). The three factors excluding Flow combine in pairs to produce Laban's eight Action Drives (Press, Flick, Punch, Float, Wring, Dab, Slash, Glide), each naming a distinct movement quality.
+**Effort** describes the dynamic, qualitative structure of movement through four factors: Weight (Strong/Light, the mover's relationship to gravity and force), Time (Sudden/Sustained, the sense of urgency), Space (Direct/Indirect, attentional focus), and Flow (Bound/Free, the continuity and controllability of movement). The three factors excluding Flow combine in pairs to produce Laban's eight Action Drives (Press, Flick, Punch, Float, Wring, Dab, Slash, Glide), each naming a distinct movement quality.
 
 **Shape** describes how the body changes form in three-dimensional space: growing or shrinking, rising or sinking, advancing or retreating.
 
-**Body** describes the structural organization of the mover: which body parts initiate and follow, how movement sequences through connected segments (sequencing), and how well the core integrates peripheral action (connectivity). Hackney (2002) elaborates these as Patterns of Total Body Connectivity.
+**Body** describes the structural organization of the mover: which body parts lead and follow, how movement sequences through connected segments (sequencing), and how well the core integrates peripheral action (connectivity). 
 
 **Space** describes the mover's relationship to the spatial environment: the kinesphere, the dominant spatial plane, and the quality of spatial attention.
 
-The critical claim is that these categories co-constitute a single embodied experience. A Press is not three separate facts (strong + sustained + direct) but one felt quality. The project preserves this integration by rendering all BESS parameters through a single visual field rather than separate layers.
+The central principle is that these categories co-constitute a single embodied experience. A Press is not three separate constructs (strong + sustained + direct) but one felt quality. The project highlights this integration by rendering all BESS parameters through a single visual field rather than separate layers.
 
 ### Computational grounding
 
-Larboulette & Gibet (2015) formalize the BESS descriptors as computable functions. Weight is the maximum kinetic energy over a time window. Time is summed acceleration. Space is the ratio of path length to displacement. Flow is aggregated jerk. This project implements these formulas on the BESS annotation trajectory: as the viewer progresses, the story JavaScript computes the four descriptors over a sliding window of recent passages and sends the computed values to TouchDesigner alongside the raw BESS data. The descriptor values modulate visual parameters in real time: the preset lookup sets the target state for each Action Drive, and the descriptor values shape how the system transitions toward that target.
+Larboulette & Gibet (2015) formalize the BESS descriptors as computable functions. Weight is the maximum kinetic energy over a time window. Time is summed acceleration. Space is the ratio of path length to displacement. Flow is aggregated jerk. This project embeds these formulas on the BESS annotation trajectory: as the viewer progresses, the story JavaScript computes the four descriptors over a sliding window of recent passages and sends the computed values to TouchDesigner alongside the raw BESS data. The descriptor values modulate visual parameters in real time: the preset lookup sets the target state for each Action Drive, and the descriptor values shape how the system transitions toward that outcome.
 
 ### Polyphony
 
-Bakhtin (1984) describes polyphony as a novelistic structure in which multiple independent consciousnesses coexist without being subordinated to a single authorial voice. While Kafka's third-person narration is not polyphonic in the strict Bakhtinian sense, the concept becomes productive when applied to movement quality rather than consciousness. Kafka's prose contains multiple simultaneous movement voices: Gregor's heavy Pressing body, the clock's metronomic ticking, the mother's knock, the rain on the window. These voices do not resolve into a single Effort; they form a polyphonic texture.
+Bakhtin (1984) describes polyphony as a novelistic structure in which multiple independent consciousnesses coexist without being confined to a single authorial voice. Although Kafka's third-person narrative is not strictly Bakhtinian in its use of polyphony, the principle works well when it is applied to movement quality as opposed to consciousness. Kafka's prose contains various simultaneous movement voices: Gregor's heavy Pressing body, the clock's metronomic ticking, the mother's ambiguous knock, the rain on the window. These voices do not resolve into a single Effort; they form a polyphonic texture.
 
-The polyphonic frame operates at three levels: the source text (multiple movement voices per passage that the single-annotation approach captures only partially), the system output (five simultaneous channels sharing a harmonic ground but moving at different temporal rates), and the methodology (single-analyst annotation as one legitimate interpretive voice among possible others).
+The polyphonic frame operates at three levels: the source text (multiple movement voices per passage that the single-annotation approach captures only in part), the system output (five simultaneous channels sharing a harmonic ground but moving at different temporal rates), and the methodology (single-analyst annotation as one instructive narrative voice among various others).
 
 ---
 
@@ -84,44 +84,44 @@ The polyphonic frame operates at three levels: the source text (multiple movemen
 
 ### The pipeline: locating movement in literary prose
 
-The conventional LMA pipeline runs from a moving body through sensors to computational Effort classification. This project locates the moving body in literary text. Kafka's prose encodes physical struggle in precise kinesthetic language, and the pipeline becomes: text to close reading to BESS annotation to generative audiovisual output.
+The prevalent LMA pipeline runs from a moving body through sensors to computational Effort classification. This project locates the moving body in literary text. Kafka's prose depicts bodily struggle in vivid kinesthetic language, and the pipeline is as follows: text to close reading to BESS annotation to generative audiovisual output.
 
-**Step 1: Close reading as movement extraction.** Each of the 10 passages in the opening section of *The Metamorphosis* was read for its dominant kinesthetic content. Textual cues map onto the four Effort factors.
+**Step 1: Close reading as movement detection.** Each of the 10 passages in the opening section of *The Metamorphosis* was read for its predominant kinesthetic aspect. Textual indications map onto the four Effort factors.
 
-**Step 2: BESS annotation and Action Drive assignment.** Each passage was annotated across four BESS categories using the computable definitions from Larboulette & Gibet. The three Effort factors excluding Flow combine into one of Laban's eight Action Drives, which name the dominant movement quality of each passage. Flow then acts as a continuous modifier layered on top.
+**Step 2: BESS annotation and Action Drive assignment.** Each passage was annotated across four BESS categories using the computable definitions from Larboulette & Gibet. The three Effort factors excluding Flow combine into one of Laban's eight Action Drives, which determines the dominant movement quality of each passage. Flow then acts as a continuous modifier layered on top.
 
 The 10 passages use four of the eight Action Drives:
 
-- **Press** (Strong, Sustained, Direct): passages 1 through 4 and 6. Gregor's heavy, slow, focused physical struggle. Determination under weight.
+- **Press** (Strong, Sustained, Direct): passages 1 through 4 and 6. Gregor's heavy, slow, focused bodily struggle. Determination under weight.
 - **Wring** (Strong, Sustained, Indirect): passages 5 and 7. The same heaviness and slowness, but attention scatters. Anguish, loss of control.
-- **Glide** (Light, Sustained, Direct): passages 8 and 9. Passage 8: Gregor reaches the door with focused, gentle movement. Passage 9: the held moment as the door opens, with external agents (clerk retreating, mother sinking, father clenched and weeping) supplying intrusive energies around Gregor's sustained, Bound movement.
+- **Glide** (Light, Sustained, Direct): passages 8 and 9. Passage 8: Gregor approaches the door with focused, gentle movement. Passage 9: the held moment as the door opens, with external agents (the manager retreats, the mother collapses, and the father clenched and weeping) supplying unsettling energies around Gregor's sustained, Bound movement.
 - **Slash** (Strong, Sudden, Indirect): passage 10. The father drives Gregor back. Violent, fast, unfocused collapse.
 
-Unused: Punch, Flick, Float, Dab. These are defined in the preset table for completeness and possible extension to other texts.
+Unused: Punch, Flick, Float, Dab. These are defined in the preset table for consistency and possible application to other passages.
 
-**Step 3: Effort-to-emotion attribution via de Meijer (1989).** Each Action Drive has an interpretive emotional correlate informed by de Meijer's regression findings on 96 body movements rated by 85 naive viewers. The three underlying factors extracted by de Meijer (Rejection-Acceptance, Withdrawal-Approach, Preparation-Defeatedness) map onto the emotional arc of the opening section. De Meijer did not test Action Drives directly, so these are interpretive applications of his results.
+**Step 3: Effort-to-emotion attribution via de Meijer (1989).** Each Action Drive has an inference emotional association informed by de Meijer's regression findings on 96 body movements rated by 85 naive viewers. The three underlying factors extracted by de Meijer (Rejection-Acceptance, Withdrawal-Approach, Preparation-Defeatedness) map onto the emotional arc of the opening section. De Meijer did not test Action Drives directly, so these are interpretive applications of his results.
 
 ### Methodological note: annotation as structured expert judgment
 
-The BESS values in this project are manual qualitative annotations, not sensor-derived measurements. The analyst reads each passage, identifies kinesthetic cues in the text, and assigns normalized values on a 0-1 scale guided by the Larboulette & Gibet computable definitions as a conceptual frame.
+The BESS values in this project are manual qualitative annotations, not sensor-based measurements. The analyst reads each passage, identifies kinesthetic indicators in the text, and assigns normalized values on a 0-1 scale suggested by the Larboulette & Gibet computable definitions as a conceptual frame.
 
-This is consistent with established practice in LMA research. Fdili Alaoui et al. (2017) use certified LMA practitioner annotation as their ground truth for training computational models; de Meijer (1989) used naive viewer ratings. In both cases the authoritative source is trained human perception, not automated classification. The difference here is that the "movement" being perceived is encoded in literary language rather than performed by a body, and the annotation is carried out by a single analyst. There is no inter-rater reliability check, which is a limitation the planned user study addresses.
+This aligns with standard procedure in LMA research. Fdili Alaoui et al. (2017) use certified LMA practitioner annotation as their ground truth for training computational models; de Meijer (1989) used naive viewer ratings. In both research scenarios, the authoritative source is trained human perception, not machine-based classification. The difference here is that the "movement" being perceived is encoded in literary language rather than performed by a body, and the annotation is carried out by a single analyst. There is no inter-rater reliability check, which is an apparent limitation.
 
-Three constraints keep the annotation internally consistent. Action Drive assignments are categorical (each passage is one of eight named Effort combinations). Continuous BESS values are assigned relative to each other across the 10-passage arc, not in isolation: a value of 0.0 for shape_advance in Passage 1 means "no sagittal reach relative to the maximum in Passage 9 (0.8)." Every value must be traceable to specific textual evidence.
+Three constraints keep the annotation internally consistent. Action Drive assignments are categorical (each passage is one of eight named Effort combinations). Continuous BESS values are assigned relative to each other across the 10-passage arc, not in a vacuum: a value of 0.0 for shape_advance in Passage 1 means "no sagittal reach relative to the maximum in Passage 9 (0.8)." Every value must be mapped to specific textual evidence.
 
-### Polyphonic reading
+### Polyphonic reading examples
 
-**Passage 1** is close to monophonic. Gregor is alone with his body. The only non-Gregor movement is the bedding. The Press assignment loses very little.
+**Passage 1** is close to monophonic. Gregor is alone with his body. The Press assignment provides minimal disruption.
 
-**Passage 4** (Clock strikes, mother knocks) is where polyphony becomes audible. Three movement voices are active: Gregor's body (still Pressing), the environment (clock Sustained, rain Light), and the mother's knock (Sudden, Direct, ambiguous Weight). The dread emerges from counterpoint.
+**Passage 4** (Clock strikes, mother knocks) is where polyphony becomes apparent. Three movement voices are active: Gregor's body (still Pressing), the environment (clock Sustained, rain Light), and the mother's knock (Sudden, Direct, ambiguous Weight). The unease emerges from juxtaposition.
 
-**Passage 7** (Manager's speech) is the densest passage. Gregor's desperate Wring runs against the manager's Dab-like authoritative speech rhythm. The shame emerges from a light, precise, direct external pressure bearing down on a heavy internal collapse.
+**The most dense passage is **Passage 7**, which is the manager's speech. The desperate Wring from Gregor goes against the manager's persuasive Dab-like speech rhythm. The stigma comes from a light, precise, direct pressure from the outside pressing down on a heavy collapse from the inside.
 
-**Passage 9** (The door opens) is a held moment. Gregor's movement is sustained and Bound; external agents supply intrusive energies (clerk retreating, mother sinking, father clenched, father weeping). The passage's high intensity comes from the event and the surrounding Efforts, not from Gregor. The charged Slash energy that is loading up here discharges in P10.
+**Passage 9** (The door opens) is a held moment. Gregor's movement is sustained and Bound; external agents add intrusive energies (manager retreating, mother collapsing, father clenched, and weeping). The passage's high intensity comes from the drama and the surrounding Efforts, not from Gregor. 
 
-**Passage 10** returns toward monophony, but inverted. The father's Slash overpowers Gregor entirely. Gregor's body is no longer the dominant mover; he is being moved.
+****Page 10** reverts to monophony, but in reverse. The father's Slash overwhelms Gregor unconditionally. Gregor's body is no longer the dominant mover; he is being moved.
 
-**How the system output restores polyphony.** Five output channels operate as independent voices sharing a harmonic ground: narration (literary voice), body vocalization (Gregor's somatic voice), drones (environmental), SFX (incidental voices), and visuals (integrated BESS field).
+**How the system output restores polyphony.** Five output channels operate as independent voices sharing a harmonic ground: narration (literary voice), body vocalization (Gregor's somatic voice), drones (The vermins voice / environmental), SFX (incidental voices), and visuals (integrated BESS field).
 
 ### Worked example: Passage 1
 
@@ -129,27 +129,27 @@ Three constraints keep the annotation internally consistent. Action Drive assign
 
 **BESS annotation:** action_drive: `press`; flow: 0.15; intensity: 0.4; shape_grow: 0.1, shape_rise: 0.0, shape_advance: 0.0; body_connectivity: 0.5, body_sequencing: 0.3; kinesphere: 0.3, space_approach: 0.9, space_plane: 0.2.
 
-**Action Drive: Press.** Strong (Gregor's body carries literal weight: the armour-like back, the stiff sections, the inability to move freely). Sustained (he *lay*; he *lifted* slowly; his legs *waved*). Direct (attention converges on a single object: his own transformed body).
+**Action Drive: Press.** Strong (Gregor's body carries unbearable weight: the armour-like back, the stiff sections, the inability or unwillingness  to move freely). Sustained (he *lay*; he *lifted* slowly; his legs *waved*). Direct (attention is focused on a single object: his own transformed body).
 
-**Flow: 0.15 (tightly Bound).** Every described action can be started and stopped; nothing spills. "Lifted his head a little" is deliberately restrained. "Waved helplessly" sounds Free but is actually low in amplitude; the legs are waving within a bounded kinesphere, without propulsive release.
+**Flow: 0.15 (tightly Bound).** Every described action can be started and stopped; nothing spills. "Lifted his head a little" is explicitly restrained. "Waved helplessly" sounds like "Free," but its intepreted as having a low amplitude because the legs are waving within a bounded kinesphere without being able to move.
 
-**Intensity: 0.4.** Moderate bodily engagement. Gregor is awake and active but not straining. The legs wave, the head lifts, but there is no forceful exertion yet.
+**Intensity: 0.4.** Moderate bodily engagement. Gregor is awake and active but not engaging. The legs wave, the head lifts, but there is no bodily action yet.
 
-**Shape values.** `shape_grow: 0.1` because Gregor is not expanding; he is contained by the bedding. `shape_rise: 0.0` because he is horizontal, lying flat, only a minimal head-lift. `shape_advance: 0.0` because he has not moved forward.
+**Shape values.** `shape_grow: 0.1` because Gregor is not advancing; he is constrained by the blanket. `shape_rise: 0.0` because he is horizontal, lying flat, only a minimal head-lift. `shape_advance: 0.0` because he has not moved ahead.
 
-**Body values.** `body_connectivity: 0.5` (moderate core integration). His belly is "divided by arches into stiff sections," the legs are described as separate from "the rest of him." He has some core awareness but his body is not functioning as an integrated unit. `body_sequencing: 0.3` (low). Head-lift does not flow into torso curl. Leg-waving does not propagate into the trunk. Each body part acts in isolation.
+**Body values.** `body_connectivity: 0.5` (moderate core integration). His belly is "divided by arches into stiff sections," the legs are described as separate from "the rest of him." His core is aware, but his body isn't working as an integrated organ. `body_sequencing: 0.3` (low). Head-lift does not flow into torso curl. Leg-waving does not extend into the bodily system. Each body part acts in separation.
 
-**Space values.** `kinesphere: 0.3` (small reach space). Gregor is lying on his back in bed, his reachable space limited to the volume directly around his torso. `space_approach: 0.9` (highly Direct). His attention is self-directed: own belly, own legs, own bedding. Near-maximum directness. `space_plane: 0.2` (predominantly horizontal, but barely registering).
+**Space values.** `kinesphere: 0.3` (small reach space). Gregor is lying on his back in bed, his reachable space confined to the volume directly around his torso. `space_approach: 0.9` (highly Direct). His attention is self-directed: own belly, own legs, own bed. Near-maximum directness. `space_plane: 0.2` (mainly horizontal, but barely registering).
 
-**Interpretive correlate (after de Meijer).** Strong/Sustained/Direct maps to determination and heaviness on the Rejection-Acceptance axis. The passage's emotional signature is not despair or fear but the specific quality of bearing something heavy with focused attention. Press.
+**Interpretive correlate (after de Meijer).** Strong/Sustained/Direct maps to determination and heaviness on the Rejection-Acceptance axis. The emotional character of the passage is not fear or despair, but rather the unique quality of bearing a heavy burden with focused attention. Press.
 
 ### BESS value trajectory across the 10-passage arc
 
-The figure below shows the six most-informative BESS channels across the 10 passages, with Action Drives labelled above. Flow rises from 0.15 (tightly Bound, passages 1 to 2) to a peak of 0.75 (most Free, passage 8: the coordinated jaw-to-door effort), then drops through 0.4 at P9 (the held door-opening moment) to 0.65 at P10 (final collapse). Intensity climbs from 0.35 to a double peak of 0.8 at passages 6 to 7, dips for Glide at P8 (0.6), surges to 0.85 at P9 as the door opens and the family reacts, and holds at 0.8 for Slash. Shape_advance climbs from 0.0 through 0.5 (getting out of bed) to 0.8 (reaching through the open door), then crashes to 0.0. Body_sequencing peaks at 0.6 during Glide at P8, reflecting the coordinated jaw-to-door effort, and drops to 0.15 for Slash. Body_connectivity declines from 0.5 to 0.3 as Gregor's body becomes less coherent. Space_approach starts very high (0.9) and trends downward to 0.35 by P10. Kinesphere expands from 0.3 to 0.6 at the door scene and then contracts sharply.
+The figure below shows the six most-informative BESS channels across the 10 passages, with Action Drives labelled above. Flow rises from 0.15 (tightly Bound, passages 1 to 2) to a peak of 0.75 (most Free, passage 8: the coordinated jaw-to-door effort), then drops through 0.4 at P9 (the held door-opening moment) to 0.65 at P10 (final collapse). Intensity climbs from 0.35 to a double peak of 0.8 at passages 6 to 7, dips for Glide at P8 (0.6), surges to 0.85 at P9 as the door opens and the family reacts, and holds at 0.8 for Slash. Shape_advance climbs from 0.0 through 0.5 (getting out of bed) to 0.8 (reaching through the open door), then crashes to 0.0. Body_sequencing peaks at 0.6 during Glide at P8, reflecting the coordinated jaw-to-door effort, and drops to 0.15 for Slash. Body_connectivity declines from 0.5 to 0.3 as Gregor's body becomes less coherent. Space_approach starts very high (0.9) and trends downward to 0.35 by P10. Kinesphere expands from 0.3 to 0.6 at the door scene and then contracts violently.
 
 ![BESS value trajectory across the 10-passage arc](bess_trajectory.png)
 
-The emotional arc emerging from these values follows from the Effort constellations that de Meijer's regressions and factor structure associate with each attribution.
+The emotional arc emerging from these values follows from the Effort frameworks that de Meijer's regressions and factor structure associate with each attribution.
 
 ### Computed Larboulette & Gibet descriptors
 
@@ -157,9 +157,9 @@ The project implements the Larboulette & Gibet (2015) computable descriptors as 
 
 ![Larboulette & Gibet descriptors computed on the BESS trajectory](descriptors_computed.png)
 
-`ld_weight` (max intensity over the window) rises steadily as the piece builds toward the confrontation, matching the intuition that kinetic energy accumulates through the arc. `ld_time` (mean absolute delta) peaks sharply at passages 9 and 10 where intensity reaches its peak and Effort quality shifts most abruptly (Glide to Slash). `ld_flow` (aggregated jerk of the flow channel) rises as annotated Flow values become less smooth from passage 5 onward. `ld_space` drops to 0 through the middle of the piece because space_approach oscillates across the window (a high path-to-displacement ratio indicates Indirect motion), then recovers as the trajectory stabilises near the end. The descriptors are read values from the running system, not hand-drawn curves.
+`ld_weight` (max intensity over the window) rises steadily as the piece builds toward the confrontation, matching the sensation that kinetic energy grows through the arc. `ld_time` (mean absolute delta) peaks sharply at passages 9 and 10 where intensity reaches its peak and Effort quality shifts most abruptly (Glide to Slash). `ld_flow` (aggregated jerk of the flow channel) rises as annotated Flow values become less smooth from passage 5 onward. `ld_space` drops to 0 through the middle of the piece because space_approach fluctuates across the window (a high path-to-displacement ratio indicates Indirect motion), then recovers as the trajectory stabilises near the end. The descriptors are derived values from the running system.
 
-Worth naming honestly: `ld_flow` is computed from jerk of the annotated flow trajectory itself, so it measures meta-variability in the Flow channel rather than the Flow Effort of the described movement directly. In a sensor-based implementation `ld_flow` would be computed from the jerk of position data across all axes; here the Flow channel is the input substrate, so the descriptor is second-order. This is acceptable for the sliding-window modulation role it plays in the system (shaping visual transition behavior), but it is not a direct substitute for sensor-based aggregated jerk.
+`ld_flow` is computed from jerk of the annotated flow trajectory itself, so it measures meta-variability in the Flow channel rather than the Flow Effort of the described movement directly. In a sensor-based implementation, `ld_flow` would be calculated by computing the jerk of position data across all axes. 
 
 ---
 
@@ -167,17 +167,15 @@ Worth naming honestly: `ld_flow` is computed from jerk of the annotated flow tra
 
 ### Scope
 
-The project focuses on the opening section of *The Metamorphosis*, from Gregor waking to the door being slammed shut after his first confrontation with his family. Ten key passages trace the Effort arc. Text is excerpted at narrative turning points where Effort qualities shift. Twine presents them as a continuous viewer-paced flow.
+The project focuses on the opening section of *The Metamorphosis*, from Gregor waking to the door being slammed shut after his first confrontation with his family. Ten key passages trace the Effort arc. Text is taken out at points in the story where the qualities of effort change. They are shown by Twine as an ongoing, viewer-paced flow.
 
 ### Design choice: Twine as narrative control layer
 
-The viewer reads Kafka's prose in a Twine story (SugarCube format) in a single browser window. Text, audio, and visuals are integrated in that window. TouchDesigner runs headless on the same machine, generating abstract visuals and streaming JPEG frames back to the browser via WebSocket, where they are rendered on a canvas element behind the text. Each Twine passage sends BESS/Effort data to TD via WebSocket on passage transition and receives the visual stream in return.
+The viewer reads Kafka's prose in a Twine story (SugarCube format) in a single browser window. Text, audio, and visuals are integrated in that window. TouchDesigner runs headless on the same device, generating abstract visuals and streaming JPEG frames back to the browser via WebSocket, where they are rendered on a canvas element behind the text. On passage transition, each Twine passage transmits BESS/Effort data to TD via WebSocket and receives the visual stream in return.
 
-This design is grounded in the phenomenological framework. By making the viewer's act of reading the temporal driver of the system, the piece treats reading as an embodied, attentional act rather than a passive reception of content.
+This design is grounded in the phenomenological framework. As the viewer reads, time moves through the system. This makes reading an active, attentional act rather than a passive reception of information.
 
 ### Design choice: Action Drives as preset selectors
-
-The four Effort factors were initially parameterized as independent continua. This was revised in favor of the eight Action Drives for three reasons: fidelity to the text (Kafka's writing shifts movement quality in clusters, not one factor at a time); simpler parameterization (eight discrete visual presets with smooth crossfading, rather than four continuous axes); and legibility (saying "this passage shifts from Pressing to Wring" communicates immediately to anyone familiar with LMA).
 
 | Action | Weight | Time | Space | Visual character |
 |---|---|---|---|---|
@@ -192,17 +190,15 @@ The four Effort factors were initially parameterized as independent continua. Th
 
 ### Design choice: BESS as single integrated field
 
-Rather than rendering each BESS category as a separate visual layer, all four categories modulate a single continuous noise/feedback/color texture in TouchDesigner. The BESS analysis is preserved in full (every parameter is active) but rendered as one integrated atmospheric field.
+Rather than presenting each BESS category as a distinct visual layer, TouchDesigner adapts a single continuous noise/feedback/color texture. The BESS analysis is preserved (every parameter is active) but rendered as one composite atmospheric field.
 
-| BESS parameter | What it modulates in the visual field |
+| BESS parameter | Visual field impact |
 |---|---|
 | Effort (Action Drive preset) | Noise amplitude, period, speed, hue offset |
 | Shape (grow/rise/advance) | Zoom, vertical offset, horizontal drift |
 | Body (connectivity/sequencing) | Compositing coherence, transition sequencing |
 | Space (kinesphere/approach) | Blur width, overall brightness |
 | Flow | Feedback decay (Bound = fast decay, Free = slow decay) |
-
-This approach is both theoretically coherent (BESS categories co-constitute a single embodied experience in lived movement) and practically robust (one visual system built well rather than four built partially). Implementation details for the Body layer are in `td_body_layer_build.md`.
 
 ### System architecture
 
@@ -222,7 +218,7 @@ TOUCHDESIGNER (headless, same machine)
     --> space_blur --> space_zoom
     --> intensity_dim --> collapse
     --> final_out (Lookup + base_ramp/color_shift)
-  frame_sender Execute DAT --> JPEG via WebSocket (~15fps)
+  frame_sender Execute DAT --> JPEG via WebSocket
 
 AUDIO (browser, Web Audio API):
   masterGain --> narration | body_vox | drone | sfx | characters
@@ -232,13 +228,13 @@ AUDIO (browser, Web Audio API):
 
 The generative system's mappings are derived from specific contributions in the reference literature.
 
-**Fdili Alaoui et al. (2017): pipeline structure and multi-modal principle.** The project borrows the pipeline architecture itself (BESS annotation as structured input, Effort factors as the central parameterization, generative output as the rendering target) and transposes the input modality from physical performance to literary prose. Their finding that combining multiple data modalities characterizes Effort better than any single channel motivates the five-layer audio design and the integrated visual field.
+**Fdili Alaoui et al. (2017): pipeline structure and multi-modal principle.** The project takes inspiration from the pipeline architecture itself (BESS annotation as structured input, Effort factors as the central parameterization, generative output as the rendering target) and converts the input modality from physical performance to literary prose. The five-layer audio design and the integrated visual field are motivated by their discovery that Effort is significantly more characterized by the combination of multiple data modalities than by any single channel.
 
 **Larboulette & Gibet (2015): computable parameter mappings.** Their formalized Effort descriptors are implemented as running computations on the BESS annotation trajectory, described above.
 
-**De Meijer (1989): Effort-to-emotion interpretive grounding.** The emotional arc of the piece is grounded in de Meijer's regression findings and three-factor structure rather than arbitrary labels, with Drive-level labels treated as interpretive applications.
+**De Meijer (1989): Effort-to-emotion interpretive grounding.** The emotional arc of the piece is grounded in de Meijer's regression outcome and three-factor structure rather than arbitrary labels, with Drive-level labels treated as interpretive applications.
 
-**Siopa et al. (2024, Ghostdance): Action Drives as preset selectors.** The preset-selector architecture, where an Action Drive label triggers a coordinated cross-modal state change, comes directly from Ghostdance.
+**Siopa et al. (2024, Ghostdance): Action Drives as preset selectors.** The preset-selector architecture, where an Action Drive label triggers a cohesive cross-modal state change, comes directly from Ghostdance.
 
 | Source | What it contributes | Where it appears |
 |---|---|---|
@@ -283,11 +279,11 @@ All audio plays from the browser via Web Audio API, each layer with an independe
 
 **Body vocalization** carries Gregor's somatic voice as non-verbal breathing, gasping, straining. A slow heavy exhale is literally Strong Weight, Sustained Time. A sharp gasp is Sudden Time. Constricted throat sounds are Bound Flow. Effort qualities made audible through the vocal body, not mediated by language.
 
-**Drones** carry the environmental voice. Each Action Drive has its own tonal character generated via ElevenLabs Music Generation (60-second loops). The drone shifts when the Action Drive changes, providing a sustained atmospheric ground.
+**Drones** carry the vermins ecological voice. Each Action Drive has its own tonal character generated via ElevenLabs Music Generation (60-second loops). The drone shifts when the Action Drive changes, providing a sustained atmospheric ground.
 
 **SFX** carry the incidental voices: clock ticks (Sustained, Bound), door knocks (Sudden, Direct), body scraping (Strong, Sustained), bed throwing (Strong, Free), chair pushing (Sustained, Direct), door slams (Sudden, Strong).
 
-**Characters** carry external movement voices from P4 onward: the manager's Dab-like footsteps, the father's Slash-quality hissing and stomping, the father's weeping in P9 as Bound Flow breaking. The layer contains both authored voice recordings (the mother's call in P4, the father's weeping in P9) and character-generated sound effects (footsteps, knocks, hissing, stomping, pacing). Both types are treated as external movement voices in the polyphonic analysis because they come from identifiable agents with their own Effort qualities, distinct from the environmental SFX layer (clocks, rain, doors).
+**Characters** carry external movement voices from P4 onward: the manager's Dab-like footsteps, the father's Slash-quality hissing and stomping, the father's weeping in P9 as Bound Flow breaking. The layer contains both authored voice recordings (the mother's call in P4, the father's weeping in P9) and character-generated sound effects (footsteps, knocks, hissing, stomping, pacing). Both types are treated as external movement voices in the polyphonic analysis because they come from identified performers with their own Effort qualities, distinct from the environmental SFX layer (clocks, rain, doors).
 
 ### Audio timing
 
@@ -318,21 +314,21 @@ Five volume sliders appear in the bottom-right panel (narration, body vox, drone
 
 ## Contribution to the Embodied Interaction Field
 
-### 1. Kinesthetically dense text as movement data source (methodological)
+### 1. Kinesthetically dense text as movement data source
 
-The existing literature on Effort-driven systems assumes a physical body as input (Fdili Alaoui et al. 2017; Siopa et al. 2024; Subyen et al. 2011). This project shows that certain literary texts encode Effort with sufficient density to serve as annotation substrate, locating the moving body in the prose itself. The claim is bounded: not all prose qualifies, and texts with primarily interior or dialogic content would not yield comparable Effort traceability. Kafka's *Metamorphosis* is unusually well-suited because every paragraph foregrounds physical struggle. The Larboulette & Gibet (2015) formulas that ground the visual parameterization are the same formulas used to process motion capture data; the difference is the data source, not the framework. This extends the scope of valid input for Effort-driven systems to include kinesthetically dense literary texts as a class.
+The existing research on Effort-driven systems assumes a physical body as input (Fdili Alaoui et al. 2017; Siopa et al. 2024; Subyen et al. 2011). This project suggests that certain literary texts encode Effort with sufficient complexity to serve as annotation substrate, locating the moving body in the prose itself. The proposal is limited: not all prose qualifies, and texts with primarily interior or dialogic content would not allow for comparable Effort traceability. Kafka's *Metamorphosis* is unusually well-suited because every paragraph portrays bodily struggle. The Larboulette & Gibet (2015) formulas that ground the visual parameterization are the same formulas used to process motion capture data; the difference is the data source. This extends the array of acceptable input for Effort-driven systems to include kinesthetically dense literary texts.
 
-### 2. Reading as embodied interaction (theoretical)
+### 2. Reading as embodied interaction
 
-Most embodied-interaction work interprets "embodied" as gross motor movement, gesture, or physiological sensing. This project argues that reading literary prose about embodied experience is itself an embodied act (Gallese & Lakoff, 2005; Tettamanti et al., 2005; Zwaan, 2004), and that the viewer's attentional and temporal engagement with the text is a legitimate input for a computational system. The kinesthetic imagination activated by literary reading, which the system then amplifies through converging multimodal output, is a legitimate site of embodied experience.
+Most embodied-interaction work interprets "embodied" as gross motor movement, gesture, or physiological sensing. This project argues that reading literary prose about embodied experience is itself an embodied act (Gallese & Lakoff, 2005; Tettamanti et al., 2005; Zwaan, 2004), and that the viewer's attentional and temporal engagement with the text is a suitable input for a computational system. The kinesthetic imagination activated by literary reading, which the system then augments through interconnected multimodal output, is a valid source of embodied experience.
 
-### 3. Unified cross-modal Effort parameterization (design)
+### 3. Unified cross-modal Effort parameterization
 
-Most Effort-driven systems map Effort to a single output modality. This project maps the same BESS annotation simultaneously to five channels: visuals (Larboulette & Gibet formulas), vocal delivery (de Meijer-derived v3 tags), body vocalization (direct Effort-to-breath mapping), narrative pacing (auto-advance timers shaped by Action Drive), and environmental voices (drone, SFX, characters). All channels share a single harmonic ground.
+Most Effort-driven systems map Effort to a single output modality. This project maps the same BESS annotation simultaneously to five channels: visuals (Larboulette & Gibet formulas), vocal delivery (de Meijer-derived v3 tags), body vocalization (direct Effort-to-breath mapping), narrative pacing (auto-advance timers shaped by Action Drive), and environmental voices (drone, SFX, characters). All channels share a single harmonic grounding.
 
-### 4. Effort-driven TTS vocal direction (technical/creative)
+### 4. Effort-driven TTS vocal direction
 
-Using de Meijer-informed emotional correlates of Effort constellations to generate ElevenLabs v3 audio tags for text-to-speech is, to our knowledge, novel. The chain is: close reading extracts Action Drive, Drive maps to interpretive emotional correlate, correlate maps to v3 audio tags, tags shape vocal delivery. The voice does not simply read the text; it performs the Effort quality of the text.
+Using de Meijer-informed emotional correlates of Effort constellations to generate ElevenLabs v3 audio tags for text-to-speech is, to the best knowledge, novel. The chain is: close reading extracts Action Drive, Drive maps to interpretive emotional correlate, correlate maps to v3 audio tags, tags shape vocal delivery. The voice does not merely read the text; it performs the Effort quality of the text.
 
 ### 5. Comparison with Ghostdance (Siopa et al., 2024)
 
