@@ -295,7 +295,7 @@ ME.BODY_VOX_MAP = {
   6:  { f: 'audio/body_vox/body_vox_p06.mp3', end: true },
   7:  { f: 'audio/body_vox/body_vox_p07.mp3', at: 3 },
   8:  { f: 'audio/body_vox/body_vox_p08.mp3', end: true },
-  9:  { f: 'audio/body_vox/body_vox_p09.mp3', end: true },
+  9:  { f: 'audio/body_vox/body_vox_p09.mp3', at: 8 },
   10: { f: 'audio/body_vox/body_vox_p10.mp3', at: 2 }
 };
 
@@ -307,35 +307,33 @@ ME.SFX_MAP = {
   3:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', end: true },
        { f: 'audio/sfx/sfx_insect_legs.mp3', end: true }],
   4:  [{ f: 'audio/sfx/sfx_clock_ticking.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_clock_strike.mp3', at: -11 }],
+       { f: 'audio/sfx/sfx_clock_strike.mp3', at: -12 }],
   5:  [{ f: 'audio/sfx/sfx_voice_distortion.mp3', at: -5 },
        { f: 'audio/sfx/sfx_squeaking.mp3', at: -8 },
        { f: 'audio/sfx/sfx_bed_throw_roll.mp3', at: 0 }],
   6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', at: 1 },
-       { f: 'audio/sfx/sfx_insect_legs.mp3', end: true },
-       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: 5 }],
+       { f: 'audio/sfx/sfx_insect_legs.mp3', at: 2 },
+       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -10 }],
   7:  [{ f: 'audio/sfx/sfx_bed_sit_up.mp3', at: 0 }],
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
-       { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: 5 }],
+       { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
-  10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 3 },
-       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 5 },
-       { f: 'audio/sfx/sfx_door_slam.mp3', end: true }]
+       { f: 'audio/sfx/sfx_body_thud.mp3', at: -18 }],
+  10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 5 },
+       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 24 },
+       { f: 'audio/sfx/sfx_door_slam.mp3', at: -6 }]
 };
 
 ME.CHAR_MAP = {
   1: [], 2: [], 3: [],
   4:  [{ f: 'audio/characters/char_knock_door.mp3', at: -10 },
-       { f: 'audio/characters/char_mother_call.mp3', at: -8 }],
+       { f: 'audio/characters/char_mother_call.mp3', at: -7 }],
   5:  [], 6: [],
-  7:  [{ f: 'audio/characters/char_knock_loud.mp3', at: 0 },
-       { f: 'audio/characters/char_manager_footsteps.mp3', at: 3 }],
+  7:  [{ f: 'audio/characters/char_manager_footsteps.mp3', at: 3 }],
   8:  [],
   9:  [{ f: 'audio/characters/char_father_weeping.mp3', end: true }],
-  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 5 },
+  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 18 },
        { f: 'audio/characters/char_father_pacing.mp3', at: 10 },
        { f: 'audio/characters/char_father_stomp.mp3', at: 6 }]
 };

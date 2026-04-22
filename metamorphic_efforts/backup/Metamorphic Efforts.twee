@@ -282,7 +282,7 @@ ME.DRONE_MAP = {
 ME.DRONE_PASSAGE = {
   1: 'press_low',  2: 'press_low',  3: 'press_low',
   4: 'press_high', 5: 'wring',      6: 'press_high',
-  7: 'wring',      8: 'glide',      9: 'slash',
+  7: 'wring',      8: 'glide',      9: 'glide',
   10: 'slash'
 };
 
@@ -313,32 +313,31 @@ ME.SFX_MAP = {
        { f: 'audio/sfx/sfx_bed_throw_roll.mp3', at: 0 }],
   6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', at: 1 },
        { f: 'audio/sfx/sfx_insect_legs.mp3', end: true },
-       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -3 }],
+       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: 5 }],
   7:  [{ f: 'audio/sfx/sfx_bed_sit_up.mp3', at: 0 }],
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
        { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: -5 }],
+       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: 5 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_gasp.mp3', at: -12 },
        { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
   10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 3 },
-       { f: 'audio/sfx/sfx_body_scrape.mp3', at: -10 },
+       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 5 },
        { f: 'audio/sfx/sfx_door_slam.mp3', end: true }]
 };
 
 ME.CHAR_MAP = {
   1: [], 2: [], 3: [],
-  4:  [{ f: 'audio/characters/char_knock_door.mp3', at: -9 },
-       { f: 'audio/characters/char_mother_call.mp3', at: -7 }],
+  4:  [{ f: 'audio/characters/char_knock_door.mp3', at: -10 },
+       { f: 'audio/characters/char_mother_call.mp3', at: -8 }],
   5:  [], 6: [],
   7:  [{ f: 'audio/characters/char_knock_loud.mp3', at: 0 },
-       { f: 'audio/characters/char_manager_footsteps.mp3', at: 0 }],
+       { f: 'audio/characters/char_manager_footsteps.mp3', at: 3 }],
   8:  [],
   9:  [{ f: 'audio/characters/char_father_weeping.mp3', end: true }],
-  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 2 },
-       { f: 'audio/characters/char_father_pacing.mp3', at: 0 },
-       { f: 'audio/characters/char_father_stomp.mp3', at: 4 }]
+  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 5 },
+       { f: 'audio/characters/char_father_pacing.mp3', at: 10 },
+       { f: 'audio/characters/char_father_stomp.mp3', at: 6 }]
 };
 
 ME.PASSAGE_MIX = {
