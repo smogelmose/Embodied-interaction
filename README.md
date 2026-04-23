@@ -1,18 +1,10 @@
-# Embodied Interaction
-
-Repository for the Embodied Interaction course at AAU Copenhagen - exploring bodily presence, movement quality, and designing and evaluating embodied systems.
-
-## About
-
-This repository documents my work for the Embodied Interaction course at Aalborg University Copenhagen (MED8, Spring 2026).
-
-## Metamorphic Efforts
+# Metamorphic Efforts
 
 **Visualizing Laban Movement Qualities from Kafka's *The Metamorphosis***
 
 *Embodied polyphony: enacting the kinesthetic body of prose.*
 
-Embodied Interaction Mini-Project, MED8, Aalborg University Copenhagen, Spring 2026
+Steffen Mogelmose (smogel22@student.aau.dk) - Embodied Interaction Mini-Project, MED8, Aalborg University Copenhagen, Spring 2026
 
 Website: [mogelmose.org](https://mogelmose.org) | [Full report](report/full_report.md)
 
@@ -109,12 +101,6 @@ This extends the concept of embodied interaction to include the kinesthetic imag
 - Merleau-Ponty, M. (1945/2002). *Phenomenology of Perception.* Routledge.
 - Subyen, P. et al. (2011). "EMVIZ: The Poetics of Movement Quality Visualization." *Eurographics Workshop on Computational Aesthetics*, 121--128.
 - Zwaan, R. A. (2004). "The immersed experiencer: Toward an embodied theory of language comprehension." *Psychology of Learning and Motivation*, 44, 35--62.
-
-## Course
-
-**Aalborg University Copenhagen**  
-MED8 – Embodied Interaction  
-Spring 2026
 
 ## License
 
