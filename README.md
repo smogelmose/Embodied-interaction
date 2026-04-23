@@ -24,7 +24,7 @@ Website: [mogelmose.org](https://mogelmose.org) | [Full report](report/full_repo
 
 Fdili Alaoui et al. investigate how Laban Movement Analysis (LMA) can be computationally modeled by incorporating movement expertise into multimodal sensing systems. Working with certified LMA practitioners, they create feature sets from positional, dynamic, and physiological sensor data that match how experts understand the four qualities of Laban effort: Flow, Time, Weight, and Space. Their assessment indicates that the integration of multiple data modalities significantly enhances the character of Effort in comparison to a single modality. This paper adopts a phenomenological perspective (Merleau-Ponty, Dourish): computer systems should regard movement as a lived, expressive experience, rather than merely as functional input.
 
-### From this paper, I draw the following:
+### Key Insights from the Paper
 
 Effort factors serve as the primary parameterization, generative output serves as the rendering target, and BESS annotation serves as the structured input in the **pipeline structure**. Where their study goes from physical body to sensors to Effort classification, this project locates the moving body in literary prose - Kafka's text captures the corporal struggle in precise kinesthetic language. The generative system creates the effort qualities after the close reading extracts them using the same BESS framework as physical bodies.
 
