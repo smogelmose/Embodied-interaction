@@ -25,6 +25,14 @@ ME.revealTimer = null;
 ME.nextPassageTarget = null;
 ME.layerTimers = [];
 
+// Larboulette & Gibet (2015) descriptor state.
+// bessHistory accumulates per-passage BESS snapshots. computeDescriptors
+// runs over a sliding window of the last DESCRIPTOR_WINDOW entries and
+// returns four values (ld_weight, ld_time, ld_space, ld_flow) that are
+// appended to the BESS payload sent to TouchDesigner on each transition.
+ME.bessHistory = [];
+ME.DESCRIPTOR_WINDOW = 5;
+
 // ============================================================
 // AUDIO MAPS
 // ============================================================
@@ -177,6 +185,71 @@ ME.sendBESS = function(data) {
   if (ME.ws && ME.ws.readyState === WebSocket.OPEN) {
     ME.ws.send(JSON.stringify(data));
   }
+};
+
+// ============================================================
+// LARBOULETTE & GIBET (2015) COMPUTABLE DESCRIPTORS
+// Computed on the BESS annotation trajectory (ME.bessHistory), not on
+// sensor data. Each descriptor is a sliding-window computation over the
+// last W passages. Appended to the BESS payload in triggerPassage before
+// sending to TouchDesigner.
+//
+// ld_weight: max intensity over window   (max kinetic energy proxy)
+// ld_time:   mean absolute delta         (summed acceleration proxy)
+// ld_space:  path/displacement ratio     (directness; exact L&G formula)
+// ld_flow:   aggregated jerk of flow     (meta-variability of Flow channel)
+// ============================================================
+ME.computeDescriptors = function(history) {
+  if (!history || history.length < 2) {
+    return { ld_weight: 0.5, ld_time: 0.5, ld_space: 0.5, ld_flow: 0.5 };
+  }
+  var w = Math.min(ME.DESCRIPTOR_WINDOW, history.length);
+  var win = history.slice(-w);
+  var n = win.length;
+
+  // Weight: max intensity over window (peak kinetic energy proxy)
+  var ld_weight = 0;
+  for (var i = 0; i < n; i++) {
+    if (win[i].intensity > ld_weight) ld_weight = win[i].intensity;
+  }
+
+  // Time: mean absolute delta of intensity + flow (summed acceleration proxy)
+  var timeSum = 0, timeSamples = 0;
+  for (var i = 1; i < n; i++) {
+    timeSum += Math.abs(win[i].intensity - win[i-1].intensity);
+    timeSum += Math.abs(win[i].flow - win[i-1].flow);
+    timeSamples += 2;
+  }
+  var ld_time = timeSamples > 0 ? Math.min(1, (timeSum / timeSamples) * 5) : 0.5;
+
+  // Space: path/displacement ratio of space_approach trajectory (directness)
+  // Exact L&G formula: ratio near 1 is Direct, higher is Indirect.
+  // Mapped to [0, 1] where 1 is Direct.
+  var pathLen = 0;
+  for (var i = 1; i < n; i++) {
+    pathLen += Math.abs(win[i].space_approach - win[i-1].space_approach);
+  }
+  var disp = Math.abs(win[n-1].space_approach - win[0].space_approach);
+  var ratio = disp > 0.01 ? pathLen / disp : 1.0;
+  var ld_space = Math.max(0, Math.min(1, 1 - (ratio - 1) / 4));
+
+  // Flow: aggregated jerk of the flow channel itself (second derivative)
+  // Note: second-order measure (jerk of annotated flow trajectory)
+  var jerkSum = 0, jerkSamples = 0;
+  for (var i = 2; i < n; i++) {
+    var d1 = win[i].flow - win[i-1].flow;
+    var d0 = win[i-1].flow - win[i-2].flow;
+    jerkSum += Math.abs(d1 - d0);
+    jerkSamples++;
+  }
+  var ld_flow = jerkSamples > 0 ? Math.min(1, (jerkSum / jerkSamples) * 10) : 0.5;
+
+  return {
+    ld_weight: parseFloat(ld_weight.toFixed(3)),
+    ld_time:   parseFloat(ld_time.toFixed(3)),
+    ld_space:  parseFloat(ld_space.toFixed(3)),
+    ld_flow:   parseFloat(ld_flow.toFixed(3))
+  };
 };
 
 // ============================================================
@@ -458,8 +531,26 @@ ME.triggerPassage = function(pid, bessData) {
   ME.targetBess = bessData;
   if (!ME.currentBess) ME.currentBess = Object.assign({}, bessData);
 
+  // Reset history on End (pid=0) so replays start fresh
+  if (pid === 0) {
+    ME.bessHistory = [];
+  } else {
+    // Accumulate this passage in history for descriptor computation
+    ME.bessHistory.push({
+      passage_id: pid,
+      intensity: bessData.intensity,
+      flow: bessData.flow,
+      space_approach: bessData.space_approach
+    });
+  }
+
+  // Compute Larboulette & Gibet descriptors over sliding window and
+  // append to the payload before sending.
+  var descriptors = ME.computeDescriptors(ME.bessHistory);
+  var payload = Object.assign({}, bessData, descriptors);
+
   // Send to TD
-  ME.sendBESS(bessData);
+  ME.sendBESS(payload);
 
   // Resume AudioContext on first interaction
   if (ME.audioCtx && ME.audioCtx.state === 'suspended') {

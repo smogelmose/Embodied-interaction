@@ -42,7 +42,7 @@ ME.setAutoAdvance('Passage 2');
 <</script>>\
 <div class="passage-meta">Passage 1</div><div class="passage-scene">Waking</div>
 
-One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He <span class="lma" data-cat="effort" data-lma="Strong Weight, Sustained">lay</span> on his <span class="lma" data-cat="effort" data-lma="Strong Weight">armour-like</span> back, and if he <span class="lma" data-cat="shape" data-lma="Minimal Rise">lifted his head a little</span> he could see his brown belly, slightly domed and <span class="lma" data-cat="body" data-lma="Fragmented Connectivity">divided by arches into stiff sections</span>. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, <span class="lma" data-cat="body" data-lma="Disproportionate Parts">pitifully thin compared with the size of the rest of him</span>, <span class="lma" data-cat="effort" data-lma="Free Flow">waved about helplessly</span> as he looked.
+One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He <span class="lma" data-cat="effort" data-lma="Strong Weight, Sustained">lay</span> on his <span class="lma" data-cat="effort" data-lma="Strong Weight">armour-like</span> back, and if he <span class="lma" data-cat="shape" data-lma="Minimal Rise">lifted his head a little</span> he could see his brown belly, slightly domed and <span class="lma" data-cat="body" data-lma="Fragmented Connectivity">divided by arches into stiff sections</span>. The bedding was <span class="lma" data-cat="effort" data-lma="Strong Weight">hardly able to cover it</span> and seemed ready to slide off any moment. His many legs, <span class="lma" data-cat="body" data-lma="Disproportionate Parts">pitifully thin compared with the size of the rest of him</span>, <span class="lma" data-cat="effort" data-lma="Free Flow">waved about helplessly</span> as he looked.
 
 <div class="continue">[[Continue|Passage 2]]</div>
 
@@ -51,7 +51,7 @@ One morning, when Gregor Samsa woke from troubled dreams, he found himself trans
 <<script>>
 ME.triggerPassage(10, {
   passage_id: 10, action_drive: "slash",
-  flow: 0.65, intensity: 0.8, weight_passive: 0.1,
+  flow: 0.15, intensity: 0.8, weight_passive: 0.1,
   shape_grow: 0.1, shape_rise: 0.0, shape_advance: 0.0,
   body_connectivity: 0.3, body_sequencing: 0.15,
   kinesphere: 0.2, space_approach: 0.35, space_plane: 0.3
@@ -80,7 +80,7 @@ ME.setAutoAdvance('Passage 3');
 <</script>>\
 <div class="passage-meta">Passage 2</div><div class="passage-scene">The room</div>
 
-"What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, <span class="lma" data-cat="effort" data-lma="Bound Flow (stillness)">lay peacefully</span> between its four familiar walls. A collection of textile samples lay spread out on the table and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.
+"What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, <span class="lma" data-cat="effort" data-lma="Sustained Time">lay peacefully</span> between its four familiar walls. A collection of textile samples lay spread out on the table and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.
 
 Gregor then <span class="lma" data-cat="shape" data-lma="Minimal Advance">turned to look out the window</span> at the dull weather. <span class="lma" data-cat="space" data-lma="Indirect, Free (environment)">Drops of rain could be heard hitting the pane</span>, which made him feel quite sad.
 
@@ -94,7 +94,7 @@ ME.triggerPassage(3, {
   flow: 0.2, intensity: 0.55, weight_passive: 0.0,
   shape_grow: 0.15, shape_rise: 0.1, shape_advance: 0.1,
   body_connectivity: 0.45, body_sequencing: 0.35,
-  kinesphere: 0.35, space_approach: 0.65, space_plane: 0.3
+  kinesphere: 0.35, space_approach: 0.8, space_plane: 0.3
 });
 ME.setAutoAdvance('Passage 4');
 <</script>>\
@@ -111,7 +111,7 @@ ME.setAutoAdvance('Passage 4');
 <<script>>
 ME.triggerPassage(4, {
   passage_id: 4, action_drive: "press",
-  flow: 0.18, intensity: 0.65, weight_passive: 0.0,
+  flow: 0.25, intensity: 0.65, weight_passive: 0.0,
   shape_grow: 0.15, shape_rise: 0.15, shape_advance: 0.2,
   body_connectivity: 0.45, body_sequencing: 0.3,
   kinesphere: 0.4, space_approach: 0.75, space_plane: 0.3
@@ -120,9 +120,9 @@ ME.setAutoAdvance('Passage 5');
 <</script>>\
 <div class="passage-meta">Passage 4</div><div class="passage-scene">Clock strikes, mother knocks</div>
 
-And he looked over at the alarm clock, <span class="lma" data-cat="effort" data-lma="Sustained, Bound (environment)">ticking</span> on the chest of drawers. "God in Heaven!" he thought. It was half past six and the hands were <span class="lma" data-cat="effort" data-lma="Sustained Time">quietly moving forwards</span>, it was even later than half past, more like quarter to seven. Had the alarm clock not rung?
+And he looked over at the alarm clock, <span class="lma" data-cat="space" data-lma="Sustained, Bound (environment)">ticking</span> on the chest of drawers. "God in Heaven!" he thought. It was half past six and the hands were <span class="lma" data-cat="effort" data-lma="Sustained Time">quietly moving forwards</span>, it was even later than half past, more like quarter to seven. Had the alarm clock not rung?
 
-He was still hurriedly thinking all this through, <span class="lma" data-cat="effort" data-lma="Bound Flow">unable to decide to get out of the bed</span>, when the clock struck quarter to seven. There was a <span class="lma" data-cat="effort" data-lma="Bound, Direct (external)">cautious knock</span> at the door near his head. "Gregor," somebody called. It was his mother. "It's quarter to seven. Didn't you want to go somewhere?"
+He was still hurriedly thinking all this through, <span class="lma" data-cat="effort" data-lma="Bound Flow">unable to decide to get out of the bed</span>, when the clock struck quarter to seven. There was a <span class="lma" data-cat="effort" data-lma="Sudden, Direct (external)">cautious knock</span> at the door near his head. "Gregor," somebody called. It was his mother. "It's quarter to seven. Didn't you want to go somewhere?"
 
 <div class="continue">[[Continue|Passage 5]]</div>
 
@@ -134,7 +134,7 @@ ME.triggerPassage(5, {
   flow: 0.3, intensity: 0.75, weight_passive: 0.0,
   shape_grow: 0.15, shape_rise: 0.2, shape_advance: 0.3,
   body_connectivity: 0.4, body_sequencing: 0.4,
-  kinesphere: 0.4, space_approach: 0.32, space_plane: 0.3
+  kinesphere: 0.4, space_approach: 0.5, space_plane: 0.3
 });
 ME.setAutoAdvance('Passage 6');
 <</script>>\
@@ -151,7 +151,7 @@ Gregor had wanted to give a full answer and explain everything, but in the circu
 <<script>>
 ME.triggerPassage(6, {
   passage_id: 6, action_drive: "press",
-  flow: 0.5, intensity: 0.8, weight_passive: 0.0,
+  flow: 0.2, intensity: 0.8, weight_passive: 0.0,
   shape_grow: 0.2, shape_rise: 0.2, shape_advance: 0.5,
   body_connectivity: 0.35, body_sequencing: 0.45,
   kinesphere: 0.45, space_approach: 0.7, space_plane: 0.4
@@ -160,9 +160,9 @@ ME.setAutoAdvance('Passage 7');
 <</script>>\
 <div class="passage-meta">Passage 6</div><div class="passage-scene">Getting out of bed</div>
 
-It was a simple matter to throw off the covers; he only had to <span class="lma" data-cat="shape" data-lma="Grow">blow himself up a little</span> and they fell off by themselves. But it became difficult after that, especially as he was so <span class="lma" data-cat="shape" data-lma="Lateral presence">exceptionally broad</span>. He would have used his arms and his hands to push himself up; but instead of them he only had all those <span class="lma" data-cat="effort" data-lma="Free Flow, Indirect">little legs continuously moving in different directions</span>, and which he was moreover <span class="lma" data-cat="body" data-lma="Low Sequencing">unable to control</span>.
+It was a simple matter to throw off the covers; he only had to <span class="lma" data-cat="shape" data-lma="Grow">blow himself up a little</span> and they fell off by themselves. But it became difficult after that, especially as he was so <span class="lma" data-cat="shape" data-lma="Lateral presence">exceptionally broad</span>. He would have used his arms and his hands to push himself up; but instead of them he only had all those <span class="lma" data-cat="effort" data-lma="Free Flow, Indirect Space">little legs continuously moving in different directions</span>, and which he was moreover <span class="lma" data-cat="body" data-lma="Low Sequencing">unable to control</span>.
 
-The first thing he wanted to do was get the lower part of his body out of the bed, but he had never seen this lower part, and could not imagine what it looked like; it turned out to be too hard to move; it went so slowly; and finally, almost in a frenzy, when he <span class="lma" data-cat="effort" data-lma="Strong Weight, maximum force">carelessly shoved himself forwards with all the force he could gather</span>, he chose the wrong direction, <span class="lma" data-cat="effort" data-lma="Sudden, Strong, Direct">hit hard against the lower bedpost</span>, and learned from the burning pain he felt that the lower part of his body might well, at present, be the most sensitive.
+The first thing he wanted to do was get the lower part of his body out of the bed, but he had <span class="lma" data-cat="body" data-lma="Fragmented Connectivity">never seen this lower part, and could not imagine what it looked like</span>; it turned out to be too hard to move; it went so slowly; and finally, almost in a frenzy, when he <span class="lma" data-cat="effort" data-lma="Strong Weight, maximum force">carelessly shoved himself forwards with all the force he could gather</span>, he chose the wrong direction, <span class="lma" data-cat="effort" data-lma="Sudden, Strong, Direct">hit hard against the lower bedpost</span>, and learned from the burning pain he felt that the lower part of his body might well, at present, be the most sensitive.
 
 <div class="continue">[[Continue|Passage 7]]</div>
 
@@ -180,7 +180,7 @@ ME.setAutoAdvance('Passage 8');
 <</script>>\
 <div class="passage-meta">Passage 7</div><div class="passage-scene">The manager speaks</div>
 
-The chief clerk now <span class="lma" data-cat="effort" data-lma="Strong Weight (external voice)">raised his voice</span>. "Mr. Samsa, what is wrong? You <span class="lma" data-cat="effort" data-lma="Bound Flow, Enclosed Space">barricade yourself in your room</span>, give us no more than yes or no for an answer, you are causing serious and unnecessary concern to your parents and you fail to carry out your business duties in a way that is quite unheard of. I'm speaking here on behalf of your parents and of your employer, and really must request a <span class="lma" data-cat="space" data-lma="Direct Space (external)">clear and immediate explanation</span>."
+The chief clerk now <span class="lma" data-cat="effort" data-lma="Strong Weight (external voice)">raised his voice</span>. "Mr. Samsa, what is wrong? You <span class="lma" data-cat="space" data-lma="Enclosed, Bound">barricade yourself in your room</span>, give us no more than yes or no for an answer, you are causing serious and unnecessary concern to your parents and you fail to carry out your business duties in a way that is quite unheard of. I'm speaking here on behalf of your parents and of your employer, and really must request a <span class="lma" data-cat="effort" data-lma="Direct Space, Sudden (external)">clear and immediate explanation</span>."
 
 "But Sir," called Gregor, <span class="lma" data-cat="effort" data-lma="Free Flow (loss of restraint)">beside himself and forgetting all else in the excitement</span>, "I'll open up immediately, just a moment. I'm slightly unwell, an attack of dizziness, I haven't been able to get up. I'm still in bed now."
 
@@ -191,7 +191,7 @@ The chief clerk now <span class="lma" data-cat="effort" data-lma="Strong Weight 
 <<script>>
 ME.triggerPassage(8, {
   passage_id: 8, action_drive: "glide",
-  flow: 0.75, intensity: 0.6, weight_passive: 0.0,
+  flow: 0.2, intensity: 0.6, weight_passive: 0.0,
   shape_grow: 0.2, shape_rise: 0.3, shape_advance: 0.6,
   body_connectivity: 0.55, body_sequencing: 0.6,
   kinesphere: 0.5, space_approach: 0.8, space_plane: 0.5
@@ -200,7 +200,7 @@ ME.setAutoAdvance('Passage 9');
 <</script>>\
 <div class="passage-meta">Passage 8</div><div class="passage-scene">Reaching the door</div>
 
-Gregor <span class="lma" data-cat="effort" data-lma="Sustained Time, Strong Weight">slowly pushed his way over to the door</span> with the chair. Once there he let go of it and threw himself onto the door, <span class="lma" data-cat="body" data-lma="High Connectivity">holding himself upright against it using the adhesive on the tips of his legs</span>. He <span class="lma" data-cat="effort" data-lma="Sustained, controlled">rested there a little while</span> to recover from the effort involved and then set himself to the task of <span class="lma" data-cat="body" data-lma="High Sequencing, Direct Space">turning the key in the lock with his mouth</span>.
+Gregor <span class="lma" data-cat="effort" data-lma="Sustained Time, Light Weight">slowly pushed his way over to the door</span> with the chair. Once there he let go of it and threw himself onto the door, <span class="lma" data-cat="body" data-lma="High Connectivity">holding himself upright against it using the adhesive on the tips of his legs</span>. He <span class="lma" data-cat="effort" data-lma="Sustained, controlled">rested there a little while</span> to recover from the effort involved and then set himself to the task of <span class="lma" data-cat="body" data-lma="High Sequencing, Direct Space">turning the key in the lock with his mouth</span>.
 
 Using the jaw, he really was able to start the key turning, ignoring the fact that he must have been causing some kind of damage as a <span class="lma" data-cat="body" data-lma="Loss of Containment">brown fluid came from his mouth</span>, flowed over the key and dripped onto the floor.
 
@@ -267,6 +267,14 @@ ME.revealTimer = null;
 ME.nextPassageTarget = null;
 ME.layerTimers = [];
 
+// Larboulette & Gibet (2015) descriptor state.
+// bessHistory accumulates per-passage BESS snapshots. computeDescriptors
+// runs over a sliding window of the last DESCRIPTOR_WINDOW entries and
+// returns four values (ld_weight, ld_time, ld_space, ld_flow) that are
+// appended to the BESS payload sent to TouchDesigner on each transition.
+ME.bessHistory = [];
+ME.DESCRIPTOR_WINDOW = 5;
+
 // ============================================================
 // AUDIO MAPS
 // ============================================================
@@ -282,7 +290,7 @@ ME.DRONE_MAP = {
 ME.DRONE_PASSAGE = {
   1: 'press_low',  2: 'press_low',  3: 'press_low',
   4: 'press_high', 5: 'wring',      6: 'press_high',
-  7: 'wring',      8: 'glide',      9: 'slash',
+  7: 'wring',      8: 'glide',      9: 'glide',
   10: 'slash'
 };
 
@@ -295,7 +303,7 @@ ME.BODY_VOX_MAP = {
   6:  { f: 'audio/body_vox/body_vox_p06.mp3', end: true },
   7:  { f: 'audio/body_vox/body_vox_p07.mp3', at: 3 },
   8:  { f: 'audio/body_vox/body_vox_p08.mp3', end: true },
-  9:  { f: 'audio/body_vox/body_vox_p09.mp3', end: true },
+  9:  { f: 'audio/body_vox/body_vox_p09.mp3', at: 8 },
   10: { f: 'audio/body_vox/body_vox_p10.mp3', at: 2 }
 };
 
@@ -307,38 +315,35 @@ ME.SFX_MAP = {
   3:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', end: true },
        { f: 'audio/sfx/sfx_insect_legs.mp3', end: true }],
   4:  [{ f: 'audio/sfx/sfx_clock_ticking.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_clock_strike.mp3', at: -11 }],
+       { f: 'audio/sfx/sfx_clock_strike.mp3', at: -12 }],
   5:  [{ f: 'audio/sfx/sfx_voice_distortion.mp3', at: -5 },
        { f: 'audio/sfx/sfx_squeaking.mp3', at: -8 },
        { f: 'audio/sfx/sfx_bed_throw_roll.mp3', at: 0 }],
   6:  [{ f: 'audio/sfx/sfx_body_thrashing.mp3', at: 1 },
-       { f: 'audio/sfx/sfx_insect_legs.mp3', end: true },
-       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -3 }],
+       { f: 'audio/sfx/sfx_insect_legs.mp3', at: 2 },
+       { f: 'audio/sfx/sfx_bedpost_impact.mp3', at: -10 }],
   7:  [{ f: 'audio/sfx/sfx_bed_sit_up.mp3', at: 0 }],
   8:  [{ f: 'audio/sfx/sfx_key_turning.mp3', at: -15 },
        { f: 'audio/sfx/sfx_fluid_drip.mp3', at: -10 },
-       { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_door_throw_cling.mp3', at: -5 }],
+       { f: 'audio/sfx/sfx_gregor_chair_push.mp3', at: 0 }],
   9:  [{ f: 'audio/sfx/sfx_door_open.mp3', at: 0 },
-       { f: 'audio/sfx/sfx_gasp.mp3', at: -12 },
-       { f: 'audio/sfx/sfx_body_thud.mp3', end: true }],
-  10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 3 },
-       { f: 'audio/sfx/sfx_body_scrape.mp3', at: -10 },
-       { f: 'audio/sfx/sfx_door_slam.mp3', end: true }]
+       { f: 'audio/sfx/sfx_body_thud.mp3', at: -18 }],
+  10: [{ f: 'audio/sfx/sfx_newspaper_swat.mp3', at: 5 },
+       { f: 'audio/sfx/sfx_body_scrape.mp3', at: 24 },
+       { f: 'audio/sfx/sfx_door_slam.mp3', at: -6 }]
 };
 
 ME.CHAR_MAP = {
   1: [], 2: [], 3: [],
-  4:  [{ f: 'audio/characters/char_knock_door.mp3', at: -9 },
+  4:  [{ f: 'audio/characters/char_knock_door.mp3', at: -10 },
        { f: 'audio/characters/char_mother_call.mp3', at: -7 }],
   5:  [], 6: [],
-  7:  [{ f: 'audio/characters/char_knock_loud.mp3', at: 0 },
-       { f: 'audio/characters/char_manager_footsteps.mp3', at: 0 }],
+  7:  [{ f: 'audio/characters/char_manager_footsteps.mp3', at: 3 }],
   8:  [],
   9:  [{ f: 'audio/characters/char_father_weeping.mp3', end: true }],
-  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 2 },
-       { f: 'audio/characters/char_father_pacing.mp3', at: 0 },
-       { f: 'audio/characters/char_father_stomp.mp3', at: 4 }]
+  10: [{ f: 'audio/characters/char_father_hissing.mp3', at: 18 },
+       { f: 'audio/characters/char_father_pacing.mp3', at: 10 },
+       { f: 'audio/characters/char_father_stomp.mp3', at: 6 }]
 };
 
 ME.PASSAGE_MIX = {
@@ -422,6 +427,71 @@ ME.sendBESS = function(data) {
   if (ME.ws && ME.ws.readyState === WebSocket.OPEN) {
     ME.ws.send(JSON.stringify(data));
   }
+};
+
+// ============================================================
+// LARBOULETTE & GIBET (2015) COMPUTABLE DESCRIPTORS
+// Computed on the BESS annotation trajectory (ME.bessHistory), not on
+// sensor data. Each descriptor is a sliding-window computation over the
+// last W passages. Appended to the BESS payload in triggerPassage before
+// sending to TouchDesigner.
+//
+// ld_weight: max intensity over window   (max kinetic energy proxy)
+// ld_time:   mean absolute delta         (summed acceleration proxy)
+// ld_space:  path/displacement ratio     (directness; exact L&G formula)
+// ld_flow:   aggregated jerk of flow     (meta-variability of Flow channel)
+// ============================================================
+ME.computeDescriptors = function(history) {
+  if (!history || history.length < 2) {
+    return { ld_weight: 0.5, ld_time: 0.5, ld_space: 0.5, ld_flow: 0.5 };
+  }
+  var w = Math.min(ME.DESCRIPTOR_WINDOW, history.length);
+  var win = history.slice(-w);
+  var n = win.length;
+
+  // Weight: max intensity over window (peak kinetic energy proxy)
+  var ld_weight = 0;
+  for (var i = 0; i < n; i++) {
+    if (win[i].intensity > ld_weight) ld_weight = win[i].intensity;
+  }
+
+  // Time: mean absolute delta of intensity + flow (summed acceleration proxy)
+  var timeSum = 0, timeSamples = 0;
+  for (var i = 1; i < n; i++) {
+    timeSum += Math.abs(win[i].intensity - win[i-1].intensity);
+    timeSum += Math.abs(win[i].flow - win[i-1].flow);
+    timeSamples += 2;
+  }
+  var ld_time = timeSamples > 0 ? Math.min(1, (timeSum / timeSamples) * 5) : 0.5;
+
+  // Space: path/displacement ratio of space_approach trajectory (directness)
+  // Exact L&G formula: ratio near 1 is Direct, higher is Indirect.
+  // Mapped to [0, 1] where 1 is Direct.
+  var pathLen = 0;
+  for (var i = 1; i < n; i++) {
+    pathLen += Math.abs(win[i].space_approach - win[i-1].space_approach);
+  }
+  var disp = Math.abs(win[n-1].space_approach - win[0].space_approach);
+  var ratio = disp > 0.01 ? pathLen / disp : 1.0;
+  var ld_space = Math.max(0, Math.min(1, 1 - (ratio - 1) / 4));
+
+  // Flow: aggregated jerk of the flow channel itself (second derivative)
+  // Note: second-order measure (jerk of annotated flow trajectory)
+  var jerkSum = 0, jerkSamples = 0;
+  for (var i = 2; i < n; i++) {
+    var d1 = win[i].flow - win[i-1].flow;
+    var d0 = win[i-1].flow - win[i-2].flow;
+    jerkSum += Math.abs(d1 - d0);
+    jerkSamples++;
+  }
+  var ld_flow = jerkSamples > 0 ? Math.min(1, (jerkSum / jerkSamples) * 10) : 0.5;
+
+  return {
+    ld_weight: parseFloat(ld_weight.toFixed(3)),
+    ld_time:   parseFloat(ld_time.toFixed(3)),
+    ld_space:  parseFloat(ld_space.toFixed(3)),
+    ld_flow:   parseFloat(ld_flow.toFixed(3))
+  };
 };
 
 // ============================================================
@@ -703,8 +773,26 @@ ME.triggerPassage = function(pid, bessData) {
   ME.targetBess = bessData;
   if (!ME.currentBess) ME.currentBess = Object.assign({}, bessData);
 
+  // Reset history on End (pid=0) so replays start fresh
+  if (pid === 0) {
+    ME.bessHistory = [];
+  } else {
+    // Accumulate this passage in history for descriptor computation
+    ME.bessHistory.push({
+      passage_id: pid,
+      intensity: bessData.intensity,
+      flow: bessData.flow,
+      space_approach: bessData.space_approach
+    });
+  }
+
+  // Compute Larboulette & Gibet descriptors over sliding window and
+  // append to the payload before sending.
+  var descriptors = ME.computeDescriptors(ME.bessHistory);
+  var payload = Object.assign({}, bessData, descriptors);
+
   // Send to TD
-  ME.sendBESS(bessData);
+  ME.sendBESS(payload);
 
   // Resume AudioContext on first interaction
   if (ME.audioCtx && ME.audioCtx.state === 'suspended') {
