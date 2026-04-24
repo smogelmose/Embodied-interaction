@@ -93,7 +93,66 @@ The philosophical grounding is Merleau-Ponty's phenomenology of perception, chan
 
 This extends the concept of embodied interaction to include the kinesthetic imagination that is formed during literary reading, in addition to bodily movement, gestures, and touch.
 
-## 4. Additional References
+## 4. Installation
+ 
+### Requirements
+ 
+- **Python 3.8+** for the local HTTP server
+- **TouchDesigner 2023.x or later** (the free non-commercial license is sufficient): [derivative.ca/download](https://derivative.ca/download)
+- **A modern browser** with Web Audio API and WebSocket support (Chrome / Firefox)
+### Setup
+ 
+```bash
+git clone https://github.com/smogelmose/Embodied-interaction.git
+cd Embodied-interaction
+```
+ 
+That is the entire installation. The project runs from static files plus the TouchDesigner project; there is no build step and no package installation.
+
+## 5. Running
+ 
+The system requires three components running simultaneously: TouchDesigner (visual generator), a local HTTP server (browser host), and the browser tab itself.
+ 
+### 1. Start TouchDesigner
+ 
+Open `Metamorphic_Efforts.toe` in TouchDesigner. The Web Server DAT starts the WebSocket server automatically on port 9980, and the Execute DAT named `frame_sender` begins streaming JPEG frames at approximately 15 fps once a browser client connects.
+ 
+### 2. Start the local HTTP server
+ 
+From the project root:
+ 
+**macOS / Linux:**
+ 
+```bash
+python3 -m http.server 8080
+```
+ 
+**Windows:**
+ 
+```
+start_server.bat
+```
+ 
+or manually:
+ 
+```
+python -m http.server 8080
+```
+ 
+### 3. Open the browser
+ 
+Navigate to `http://localhost:8080/Metamorphic_Efforts.html` and click the first passage link to begin.
+ 
+### Interface
+ 
+The browser window shows three things at once:
+ 
+- the Kafka text with progressive LMA annotation overlay (toggled in the controls panel)
+- a canvas displaying the live TouchDesigner frame stream
+- a controls panel with five layer volume sliders (narration, body vox, drone, SFX, characters) and an annotation toggle
+
+
+## 6. Additional References
 
 - Dourish, P. (2004). *Where the Action Is: The Foundations of Embodied Interaction.* MIT Press.
 - Gallese, V. & Lakoff, G. (2005). "The brain's concepts: The role of the sensory-motor system in conceptual knowledge." *Cognitive Neuropsychology*, 22(3-4), 455--479.
