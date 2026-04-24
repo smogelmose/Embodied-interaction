@@ -4,7 +4,7 @@
 
 *Embodied polyphony: enacting the kinesthetic body of prose.*
 
-Steffen Mogelmose (smogel22@student.aau.dk) - Embodied Interaction Mini-Project, MED8, Aalborg University Copenhagen, Spring 2026
+Steffen Møgelmose (smogel22@student.aau.dk) - Embodied Interaction Mini-Project, MED8, Aalborg University Copenhagen, Spring 2026
 
 Website: [mogelmose.org](https://mogelmose.org) | [Full report](report/full_report.md)
 
