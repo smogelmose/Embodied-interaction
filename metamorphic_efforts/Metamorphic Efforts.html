@@ -1097,6 +1097,7 @@ ME.triggerPassage = function(pid, bessData) {
 
   // Send to TD
   ME.sendBESS(payload);
+  console.log('ME: payload', payload);
 
   // Resume AudioContext on first interaction
   if (ME.audioCtx && ME.audioCtx.state === 'suspended') {
