@@ -116,8 +116,7 @@ The following tools are only needed if you intend to extend or modify the projec
  
 **Tweego (Twine compiler).** Required if you edit the `.twee` source and need to re-export the playable HTML.
  
-- macOS: `brew install tweego`
-- Other platforms: download from [motoslave.net/tweego](https://www.motoslave.net/tweego/)
+- Download from [motoslave.net/tweego](https://www.motoslave.net/tweego/)
 Re-export the HTML with:
  
 ```bash
