@@ -99,7 +99,8 @@ This extends the concept of embodied interaction to include the kinesthetic imag
  
 - **Python 3.8+** for the local HTTP server
 - **TouchDesigner 2023.x or later** (the free non-commercial license is sufficient): [derivative.ca/download](https://derivative.ca/download)
-- **A modern browser** with Web Audio API and WebSocket support (Chrome / Firefox)
+- **A modern browser** with Web Audio API and WebSocket support
+
 ### Setup
  
 ```bash
@@ -107,8 +108,22 @@ git clone https://github.com/smogelmose/Embodied-interaction.git
 cd Embodied-interaction
 ```
  
-That is the entire installation. The project runs from static files plus the TouchDesigner project; there is no build step and no package installation.
-
+### Optional tooling
+ 
+The following tools are only needed if you intend to extend or modify the project. 
+ 
+**BESS Author (annotation editor).** `bess_author.html` is a self-contained browser tool for creating and editing BESS annotations on passage text. It loads a `.twee` or `.txt` file, lets you select text spans and tag them with BESS category and LMA label, set Action Drive and ElevenLabs v3 voice tags per passage, and outputs Twine-ready markup. This is the tool used to author the 53 annotation spans currently in `Metamorphic_Efforts.twee`.
+ 
+**Tweego (Twine compiler).** Required if you edit the `.twee` source and need to re-export the playable HTML.
+ 
+- macOS: `brew install tweego`
+- Other platforms: download from [motoslave.net/tweego](https://www.motoslave.net/tweego/)
+Re-export the HTML with:
+ 
+```bash
+tweego -o Metamorphic_Efforts.html Metamorphic_Efforts.twee
+```
+ 
 ## 5. Running
  
 The system requires three components running simultaneously: TouchDesigner (visual generator), a local HTTP server (browser host), and the browser tab itself.
@@ -151,7 +166,10 @@ The browser window shows three things at once:
 - a canvas displaying the live TouchDesigner frame stream
 - a controls panel with five layer volume sliders (narration, body vox, drone, SFX, characters) and an annotation toggle
 
-
+### Stopping
+ 
+Close the browser tab, stop the HTTP server with Ctrl+C, and close the TouchDesigner project.
+ 
 ## 6. Additional References
 
 - Dourish, P. (2004). *Where the Action Is: The Foundations of Embodied Interaction.* MIT Press.
