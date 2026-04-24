@@ -120,7 +120,7 @@ The following tools are only needed if you intend to extend or modify the projec
 Re-export the HTML with:
  
 ```bash
-tweego -o Metamorphic_Efforts.html Metamorphic_Efforts.twee
+tweego -o Metamorphic-Efforts.html Metamorphic_Efforts.twee
 ```
  
 ## 5. Running
