@@ -62,6 +62,13 @@ The project extracts Effort Action Drives from the opening section of Kafka's *T
 
 ![Running piece on Passage 1 (Press): topographic visual texture, LMA annotation overlay (red "Strong Weight" tooltip), and the polyphonic voices mixer panel.](report/running_piece_p1.png)
 
+
+### Demonstration
+ 
+A full recording of the piece from Passage 1 through Passage 10 is available on Vimeo:
+ 
+[Watch on Vimeo](https://vimeo.com/1187075793)
+
 ### System architecture
 
 Twine (SugarCube) is the single browser interface: text, audio, and visuals all come together in one display. TouchDesigner runs headless on the same device, generating visuals and streaming JPEG frames to the browser via WebSocket. Using the Web Audio API, audio is played from the browser with five polyphonic layers (narration, body vocalizations, drones, SFX, and character voices) and optional viewer volume control for each seperate layer.
@@ -185,5 +192,11 @@ Close the browser tab, stop the HTTP server with Ctrl+C, and close the TouchDesi
 - Zwaan, R. A. (2004). "The immersed experiencer: Toward an embodied theory of language comprehension." *Psychology of Learning and Motivation*, 44, 35--62.
 
 ## License
-
-MIT License - see [LICENSE](LICENSE) for details.
+ 
+This project uses dual licensing to reflect that it contains both software and creative work, which have different reuse expectations.
+ 
+**Code** (JavaScript, TouchDesigner project files, BESS Author tool, Python scripts, configuration) is licensed under the **MIT License**.
+ 
+**Creative content** (the BESS annotations, the report, the figures, the generated audio, the walkthrough video, the system design as an artwork) is licensed under **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
+ 
+The source text - Franz Kafka's *The Metamorphosis* (1915), David Wyllie translation - is in the public domain (Project Gutenberg edition). Audio assets were generated with ElevenLabs on a paid tier with commercial rights; the licensing above applies to the project's use and arrangement of those assets, not to the underlying ElevenLabs models.
