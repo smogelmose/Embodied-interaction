@@ -60,6 +60,8 @@ The Effort data** depicts the emotional arc, not solely interpretation. The pass
 
 The project extracts Effort Action Drives from the opening section of Kafka's *The Metamorphosis* (10 passages) through close reading and full BESS annotation, and subsequently recreates them as a generative audiovisual experience.
 
+![Running piece on Passage 1 (Press): topographic visual texture, LMA annotation overlay (red "Strong Weight" tooltip), and the polyphonic voices mixer panel.](report/running_piece_p1.png)
+
 ### System architecture
 
 Twine (SugarCube) is the single browser interface: text, audio, and visuals all come together in one display. TouchDesigner runs headless on the same device, generating visuals and streaming JPEG frames to the browser via WebSocket. Using the Web Audio API, audio is played from the browser with five polyphonic layers (narration, body vocalizations, drones, SFX, and character voices) and optional viewer volume control for each seperate layer.
@@ -77,6 +79,8 @@ TOUCHDESIGNER
   |  Receives BESS, updates noise/feedback/color chain
   |  Encodes final_out as JPEG
 ```
+
+![TouchDesigner network: WebSocket-in DAT, parser, value lag, noise + feedback chain (noise1, comp1, fb_decay), space_blur, space_zoom, intensity_dim, body_displace and body_edges branches, base_ramp / color_shift, and final_out feeding the frame_sender Execute DAT (right panel) which streams JPEGs over WebSocket. Right column shows live BESS payload values for Passage 1.](report/touchdesigner_network.png)
 
 ### Mapping derivations summary
 
@@ -114,6 +118,8 @@ The following tools are only needed if you intend to extend or modify the projec
  
 **BESS Author (annotation editor).** `bess_author.html` is a self-contained browser tool for creating and editing BESS annotations on passage text. It loads a `.twee` or `.txt` file, lets you select text spans and tag them with BESS category and LMA label, set Action Drive and ElevenLabs v3 voice tags per passage, and outputs Twine-ready markup. This is the tool used to author the 53 annotation spans currently in `Metamorphic_Efforts.twee`.
  
+![BESS Author tool: passage selector, span tagging with BESS category color coding, ElevenLabs v3 delivery tags, Action Drive selector, BESS sliders for Effort, Shape, Body, Space, and JSON output. Shown editing Passage 1 with the values used in the report's worked example.](report/bess_author.png)
+
 **Tweego (Twine compiler).** Required if you edit the `.twee` source and need to re-export the playable HTML.
  
 - Download from [motoslave.net/tweego](https://www.motoslave.net/tweego/)
