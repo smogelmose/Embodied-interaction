@@ -179,7 +179,7 @@ Use one of these two modes depending on whether you want a local-only run or a l
 2. Ensure local Web Server DAT (`ws_in`) is active on port `9980`.
 3. Start a local web server:
    - Windows: `serve_docs.bat`
-   - macOS/Linux: `python3 -m http.server 8080 -d docs`
+   - macOS/Linux: `./serve_docs.sh` (or `python3 -m http.server 8080 -d docs`)
 4. Open `http://localhost:8080/Metamorphic_Efforts.html`.
 
 In local mode, the frontend automatically uses `ws://localhost:9980`.
