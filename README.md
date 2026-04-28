@@ -168,6 +168,34 @@ tweego -o Metamorphic-Efforts.html Metamorphic_Efforts.twee
 ## 5. Running
  
 The system requires three components running simultaneously: TouchDesigner (visual generator), a local HTTP server (browser host), and the browser tab itself.
+
+### Runbook
+
+Use one of these two modes depending on whether you want a local-only run or a live web run.
+
+#### Local mode (same machine)
+
+1. Open `Metamorphic_Efforts.toe` in TouchDesigner.
+2. Ensure local Web Server DAT (`ws_in`) is active on port `9980`.
+3. Start a local web server:
+   - Windows: `serve_docs.bat`
+   - macOS/Linux: `python3 -m http.server 8080 -d docs`
+4. Open `http://localhost:8080/Metamorphic_Efforts.html`.
+
+In local mode, the frontend automatically uses `ws://localhost:9980`.
+
+#### Live relay mode (public page + local TouchDesigner)
+
+1. Open `Metamorphic_Efforts.toe` in TouchDesigner.
+2. Ensure `frame_sender1` points to `ws_render` (with fallback to `ws_in` if desired).
+3. In `ws_render` (WebSocket DAT), connect to:
+   - Address/path: `embodied-interaction.onrender.com/ws?role=td`
+   - Port: `443`
+   - Active: `On`
+4. Open the public page:
+   - `https://mogelmose.org/Embodied-interaction/Metamorphic_Efforts.html`
+
+In live relay mode, TouchDesigner publishes frames to Render and the browser receives them through the same backend.
  
 ### 1. Start TouchDesigner
  
@@ -186,7 +214,7 @@ python3 -m http.server 8080
 **Windows:**
  
 ```
-start_server.bat
+serve_docs.bat
 ```
  
 or manually:
