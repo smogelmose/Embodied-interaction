@@ -10,6 +10,35 @@ Website: [mogelmose.org](https://mogelmose.org) | [Full report](report/full_repo
 
 ---
 
+## Deployment
+
+### Frontend on GitHub Pages
+
+This repository is configured for the GitHub Pages `main/docs` flow. The published frontend lives in `docs/`.
+
+1. In GitHub, open **Settings -> Pages**.
+2. Set **Source** to **Deploy from a branch**.
+3. Select **Branch: `main`** and **Folder: `/docs`**.
+4. Push to `main`.
+5. Open the published page URL. By default, the frontend connects to:
+   - `wss://embodied-interaction.onrender.com/ws?role=browser`
+
+You can still override this with a query param (`?ws=...`) or by defining `window.ME_BACKEND_WS` before `story-javascript.js` loads.
+When you make frontend changes, keep `docs/` in sync with `metamorphic_efforts/` before pushing.
+
+### Backend on Render
+
+This repository includes a Render Blueprint file (`render.yaml`) that deploys `backend/` as a Node web service.
+
+1. In Render, create a new Blueprint and select this repository.
+2. Confirm the detected service `embodied-interaction-backend`.
+3. Deploy. Render runs `npm install` and `npm start` in `backend/`.
+4. Verify health at `https://<your-render-service>.onrender.com/healthz`.
+5. Use the resulting WebSocket URL from your frontend:
+   - `wss://<your-render-service>.onrender.com/ws?role=browser`
+
+If you run locally, the Twine experience still defaults to `ws://localhost:9980` for TouchDesigner.
+
 ## 1. Main Reference
 
 **Fdili Alaoui, S., Francoise, J., Schiphorst, T., Studd, K., & Bevilacqua, F. (2017). "Seeing, Sensing and Recognizing Laban Movement Qualities." In *Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems* (CHI '17). ACM, 4009--4020.**
