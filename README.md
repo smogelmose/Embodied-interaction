@@ -246,6 +246,11 @@ If you run locally, the Twine experience still defaults to `ws://localhost:9980`
 - Subyen, P. et al. (2011). "EMVIZ: The Poetics of Movement Quality Visualization." *Eurographics Workshop on Computational Aesthetics*, 121--128.
 - Zwaan, R. A. (2004). "The immersed experiencer: Toward an embodied theory of language comprehension." *Psychology of Learning and Motivation*, 44, 35--62.
 
+
+## AI Use Disclosure
+ 
+A formal disclosure of generative AI and AI-assisted tools used in this project is available in [AI_USE.md](AI_USE.md).
+
 ## License
  
 This project uses dual licensing to reflect that it contains both software and creative work, which have different reuse expectations.
