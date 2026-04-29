@@ -249,7 +249,7 @@ If you run locally, the Twine experience still defaults to `ws://localhost:9980`
 
 ## AI Use Disclosure
  
-A formal disclosure of generative AI and AI-assisted tools used in this project is available in [AI_USE.md](AI_USE.md).
+A formal disclosure of generative AI and AI-assisted tools used in this project is available in [AI_USE.md](report/AI_USE.md).
 
 ## License
  
