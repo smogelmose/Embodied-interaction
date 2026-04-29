@@ -200,7 +200,11 @@ Rather than presenting each BESS category as a distinct visual layer, TouchDesig
 | Space (kinesphere/approach) | Blur width, overall brightness |
 | Flow | Feedback decay (Bound = fast decay, Free = slow decay) |
 
-### System architecture
+#### System architecture
+
+The same TouchDesigner network and the same browser interface run in two configurations.
+
+**Local development** (single machine):
 
 ```
 TWINE (browser, single interface)
@@ -209,8 +213,9 @@ TWINE (browser, single interface)
   |  Canvas shows TD visual frames
   |  Viewer adjusts layer volumes (optional)
   |
-  |  WebSocket text: BESS JSON --->
-  |  <--- WebSocket binary: JPEG frames
+  |  ws://localhost:9980
+  |  (BESS JSON --->)
+  |  (<--- JPEG frames)
   |
 TOUCHDESIGNER (headless, same machine)
   [Web Server DAT] --> parser + preset callbacks --> value_lag + preset_lag
@@ -222,6 +227,25 @@ TOUCHDESIGNER (headless, same machine)
 
 AUDIO (browser, Web Audio API):
   masterGain --> narration | body_vox | drone | sfx | characters
+```
+
+**Deployed** (browser hosted on GitHub Pages, TouchDesigner on the artist's machine, Render Node service relaying between them):
+
+```
+TWINE (browser, mogelmose.org/Embodied-interaction/, role=browser)
+        |
+        |  wss://embodied-interaction.onrender.com/ws
+        v
+RENDER RELAY (Node, backend/)
+        ^
+        |  wss://embodied-interaction.onrender.com/ws
+        |
+TOUCHDESIGNER (artist's machine, role=td)
+  Same noise/feedback chain as above
+  Connects out to Render (no inbound port required)
+```
+
+The relay forwards BESS payloads from `role=browser` clients to `role=td` and JPEG frames in the reverse direction. The application logic on both sides is identical to the local configuration; only the transport changes. This allows the piece to be experienced from any modern browser without the viewer needing to install TouchDesigner.
 ```
 
 ### Mapping derivations
