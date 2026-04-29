@@ -10,7 +10,7 @@ In accordance with Aalborg University's guidelines on the responsible use of AI 
 
 ### Anthropic Claude (LLM)
 
-**Used for:** general project organization (Notion sub-pages, Obsidian vault structure), code review and debugging support for the JavaScript and TouchDesigner Python callbacks, and structuring and editing sections of supporting documents.
+**Used for:** general project organization (Notion sub-pages, Obsidian vault structure), code review and debugging support for the JavaScript and TouchDesigner Python callbacks, and structuring and editing sections of supporting documents and tools.
 
 **Not used for:** the close reading and BESS annotation of *The Metamorphosis*, the theoretical framing and foundation of the project, the choice of Laban Movement Analysis as the descriptive system, the design of the cross-modal mappings, or the methodological decisions documented in the report.
 
