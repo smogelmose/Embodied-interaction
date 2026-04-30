@@ -1,10 +1,10 @@
 @echo off
-title Metamorphic Efforts Docs Server
+title Metamorphic Efforts Server
 cd /d "%~dp0"
 
 echo.
 echo   ========================================
-echo     Metamorphic Efforts Docs Server
+echo     Metamorphic Efforts Server
 echo     Serving: docs/
 echo     http://localhost:8080/Metamorphic_Efforts.html
 echo     Press Ctrl+C to stop

@@ -1,11 +1,9 @@
 """
 generate_report_figures.py
 
-The BESS values below are the canonical annotations used in the running system
-(Metamorphic_Efforts.twee, ME.passageData) and in the report's worked example
-for Passage 1. The descriptor logic mirrors ME.computeDescriptors in
-story-javascript.js bit-for-bit, so the two figures stay consistent with the
-runtime system.
+The BESS values below are the annotations used in the running system
+(Metamorphic_Efforts.twee, ME.passageData). 
+The descriptor logic mirrors ME.computeDescriptors in story-javascript.js.
 
 Run:
     python report_figures.py
@@ -23,11 +21,8 @@ import matplotlib.pyplot as plt
 
 
 # ------------------------------------------------------------------
-# Canonical BESS annotation: 10 passages
+# BESS annotation: 10 passages
 # ------------------------------------------------------------------
-# Values are mirrored from the Twine StoryScript (ME.passageData) and from the
-# report's per-passage tables. The Action Drive label per passage is also kept
-# here for figure annotation.
 
 @dataclass
 class Passage:
@@ -132,7 +127,7 @@ def descriptor_trajectory(passages: List[Passage]) -> List[Dict[str, float]]:
 
 
 # ------------------------------------------------------------------
-# Figure plumbing
+# Figures
 # ------------------------------------------------------------------
 
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "")
@@ -227,7 +222,7 @@ def plot_descriptors_computed(passages: List[Passage], out_path: str) -> None:
 
 
 # ------------------------------------------------------------------
-# Optional CSV export of the underlying values
+# CSV export
 # ------------------------------------------------------------------
 
 def export_csv(passages: List[Passage], out_dir: str) -> None:
