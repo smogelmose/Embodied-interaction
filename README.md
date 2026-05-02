@@ -53,7 +53,7 @@ The **parameter mappings** for the visual preset table. Each TouchDesigner param
 
 Demonstrates that naive viewers, who are not aware of any context, assign consistent, predictable emotions to movement sequences solely based on their Effort constellations.
 
-The Effort data** depicts the emotional arc, not solely interpretation. The passage sequence (Press to Wring to Glide to Slash) carries quantified emotional signatures (determination to anguish to calm to shock). This also grounds the ElevenLabs TTS vocal direction: tag selection per passage (e.g., breathless/strained for Wring, calm/flowing for Glide) follows de Meijer's empirical correlates.
+The **Effort data** depicts the emotional arc, not solely interpretation. The passage sequence (Press to Wring to Glide to Slash) carries quantified emotional signatures (determination to anguish to calm to shock). This also grounds the ElevenLabs TTS vocal direction: tag selection per passage (e.g., breathless/strained for Wring, calm/flowing for Glide) follows de Meijer's empirical correlates.
 
 ## 3. Implementation
 
