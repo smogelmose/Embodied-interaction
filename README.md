@@ -208,7 +208,7 @@ The `ld_flow` descriptor is computed from the jerk of the annotated flow channel
 
 Audio uses Effort as a design-time curation principle for asset selection (which audio tags, which body vox file, which drone loop), not as a runtime control signal. Only the visual layer is continuously runtime-modulated by descriptors. Symmetry between visual and audio modulation is a worthwhile future direction.
 
-The system is a forward chain, not a closed loop: the viewer's body state does not influence the system. A version that closes this loop (for example by reading the viewer's breath or attention through a low-cost sensor) would more fully realize Dourish's [2] embodied-interaction principle.
+The system is a forward chain, not a closed loop: the viewer's body state does not influence the system. A version that closes this loop through psychophysiological measurements would more fully realize Dourish's [2] embodied-interaction principle.
 
 A planned listener evaluation was not conducted within the scope of this mini-project.
 
@@ -218,13 +218,13 @@ Three directions:
 
 **Listener evaluation.** A protocol for an N=12-15 study is drafted. Listeners would experience the piece in two conditions (visual+audio, audio only) and rate perceived Effort and emotional correlates per passage. This would test whether the Effort qualities encoded by the system are received by the listener as designed.
 
-**Multi-text generalization.** The text-as-movement-substrate claim is bounded to kinesthetically dense prose. Testing the same pipeline on Beckett's *The Unnamable*, Bernhard's *Correction*, and Kleist's *Michael Kohlhaas* would establish whether the annotation method transfers across kinesthetically dense texts of different periods and styles.
+**Multi-text generalization.** The text-as-movement-substrate claim is bounded to kinesthetically dense prose. Testing the same pipeline on other works of art would establish whether the annotation method transfers across kinesthetically dense texts of different periods and styles.
 
 **Closing the audio/visual asymmetry.** Currently visuals respond to descriptors at runtime while audio uses Effort only at design time. A future version could modulate granular synthesis or live audio processing parameters (filter cutoff, grain density, spatial position) directly from the descriptor stream, making the audio modulation symmetric with the visual modulation.
 
 ## 11. AI Use
 
-The author used Anthropic Claude (LLM) for general project organization, code review, and editing of supporting documents. ElevenLabs (paid Creator/Pro tier, commercial rights) was used to generate the audio assets for narration, body vocalization, drones, sound effects, and the mother's voice in Passage 4. Cursor (IDE) provided routine code completion. None of these tools were used for the close reading, BESS annotation, theoretical framing, or methodological decisions of the project. Full disclosure available in `AI_USE.md`.
+The author used Anthropic Claude (LLM) for general project organization, code review, and editing of supporting documents. ElevenLabs (paid Pro tier, commercial rights) was used to generate the audio assets for narration, body vocalization, drones, and sound effects. Cursor (IDE) provided routine code completion. None of these tools were used for BESS annotation, theoretical framing, or methodological decisions of the project.
 
 ## 12. Conclusion
 
@@ -296,7 +296,7 @@ The deployed configuration uses GitHub Pages for the frontend (`docs/` folder, s
 
 ### License
 
-Code is licensed under MIT. Creative content (BESS annotations, report, figures, generated audio, walkthrough video, system design) is licensed under CC BY-NC 4.0. See `LICENSE` and `LICENSE-content.md` respectively. The source text of *The Metamorphosis* (Wyllie translation, Project Gutenberg) is in the public domain.
+Code is licensed under MIT. Creative content (BESS annotations, report, figures, generated audio, walkthrough video, system design) is licensed under CC BY-NC 4.0. The source text of *The Metamorphosis* (Wyllie translation, Project Gutenberg) is in the public domain.
 
 ### Repository
 
