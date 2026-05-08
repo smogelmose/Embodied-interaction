@@ -12,7 +12,7 @@ Department of Architecture, Design and Media Technology, Aalborg University Cope
 
 ## Abstract
 
-This project creates a generative audiovisual system that transforms the first ten passages of Kafka's The Metamorphosis into a real-time embodied interaction experience. Using Laban Movement Analysis (LMA) Effort qualities, this project finds the moving body in literary prose by reading and annotating Body, Effort, Shape, and Space (BESS). The system shows the Effort trajectory as a combined visual texture  and five-layer polyphonic audio. The 10 selected passages transition BESS analysis, which uses four computable Effort descriptors following Larboulette and Gibet [6]. According to de Meijer's [7] Effort-to-emotion regression studies, Action Drive labels choose correlated visual presets and per-passage ElevenLabs v3 audio tags. This work shows that literary text with a lot of kinesthetic information can be used as a base for annotations in effort-driven generative systems. This implies that embodied interaction can be input in ways other than performed movement.
+This project presents a generative audiovisual system that translates the opening passages of Kafka's *The Metamorphosis* into an interactive embodied audiovisual experience. Using manual Body, Effort, Shape, and Space (BESS) annotations grounded in Laban Movement Analysis, the system interprets kinesthetic details in the prose and maps them to a single visual field and a five-layer polyphonic audio output. Computable Effort descriptors adapted from motion-analysis literature continuously modulate the visual system, while Drive-level emotional correlates inform audio selection. The project argues that kinesthetically dense literary prose can serve as a viable input modality for effort-driven embodied-interaction systems, alongside performed movement.
 
 ## Keywords
 
@@ -24,7 +24,7 @@ Embodied-interaction systems typically regard embodiment as physiological sensin
 
 The empirical foundation is found in cognitive linguistics. The reader's sensorimotor system is activated through motor simulation when action-related sentences are read. According to Tettamanti et al. [11], the premotor cortex is somatotopically activated by listening to action-related sentences. The corresponding motor regions exhibit distinct activations in the mouth, hand, and leg regions. This is expanded upon in a general theory of language comprehension as embodied simulation by Gallese and Lakoff [4] and Zwaan [12]. When Kafka describes that Gregor's legs "waved about helplessly," the reader does more than just figure out what the words mean; their motor system partially recreates the helpless movement of the legs.
 
-Kafka's The Metamorphosis is a particularly good candidate for this method. Body struggle is the primary focus of each paragraph. Ordinary actions like rolling, lifting a head, and opening a door are transformed into described kinesthetic events. According to Beck [1] and Pawel [9], Kafka’s fascination with Yiddish theater sprung from its distinctive combination of speech, gesture, and embodied vocal performance. His continuous association with a troupe in the years before The Metamorphosis also implies a developing relationship between   literary imagination and bodily experience. Embodied readings triggers motor simulation within the reader’s sensorimotor system, generating bodily activation alongside semantic processing. Multimodal output builds on this by reshaping the text’s encoded Effort qualities, linking perception, language, and embodiment through a single framework.
+Kafka's *The Metamorphosis* is a particularly good candidate for this method. Body struggle is the primary focus of each paragraph. Ordinary actions like rolling, lifting a head, and opening a door are transformed into described kinesthetic events. According to Beck [1] and Pawel [9], Kafka's fascination with Yiddish theater derived from its distinctive combination of speech, gesture, and embodied vocal performance. His continuous association with a troupe in the years before *The Metamorphosis* also implies a developing relationship between literary imagination and bodily experience. Embodied reading triggers motor simulation in the reader's sensorimotor system, generating bodily activation alongside semantic processing. Multimodal output builds on this by reshaping the text's encoded Effort qualities, linking perception, language, and embodiment through a single framework.
 
 Visit https://vimeo.com/1187075793 to view a walkthrough video.
 
@@ -44,11 +44,11 @@ Larboulette and Gibet present the effort descriptors as algorithmic functions: f
 
 ### 2.3 Effort-to-emotion attribution: de Meijer [7]
 
-De Meijer ran a study in which 85 naive observers evaluated 96 systematically varied body movements. Laban's weight, time, and space are analogous to three of his seven dimensions: force, velocity, and directness. From feature combinations, regression analysis predicted emotion categories; factor analysis extracted three underlying factors: Rejection-Acceptance, Withdrawal-Approach, and Preparation-Defeatedness. In this project, the emotional correlates at the Drive level (Press to determination, Wring to grief, Glide to calm focus, Slash to fear) are conceptual applications of De Meijer's regression findings, instead of direct empirical mappings, as he did not directly test Action Drives. 
+De Meijer ran a study in which 85 naive observers evaluated 96 systematically varied body movements. Laban's weight, time, and space are analogous to three of his seven dimensions: force, velocity, and directness. From feature combinations, regression analysis predicted emotion categories; factor analysis extracted three underlying factors: Rejection-Acceptance, Withdrawal-Approach, and Preparation-Defeatedness. In this project, the emotional correlates at the Drive level (Press to determination, Wring to grief, Glide to calm focus, Slash to fear) are conceptual applications of De Meijer's regression findings, instead of direct empirical mappings, as he did not directly test Action Drives.
 
 ### 2.4 Structural comparator: Ghostdance [10]
 
-Siopa et al. offer the most comparable structural study. Using an LSTM classifier, Ghostdance extracts Action Drives from a live dancer's IMU data and sends them to VR spatial audio and Unity particle presets. Action Drives serve as preset selectors in both projects, altering the state of every output modality simultaneously. The primary difference is the input channel: Ghostdance employs a live body, while this project employs literary prose. The parametric framework is achieved by the two projects from opposing perspectives: body-first and text-first.
+Siopa et al. offer the most comparable structural study. Using an LSTM classifier, Ghostdance extracts Action Drives from a live dancer's IMU data and sends them to VR spatial audio and Unity particle presets. Action Drives serve as preset selectors in both projects, altering the state of every output modality simultaneously. The primary difference is the input channel: Ghostdance employs a live body, while this project employs literary prose. The parametric framework is achieved by the two projects from opposing perspectives, one body-first and one text-first.
 
 | | Ghostdance | Metamorphic Efforts |
 |---|---|---|
@@ -62,11 +62,11 @@ Siopa et al. offer the most comparable structural study. Using an LSTM classifie
 
 Merleau-Ponty [8] provides the phenomenological foundation, which posits that perception is an active bodily interaction with the world, rather than a passive registration of stimuli. Action and perception are linked: you can't see without a body that can see. This is translated into interaction design by Dourish [2] using the embodied interaction principles, which state that systems should interact with the entire spectrum of human abilities and capacities for action, including the expressive, improvisational, and qualitative aspects of bodily experience.
 
-The project uses LMA's descriptive system to parameterize movement quality. Movement observation by LMA is broken down into four groups, which they call BESS: Body, Effort, Shape, and Space. Four components make up the dynamic, qualitative structure of movement: Time (Sudden/Sustained), Space (Direct/Indirect), Weight (Strong/Light), and Flow (Bound/Free). Laban's eight Action Drives–Press, Flick, Punch, Float, Wring, Dab, Slash, Glide are the result of the combination of the three factors, except Flow, in pairs. Shape describes the way the body changes shape in three dimensions, such as expanding or contracting, rising or sinking, or moving forward or backward. The mover's body describes how its parts are organized structurally (which parts lead and which parts follow, how movement happens). Space provides insight about how the mover interacts with its surroundings (kinesphere, dominant plane, attentional focus).
+The project uses LMA's descriptive system to parameterize movement quality. Movement observation by LMA is broken down into four groups: Body, Effort, Shape, and Space (BESS). Four components make up the dynamic, qualitative structure of movement: Time (Sudden/Sustained), Space (Direct/Indirect), Weight (Strong/Light), and Flow (Bound/Free). Laban's eight Action Drives-Press, Flick, Punch, Float, Wring, Dab, Slash, Glide are the result of the combination of the three factors, except Flow, in pairs. Shape describes the way the body changes shape in three dimensions, such as expanding or contracting, rising or sinking, or moving forward or backward. The mover's body describes how its parts are organized structurally (which parts lead and which parts follow, how movement happens). Space provides insight about how the mover interacts with its surroundings (kinesphere, dominant plane, attentional focus).
 
 The core idea is that these classifications combine to form a single embodied experience. A Press is a felt quality instead of three distinct constructs (Strong, Sustained, and Direct). This integration is demonstrated in the project by routing the same annotation to multiple polyphonic audio voices and rendering all BESS parameters through a single visual field instead of distinct layers.
 
-A structural metaphor from Bakhtin's polyphony [12] is also used in the project. There are many voices of movement at once in Kafka's writing, such as Gregor's heavy pressing body, the clock's steady ticking, the mother's unclear knock, and the rain on the window. This creates a polyphonic texture rather than resolving into a single Effort. It works on three multimodal stages: the source text with multiple movement voices per passage, the system output with five overlapping audio channels sharing a harmonic drone, and the methodology as single-analyst annotation as narrative voice. This is a metaphorical use more than strict Bakhtinian.
+A structural metaphor from Bakhtin's polyphony [13] is also used in the project. There are many voices of movement at once in Kafka's writing, such as Gregor's heavy pressing body, the clock's steady ticking, the mother's unclear knock, and the rain on the window. This creates a polyphonic texture rather than resolving into a single Effort. It works on three multimodal stages: the source text with multiple movement voices per passage, the system output with five overlapping audio channels sharing a harmonic drone, and the methodology as single-analyst annotation as narrative voice. This is a metaphorical use more than strict Bakhtinian.
 
 ## 4. Method
 
@@ -88,7 +88,7 @@ Each passage is annotated for Body, Effort, Shape, and Space using a normalized 
 
 ### 4.2 BESS annotation
 
-To author the 53 annotation spans in the source, a custom browser tool bess_author.html, Figure 2) was developed. The tool loads the Twine .twee source, enables the analyst to select text spans and tag them with the BESS category, configure the Action Drive and BESS slider values per passage, and creates Twine-ready markup or JSON.
+To author the 53 annotation spans in the source, a custom browser tool, `bess_author.html`, was developed (see Figure 2). The tool loads the Twine .twee source, enables the analyst to select text spans and tag them with the BESS category, configure the Action Drive and BESS slider values per passage, and creates Twine-ready markup or JSON.
 
 ![Figure 2: BESS Author tool, showing Passage 1 annotation: span tagging in the text body, Action Drive selector ("press"), BESS sliders for Effort, Shape, Body, and Space, and JSON output.](report/bess_author.png)
 
@@ -158,7 +158,7 @@ Each of the seven cross-modal mappings in the system is based on a distinct sour
 
 ### 6.1 Visual field
 
-By modulating a single continuous noise/feedback/color texture, TouchDesigner avoids rendering each BESS category as a distinct visual layer. The following formulas show how each Effort factor is related to a noise parameter: Weight is related to noise amplitude and period; Time is related to animation speed; Space is related to blur and zoom; Flow is related to feedback decay. Every Action Drive stores a visual preset. When the Drive changes, the preset is loaded, and {value_lag} moves smoothly toward the new target. The four computed descriptors ld_weight, ld_time, ld_space, ld_flow, modulate transition behavior continuously.
+By modulating a single continuous noise/feedback/color texture, TouchDesigner avoids rendering each BESS category as a distinct visual layer. The following formulas show how each Effort factor is related to a noise parameter: Weight is related to noise amplitude and period; Time is related to animation speed; Space is related to blur and zoom; Flow is related to feedback decay. Every Action Drive stores a visual preset. When the Drive changes, the preset is loaded, and the parameters move smoothly toward their new targets. The four computed descriptors ld_weight, ld_time, ld_space, ld_flow, modulate transition behavior continuously.
 
 ### 6.2 Polyphonic audio
 
@@ -190,9 +190,9 @@ The four Larboulette and Gibet descriptors that were computed on the BESS trajec
 
 This system demonstrates that effort-driven generative systems can use literary texts with dense kinesthetic information as a foundation for annotations. The Larboulette and Gibet formulas that underpin the visual parameterization are the same formulas that are typically employed with motion capture data; the only distinction is in the data source. For Effort-driven embodied-interaction systems, this expands the set of inputs beyond performed movement.
 
-In a way that the text alone cannot express, the polyphonic audio architecture made Kafka's prose's multi-voice character audible; by lifting and muting individual layers, one can see which voices carry which Effort qualities at each passage. The use of de Meijer-derived emotional correlates of Effort constellations to direct ElevenLabs v3 TTS via audio tags is a novel approach. The voice not only reads the text, but also performs the Effort quality of the text. 
+In a way that the text alone cannot express, the polyphonic audio architecture made Kafka's prose multi-voice character audible; by lifting and muting individual layers, one can see which voices carry which Effort qualities at each passage. The use of de Meijer-derived emotional correlates of Effort constellations to direct ElevenLabs v3 TTS via audio tags is a novel approach. The voice not only reads the text, but also performs the Effort quality of the text.
 
-The proposed assertion that text is a movement base is restricted. Not every piece of prose meets the criteria. In Kafka's writing, every paragraph focuses on physical struggle. Texts that are mostly about internal monologue or psychological abstraction would not make it possible to track effort in the same way. 
+The proposed assertion that text is a movement base is restricted. Not every piece of prose meets the criteria. In Kafka's writing, every paragraph focuses on physical struggle. Texts that are mostly about internal monologue or psychological abstraction would not make it possible to track effort in the same way.
 
 ## 9. Limitations
 
@@ -212,11 +212,11 @@ A two-condition listener study should be used to confirm perceived effort. The m
 
 ## 11. AI Use
 
-Anthropic Claude (LLM) was implemented by the author for the purpose of organizing the project, reviewing the code, and editing the supporting documents. Narration, body vocalization, drones, and sound effects were all made with ElevenLabs (Pro). Code completion was routinely provided by the cursor (IDE). The project's methodological choices, theoretical framing, and BESS annotation did not make use of these tools.
+Anthropic Claude (LLM) was implemented by the author for the purpose of organizing the project, reviewing the code, and editing the supporting documents. Narration, body vocalization, drones, and sound effects were all made with ElevenLabs (Pro). Code completion was routinely provided by Cursor (IDE). The project's methodological choices, theoretical framing, and BESS annotation did not make use of these tools.
 
 ## 12. Conclusion
 
-Metamorphic Efforts is a project that shows a generative audiovisual system that turns the first part of Kafka's "The Metamorphosis" into a real-time embodied interaction experience based on the qualities of Laban Movement Analysis Effort. By putting the moving body in literary prose instead of a performed body, the project shows that kinesthetically dense literary text can be used as a base for annotations in effort-driven generative systems. The integrated visual field and the five-layer polyphonic audio work together to show the same Effort trajectory in different ways. The primary limitation is that the system is a forward chain rather than a closed loop, and the annotation is single-analyst. However, both aspects can be addressed in future research. The assertion is methodological in nature, as it extends the input set for Effort-driven embodied-interaction systems to include kinesthetically dense literary prose in addition to performed movement.
+Metamorphic Efforts is a project that shows a generative audiovisual system that turns the first part of Kafka's *The Metamorphosis* into a real-time embodied interaction experience based on the qualities of Laban Movement Analysis Effort. By putting the moving body in literary prose instead of a performed body, the project shows that kinesthetically dense literary text can be used as a base for annotations in effort-driven generative systems. The integrated visual field and the five-layer polyphonic audio work together to show the same Effort trajectory in different ways. The primary limitation is that the system is a forward chain rather than a closed loop, and the annotation is single-analyst. However, both aspects can be addressed in future research. The assertion is methodological in nature, as it extends the input set for Effort-driven embodied-interaction systems to include kinesthetically dense literary prose in addition to performed movement.
 
 ## References
 
@@ -243,6 +243,10 @@ Metamorphic Efforts is a project that shows a generative audiovisual system that
 [11] Tettamanti, M. et al. (2005). Listening to action-related sentences activates fronto-parietal motor circuits. *Journal of Cognitive Neuroscience*, 17(2), 273-281.
 
 [12] Zwaan, R. A. (2004). The immersed experiencer: Toward an embodied theory of language comprehension. *Psychology of Learning and Motivation*, 44, 35-62.
+
+[13] Bakhtin, M. M. (1984). *Problems of Dostoevsky's Poetics* (C. Emerson, Ed. & Trans.). University of Minnesota Press.
+
+
 
 ---
 
