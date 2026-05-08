@@ -36,7 +36,7 @@ Four earlier works serve as groundwork for the project. The main reference estab
 
 In their study, Fdili Alaoui et al. look into how LMA can be modeled computationally by adding movement knowledge to multimodal sensing. In collaboration with certified LMA practitioners, the authors develop feature sets from physiological, positional, and dynamic sensor data that correspond to the perceptions of experts regarding the four Effort factors (Weight, Time, Space, Flow). Their key conclusion is that combining several data modalities produces a much better description of effort than using just one. The paper is phenomenologically based on Merleau-Ponty [8] and Dourish [2]. The above paper states that computational systems should address movement as a lived, expressive phenomenon more than as functional input.
 
-With this project, the input modality is switched from physical performance to literary prose, while the pipeline structure remains(BESS annotation as structured input, with Effort factors as the parameterization, and generative audiovisual output as the rendering). The visual field and five-layer audio design are driven by this multi-modal principle.
+With this project, the input modality is switched from physical performance to literary prose, while the pipeline structure remains BESS annotation as structured input, with Effort factors as the parameterization, and generative audiovisual output as the rendering. The visual field and five-layer audio design are driven by this multi-modal principle.
 
 ### 2.2 Computable Effort descriptors: Larboulette and Gibet [6]
 
