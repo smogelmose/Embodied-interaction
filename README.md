@@ -26,6 +26,8 @@ The empirical foundation is found in cognitive linguistics. The reader's sensori
 
 Kafka's *The Metamorphosis* is a particularly good candidate for this method. Body struggle is the primary focus of each paragraph. Ordinary actions like rolling, lifting a head, and opening a door are transformed into described kinesthetic events. According to Beck [1] and Pawel [9], Kafka's fascination with Yiddish theater derived from its distinctive combination of speech, gesture, and embodied vocal performance. His continuous association with a troupe in the years before *The Metamorphosis* also implies a developing relationship between literary imagination and bodily experience. Embodied reading triggers motor simulation in the reader's sensorimotor system, generating bodily activation alongside semantic processing. Multimodal output builds on this by reshaping the text's encoded Effort qualities, linking perception, language, and embodiment through a single framework.
 
+This project explores whether high-kinesthetic-density literary prose can serve, alongside performed bodily movement, as an Effort input modality for embodied-interaction systems. Motor-simulation theories of language comprehension are used to explain how reading sentences about actions activates the reader's sensorimotor system, making textual descriptions a plausible carrier of movement qualities. The contribution is methodological: a functional pipeline that extends the input set for Effort-driven systems by converting BESS annotations of Kafka's *The Metamorphosis* into a generative audiovisual rendering.
+
 Visit https://vimeo.com/1187075793 to view a walkthrough video.
 
 ## 2. Related Work
