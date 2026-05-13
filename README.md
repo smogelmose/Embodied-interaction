@@ -28,7 +28,7 @@ Kafka's *The Metamorphosis* is a particularly good candidate for this method. Bo
 
 This project explores whether high-kinesthetic-density literary prose can serve, alongside performed bodily movement, as an Effort input modality for embodied-interaction systems. Motor-simulation theories of language comprehension are used to explain how reading sentences about actions activates the reader's sensorimotor system, making textual descriptions a plausible carrier of movement qualities. The contribution is methodological: a functional pipeline that extends the input set for Effort-driven systems by converting BESS annotations of Kafka's *The Metamorphosis* into a generative audiovisual rendering.
 
-Visit https://vimeo.com/1187075793 to view a walkthrough video.
+**Live demo:** [mogelmose.org/Embodied-interaction](https://mogelmose.org/Embodied-interaction/Metamorphic_Efforts.html?ws=wss://embodied-interaction.onrender.com/ws?role=browser) (requires TD session online; see [walkthrough video](https://vimeo.com/1187075793) otherwise)
 
 ## 2. Related Work
 
