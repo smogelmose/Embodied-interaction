@@ -6,9 +6,9 @@ Department of Architecture, Design and Media Technology, Aalborg University Cope
 
 *Embodied Interaction Mini-Project, MED8, Spring 2026*
 
-![Figure 1: Running piece on Passage 1 (Press), showing the topographic visual texture, LMA annotation overlay (red "Strong Weight" tooltip), and the polyphonic voices mixer panel.](report/running_piece_p1.png)
+![Figure 1: Running piece on Passage 1 (Press), showing the domed visual texture, LMA annotation overlay (red "Strong Weight" tooltip), and the polyphonic voices mixer panel.](report/running_piece_p1.png)
 
-**Figure 1:** Running piece on Passage 1 (Press), showing the topographic visual texture, LMA annotation overlay, and the polyphonic voices mixer panel.
+**Figure 1:** Running piece on Passage 1 (Press), showing the domed visual texture, LMA annotation overlay, and the polyphonic voices mixer panel.
 
 ## Abstract
 
@@ -212,9 +212,9 @@ Instead of being a closed loop, the system is a forward chain, meaning that the 
 
 A two-condition listener study should be used to confirm perceived effort. The method should also be tested on different texts that are kinesthetically dense, and the audio modulation should respond in real time to match the visual system.
 
-## 11. AI Use
+## 11. AI Tool Use
 
-Anthropic Claude (LLM) was implemented by the author for the purpose of organizing the project, reviewing the code, and editing the supporting documents. Narration, body vocalization, drones, and sound effects were all made with ElevenLabs (Pro). Code completion was routinely provided by Cursor (IDE). The project's methodological choices, theoretical framing, and BESS annotation did not make use of these tools.
+Anthropic Claude (LLM) was implemented by the author for the purpose of organizing the project, reviewing the code, and editing the supporting documents for Notion and Linear. Narration, body vocalization, drones, and sound effects were all made with ElevenLabs (Pro). VSCode (IDE) was used for code debugging and for backend infrastructure. The project's methodological choices, theoretical framing, and BESS annotation did not make use of these tools.
 
 ## 12. Conclusion
 
