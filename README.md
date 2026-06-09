@@ -240,7 +240,7 @@ Metamorphic Efforts is a project that shows a generative audiovisual system that
 
 [9] Pawel, E. (1984). *The Nightmare of Reason: A Life of Franz Kafka.* Farrar, Straus and Giroux.
 
-[10] Siopa, A. et al. (2024). Ghostdance. In *Proceedings of MOCO '24*.
+[10] Siopa, J., Antunes, R. F., de Lima, C., Carrilho, J., Cláudio, A. P., & Carmo, M. B. (2024). LMA driven Dynamic Audiovisuals in a Virtual Reality Live Dance Performance: Ghostdance. In *Proceedings of MOCO '24*, 1–5.
 
 [11] Tettamanti, M. et al. (2005). Listening to action-related sentences activates fronto-parietal motor circuits. *Journal of Cognitive Neuroscience*, 17(2), 273-281.
 
